@@ -1,6 +1,6 @@
 import React from "react";
 
-function Nav() {
+const Nav = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <a className="navbar-brand" href="/">
