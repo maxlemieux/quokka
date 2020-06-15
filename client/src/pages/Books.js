@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
-
+import Trefle from "../utils/trefle"
 function Books() {
   const [books, setBooks] = useState([])
   const [formObject, setFormObject] = useState({})
@@ -47,6 +47,16 @@ function Books() {
     }
   };
 
+  
+  function GetPlantByMinTemp(event){
+    event.preventDefault();
+    Trefle.getPlantsByMinTemp(25).then(res=>console.log(res))
+  }
+  function GetPlantImage(event){
+    event.preventDefault();
+    Trefle.getPlantsImage(984782).then(res=>console.log(res.data.images[0].url))
+  }
+
     return (
       <Container fluid>
         <Row>
@@ -76,6 +86,13 @@ function Books() {
               >
                 Submit Book
               </FormBtn>
+            </form>
+            <form>
+              <Input name="minTemp" placeholder="MinTemp"/>
+              <FormBtn onClick={GetPlantByMinTemp}>Submit Temp</FormBtn>
+            </form>
+            <form>
+              <FormBtn onClick={GetPlantImage}>Get Image URL</FormBtn>
             </form>
           </Col>
           <Col size="md-6 sm-12">
