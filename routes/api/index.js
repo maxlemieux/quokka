@@ -1,11 +1,13 @@
 const router = require("express").Router();
 const bookRoutes = require("./books");
 const plantRoutes = require("./plants")
+const trefleRoutes = require("./trefle")
 const axios = require("axios");
 
 // Book routes
 router.use("/books", bookRoutes);
-router.use("/plants", plantRoutes)
+router.use("/plants", plantRoutes);
+router.use("/trefle", trefleRoutes);
 
 router.route("/trefle/species/:id")
 	.get(function(req, res) {

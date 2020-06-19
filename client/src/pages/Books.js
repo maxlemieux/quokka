@@ -54,20 +54,22 @@ function Books() {
     }
   };
 
-  function GetPlantByMinTemp(event){
+  function GetPlantsByMinTemp(event){
     event.preventDefault();
-    Trefle.getPlantsByMinTemp(formObject.minTemp).then(res=>console.log(res))
+    Trefle.getPlantsByMinTemp(formObject.minTemp)
+      .then(res=>console.log(res))
   }
 
   function GetPlantImage(event){
     event.preventDefault();
-    Trefle.getPlantsByImage().then(res=>console.log(res.data.images[0].url))
+    Trefle.getPlantsByImage()
+      .then(res=>console.log(res.data.images[0].url))
   }
 
   function GetPlantsByCommonName(event){
     event.preventDefault();
-    // API.searchPlantName(searchObject.searchName)
-    //   .then(res=>console.log(res));
+    Trefle.getPlantsByCommonName(searchObject.searchName)
+      .then(res=>console.log(res));
   }
 
   return (
@@ -102,7 +104,7 @@ function Books() {
           </form>
           <form>
             <Input onChange={handleInputChange} name="minTemp" placeholder="MinTemp"/>
-            <FormBtn onClick={GetPlantByMinTemp}>Submit Temp</FormBtn>
+            <FormBtn onClick={GetPlantsByMinTemp}>Submit Temp</FormBtn>
           </form>
           <form>
             <FormBtn onClick={GetPlantImage}>Get Image URL</FormBtn>
