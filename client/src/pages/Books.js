@@ -54,7 +54,7 @@ function Books() {
   }
   function GetPlantImage(event){
     event.preventDefault();
-    Trefle.getPlantsImage(984782).then(res=>console.log(res.data.images[0].url))
+    Trefle.getPlantsByImage().then(res=>console.log(res.data.images[0].url))
   }
 
     return (
