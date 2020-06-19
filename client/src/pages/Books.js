@@ -7,9 +7,11 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
 import Trefle from "../utils/trefle"
+
 function Books() {
   const [books, setBooks] = useState([])
   const [formObject, setFormObject] = useState({})
+  const [searchObject, setSearchObject] = useState('');
 
   useEffect(() => {
     loadBooks()
@@ -32,6 +34,11 @@ function Books() {
   function handleInputChange(event) {
     const { name, value } = event.target;
     setFormObject({...formObject, [name]: value})
+  };
+
+  function handleSearchChange(event) {
+    const { name, value } = event.target;
+    setSearchObject({...searchObject, [name]: value})
   };
 
   function handleFormSubmit(event) {
@@ -59,7 +66,8 @@ function Books() {
 
   function GetPlantsByCommonName(event){
     event.preventDefault();
-    Trefle.getPlantsByCommonName('milkweed').then(res=>console.log(res));
+    // API.searchPlantName(searchObject.searchName)
+    //   .then(res=>console.log(res));
   }
 
   return (
@@ -100,6 +108,7 @@ function Books() {
             <FormBtn onClick={GetPlantImage}>Get Image URL</FormBtn>
           </form>
           <form>
+            <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
             <FormBtn onClick={GetPlantsByCommonName}>Get Plants By Common Name</FormBtn>
           </form>
         </Col>

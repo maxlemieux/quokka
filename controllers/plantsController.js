@@ -13,6 +13,6 @@ module.exports = {
     },
     getPlantsByCommonName: function(req,res){
       console.log(process.env.REACT_APP_TREFLE)
-      return axios.get(`https://trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&common_name=milkweed`);
+      return axios.get(`https://trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&common_name=${req.params.commonName}`);
     },
 };
