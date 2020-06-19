@@ -1,3 +1,5 @@
+const axios = require("axios");
+
 const db = require("../models");
 
 // // Defining methods for the plantsController
@@ -10,6 +12,7 @@ module.exports = {
         //     'Access-Control-Allow-Origin': '*'}})
     },
     getPlantsByCommonName: function(req,res){
+      console.log(process.env.REACT_APP_TREFLE)
       return axios.get(`https://trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&common_name=milkweed`);
     },
 };
