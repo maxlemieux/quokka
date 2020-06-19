@@ -50,7 +50,7 @@ function Books() {
   
   function GetPlantByMinTemp(event){
     event.preventDefault();
-    Trefle.getPlantsByMinTemp(25).then(res=>console.log(res))
+    Trefle.getPlantsByMinTemp(formObject.minTemp).then(res=>console.log(res))
   }
   function GetPlantImage(event){
     event.preventDefault();
@@ -88,7 +88,7 @@ function Books() {
               </FormBtn>
             </form>
             <form>
-              <Input name="minTemp" placeholder="MinTemp"/>
+              <Input onChange={handleInputChange} name="minTemp" placeholder="MinTemp"/>
               <FormBtn onClick={GetPlantByMinTemp}>Submit Temp</FormBtn>
             </form>
             <form>
