@@ -1,8 +1,11 @@
-// const router = require("express").Router();
-// const plantsController = require("../../controllers/plantsController");
+const router = require("express").Router();
+const { getPlantsByImage, getPlantsByCommonName } = require("../../controllers/plantsController");
 
-// // Matches with "/api/books"
-// router.route("/")
-//   .get(plantsController.getPlantByImage);
+// // Matches with "/api/plants"
+router.route("/")
+  .get(getPlantsByImage);
 
-// module.exports = router;
+router.route("/species/:commonName")
+  .get(getPlantsByCommonName);
+
+module.exports = router;

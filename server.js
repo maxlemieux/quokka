@@ -21,8 +21,13 @@ app.use(function(req, res, next) {
 // Add routes, both API and view
 app.use(routes);
 
+const MongoOpts = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
+
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/quokka");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/quokka", MongoOpts);
 
 // Start the API server
 app.listen(PORT, function() {

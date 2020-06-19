@@ -14,5 +14,9 @@ export default {
 
         // return axios.get(`https://trefle.io/api/species/${id}?token=${process.env.REACT_APP_TREFLE}`,{crossDomain:true , headers: {
         //     'Access-Control-Allow-Origin': '*'}})
-    }
+    },
+    getPlantsByCommonName: function(commonName){
+        // return axios.get(`https://trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}?common_name=${commonName}`);
+        return axios.get(`/api/plants/species/milkweed`);
+    },
 }
