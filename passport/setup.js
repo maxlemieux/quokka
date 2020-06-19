@@ -1,7 +1,7 @@
 /* https://medium.com/swlh/set-up-an-express-js-app-with-passport-js-and-mongodb-for-password-authentication-6ea05d95335c */
 
 const bcrypt = require('bcryptjs');
-const User = require('../models/Users');
+const User = require('../models/user');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
