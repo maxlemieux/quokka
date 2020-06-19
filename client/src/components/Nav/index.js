@@ -21,7 +21,7 @@ const Nav = () => {
  
   return (
     <nav 
-    className="navbar navbar-expand-lg navbar-dark bg-primary"
+    className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top"
     style= {navStyle}
     >
       <a 
@@ -30,7 +30,7 @@ const Nav = () => {
         
       >
         <img src="../img/quokka-logo.png" 
-          alt="quokka-image"
+          alt="quokka"
           style = {imgStyle} 
         />
            <p style={wordStyle}>quokka</p>
