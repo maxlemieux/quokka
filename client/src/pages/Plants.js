@@ -40,7 +40,7 @@ function Plants() {
   // };
 
   function handleSearchChange(event) {
-    const { name, value } = event.target;
+    const { value } = event.target;
     setSearchResults(value);
   };
 
