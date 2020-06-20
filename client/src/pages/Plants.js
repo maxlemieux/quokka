@@ -12,6 +12,7 @@ function Plants() {
   const [books, setBooks] = useState([])
   const [formObject, setFormObject] = useState({})
   const [searchObject, setSearchObject] = useState('');
+  const [temperatureObject, setTemperatureObject] = useState(0);
 
   useEffect(() => {
     loadBooks()
@@ -33,13 +34,18 @@ function Plants() {
 
   function handleInputChange(event) {
     const { name, value } = event.target;
-    setFormObject({...formObject, [name]: value})
+    setFormObject({...formObject, [name]: value});
   };
 
   function handleSearchChange(event) {
     const { name, value } = event.target;
-    setSearchObject({...searchObject, [name]: value})
+    setSearchObject({...searchObject, [name]: value});
   };
+
+  function handleTemperatureChange(event) {
+    const { name, value } = event.target;
+    setTemperatureObject({...temperatureObject, [name]: value});
+  }
 
   function handleFormSubmit(event) {
     event.preventDefault();
@@ -103,8 +109,14 @@ function Plants() {
             </FormBtn>
           </form> */}
           <form>
-            <Input onChange={handleInputChange} name="minTemp" placeholder="MinTemp"/>
-            <FormBtn onClick={GetPlantsByMinTemp}>Submit Temp</FormBtn>
+            <Input
+              onChange={handleInputChange}
+              name="minTemp" 
+              onChange={handleTemperatureChange}
+              placeholder="MinTemp" />
+            <FormBtn 
+              disabled={!(formObject.minTemp && formObject.title)}
+              onClick={GetPlantsByMinTemp}>Submit Temp</FormBtn>
           </form>
           <form>
             <FormBtn onClick={GetPlantImage}>Get Image URL</FormBtn>
