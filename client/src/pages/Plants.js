@@ -46,6 +46,8 @@ function Plants() {
 
   function handleTemperatureChange(event) {
     const { name, value } = event.target;
+    console.log(`name ${name}`);
+    console.log(`value ${value}`);
     setTemperatureObject({...temperatureObject, [name]: value});
   }
 
@@ -64,10 +66,11 @@ function Plants() {
 
   function GetPlantsByMinTemp(event){
     event.preventDefault();
+    console.log(`search with min temp ${temperatureObject.minTemp}`);
     Trefle.getPlantsByMinTemp(temperatureObject.minTemp)
       .then(res=>{
         console.log(res)
-        setSearchResults({...searchResults, ...res});
+        setSearchResults(res);
       })
   }
 
