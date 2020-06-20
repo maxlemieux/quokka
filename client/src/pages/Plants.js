@@ -8,29 +8,35 @@ import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
 import { SearchResults } from "../components/SearchResults";
 import Trefle from "../utils/trefle"
+import phzmapi from "../utils/phzmapi"
 
 function Plants() {
-  const [books, setBooks] = useState([])
+  const [plants, setPlants] = useState([])
   // const [formObject, setFormObject] = useState({})
   // const [searchObject, setSearchObject] = useState('');
   const [temperatureObject, setTemperatureObject] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    loadBooks()
-  }, [])
+    loadPlants()
+  }, []);
 
-  function loadBooks() {
-    API.getBooks()
+  /* Run the automatic plant suggestion code on component render */
+  useEffect(() => {
+    // loadSuggestions()
+  });
+
+  function loadPlants() {
+    API.getPlants()
       .then(res => 
-        setBooks(res.data)
+        setPlants(res.data)
       )
       .catch(err => console.log(err));
   };
 
-  function deleteBook(id) {
-    API.deleteBook(id)
-      .then(res => loadBooks())
+  function deletePlant(id) {
+    API.deletePlants(id)
+      .then(res => loadPlants())
       .catch(err => console.log(err));
   }
 
@@ -74,10 +80,31 @@ function Plants() {
       })
   }
 
-  function GetPlantImage(event){
+  // function GetPlantImage(event){
+  //   event.preventDefault();
+  //   Trefle.getPlantsByImage()
+  //     .then(res=>console.log(res.data.images[0].url))
+  // }
+
+  // function GetTemperatureByZipcode(event){
+  //   event.preventDefault();
+  //   phzmapi.getTemperatureByZipcode(99518)
+  //     .then(res=> {
+  //       console.log(res.data.temperature_range.split(' ')[0])
+  //   })
+  // }
+
+  function loadSuggestions(event) {
     event.preventDefault();
-    Trefle.getPlantsByImage()
-      .then(res=>console.log(res.data.images[0].url))
+    phzmapi.getTemperatureByZipcode(99518)
+      .then(res => {
+        const minTemp = res.data.temperature_range.split(' ')[0];
+        Trefle.getPlantsByMinTemp(minTemp)
+          .then(res => {
+            // console.log(res);
+            setSearchResults(res);
+          })  
+    })
   }
 
   function GetPlantsByName(event){
@@ -131,8 +158,12 @@ function Plants() {
               onClick={GetPlantsByMinTemp}>Submit Temp</FormBtn>
           </form>
 
-          <form>
+          {/* <form>
             <FormBtn onClick={GetPlantImage}>Get Image URL</FormBtn>
+          </form> */}
+
+          <form>
+            <FormBtn onClick={loadSuggestions}>Get Suggestions</FormBtn>
           </form>
 
           <form>
@@ -147,16 +178,16 @@ function Plants() {
           <Jumbotron>
             <h1>Plants On My List</h1>
           </Jumbotron>
-          {books.length ? (
+          {plants.length ? (
             <List>
-              {books.map(book => (
-                <ListItem key={book._id}>
-                  <Link to={"/books/" + book._id}>
+              {plants.map(plant => (
+                <ListItem key={plant._id}>
+                  <Link to={"/plants/" + plant._id}>
                     <strong>
-                      {book.title} by {book.author}
+                      {plant.title} by {plant.author}
                     </strong>
                   </Link>
-                  <DeleteBtn onClick={() => deleteBook(book._id)} />
+                  <DeleteBtn onClick={() => deletePlant(plant._id)} />
                 </ListItem>
               ))}
             </List>

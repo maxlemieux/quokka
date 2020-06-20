@@ -1,12 +1,16 @@
-const axios = require("axios");
 const router = require("express").Router();
-const { getPlantsByImage, getPlantsByName } = require("../../controllers/plantsController");
+const plantsController = require("../../controllers/plantsController");
 
-// // Matches with "/api/plants"
+// Matches with "/api/plants"
 router.route("/")
-  .get(getPlantsByImage);
+  .get(plantsController.findAll)
+  .post(plantsController.create);
 
-router.route("/species/:name")
-  .get(getPlantsByName);
+// Matches with "/api/plants/:id"
+router
+  .route("/:id")
+  .get(plantsController.findById)
+  .put(plantsController.update)
+  .delete(plantsController.remove);
 
 module.exports = router;
