@@ -120,7 +120,7 @@ function Plants() {
   return (
     <Container fluid>
       <Row>
-        <Col size="md-6">
+        <Col size="md-5">
           <Jumbotron>
             <h1>What Should I Plant?</h1>
           </Jumbotron>
@@ -174,7 +174,7 @@ function Plants() {
           <SearchResults searchResults={searchResults} />
 
         </Col>
-        <Col size="md-6 sm-12">
+        <Col size="md-4 sm-12">
           <Jumbotron>
             <h1>Plants On My List</h1>
           </Jumbotron>
@@ -194,6 +194,11 @@ function Plants() {
           ) : (
             <h3>No Results to Display</h3>
           )}
+        </Col>
+        <Col size="md-3">
+          <Jumbotron>
+            <h1>Fav Live Feed</h1>
+          </Jumbotron>
         </Col>
       </Row>
     </Container>
