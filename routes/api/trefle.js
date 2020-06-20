@@ -26,15 +26,15 @@ router.route("/temperature_minimum_deg_f/:minTemp")
 		})
 	});
 
-router.route("/common_name/:commonName")
+router.route("/name/:name")
 	.get(function(req, res) {
-		// console.log(req.params.commonName);
-		axios.get(`https://trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&common_name=${req.params.commonName}`)
+		console.log(req.params.name);
+		axios.get(`https://trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&q=${req.params.name}`)
 		.then(function(response) {
 			res.json(response.data);
 		})
 		.catch(function(err) {
-			console.log("backend axios error getting trefle data on common name");
+			console.log("backend axios error getting trefle data on name");
 			res.status(err.response.status).send(err.response.statusText);
 		})
 	});

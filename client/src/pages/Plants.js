@@ -107,12 +107,12 @@ function Plants() {
     })
   }
 
-  function GetPlantsByCommonName(event){
+  function GetPlantsByName(event){
     event.preventDefault();
     // console.log(searchResults)
-    Trefle.getPlantsByCommonName(searchResults)
+    Trefle.getPlantsByName(searchResults)
       .then(res=>{
-        // console.log(res);
+        //console.log(res);
         setSearchResults(res);
       });
   }
@@ -168,7 +168,7 @@ function Plants() {
 
           <form>
             <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
-            <FormBtn onClick={GetPlantsByCommonName}>Get Plants By Common Name</FormBtn>
+            <FormBtn onClick={GetPlantsByName}>Get Plants By Name</FormBtn>
           </form>
 
           <SearchResults searchResults={searchResults} />
