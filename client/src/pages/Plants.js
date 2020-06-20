@@ -12,7 +12,7 @@ import Trefle from "../utils/trefle"
 function Plants() {
   const [books, setBooks] = useState([])
   // const [formObject, setFormObject] = useState({})
-  const [searchObject, setSearchObject] = useState('');
+  // const [searchObject, setSearchObject] = useState('');
   const [temperatureObject, setTemperatureObject] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
 
@@ -41,14 +41,14 @@ function Plants() {
 
   function handleSearchChange(event) {
     const { name, value } = event.target;
-    setSearchObject({...searchObject, [name]: value});
+    setSearchResults(value);
   };
 
   function handleTemperatureChange(event) {
     const { name, value } = event.target;
     console.log(`name ${name}`);
     console.log(`value ${value}`);
-    setTemperatureObject({...temperatureObject, [name]: value});
+    setTemperatureObject({ minTemp: value });
   }
 
   // function handleFormSubmit(event) {
@@ -82,8 +82,12 @@ function Plants() {
 
   function GetPlantsByCommonName(event){
     event.preventDefault();
-    Trefle.getPlantsByCommonName(searchObject.searchName)
-      .then(res=>console.log(res));
+    // console.log(searchResults)
+    Trefle.getPlantsByCommonName(searchResults)
+      .then(res=>{
+        // console.log(res);
+        setSearchResults(res);
+      });
   }
 
   return (
