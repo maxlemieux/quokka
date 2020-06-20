@@ -16,5 +16,9 @@ export default {
   // Saves a book to the database
   saveBook: function(bookData) {
     return axios.post("/api/books", bookData);
+  },
+  // Searches Trefle through our back end
+  searchPlantName: function(searchName) {
+    return axios.get(`/api/plants/species/${searchName}`);
   }
 };
