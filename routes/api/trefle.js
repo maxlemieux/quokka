@@ -4,7 +4,7 @@ const router = require("express").Router();
 router.route("/temperature_minimum_deg_f/:minTemp")
 	.get(function(req, res) {
 		// console.log(process.env.REACT_APP_TREFLE)
-		axios.get(`https://trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&temperature_minimum_deg_f=${req.params.minTemp}`)
+		axios.get(`https://trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&temperature_minimum_deg_f>${req.params.minTemp}`)
 		.then(function(response) {
 			res.json(response.data);
 		})
