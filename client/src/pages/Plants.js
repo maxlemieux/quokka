@@ -147,31 +147,41 @@ function Plants() {
               Submit Book
             </FormBtn>
           </form> */}
+        <Row>
+        <form>
+            <FormBtn onClick={loadSuggestions}>Get Suggestions</FormBtn>
+          </form>
+          </Row>
 
+          <Row>
           <form>
             <Input
               name="minTemp" 
               onChange={handleTemperatureChange}
               placeholder="MinTemp" />
-            <FormBtn 
+              <FormBtn 
               disabled={!temperatureObject.minTemp}
               onClick={GetPlantsByMinTemp}>Submit Temp</FormBtn>
           </form>
+          </Row>
+          
 
           {/* <form>
             <FormBtn onClick={GetPlantImage}>Get Image URL</FormBtn>
           </form> */}
 
-          <form>
-            <FormBtn onClick={loadSuggestions}>Get Suggestions</FormBtn>
-          </form>
-
+          
+          <Row>
           <form>
             <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
             <FormBtn onClick={GetPlantsByCommonName}>Get Plants By Common Name</FormBtn>
           </form>
+          </Row>
+          
 
+          
           <SearchResults searchResults={searchResults} />
+          
 
         </Col>
         <Col size="md-4 sm-12">
