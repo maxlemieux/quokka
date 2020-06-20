@@ -21,7 +21,7 @@ const Nav = () => {
  
   return (
     <nav 
-    className="navbar navbar-expand-lg navbar-dark bg-primary"
+    className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top"
     style= {navStyle}
     >
       <a 
