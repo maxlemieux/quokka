@@ -8,6 +8,7 @@ import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
 import { SearchResults } from "../components/SearchResults";
 import Trefle from "../utils/trefle"
+import phzmapi from "../utils/phzmapi"
 
 function Plants() {
   const [plants, setPlants] = useState([])
@@ -18,7 +19,12 @@ function Plants() {
 
   useEffect(() => {
     loadPlants()
-  }, [])
+  }, []);
+
+  /* Run the automatic plant suggestion code on component render */
+  useEffect(() => {
+    // loadSuggestions()
+  });
 
   function loadPlants() {
     API.getPlants()
@@ -74,10 +80,31 @@ function Plants() {
       })
   }
 
-  function GetPlantImage(event){
+  // function GetPlantImage(event){
+  //   event.preventDefault();
+  //   Trefle.getPlantsByImage()
+  //     .then(res=>console.log(res.data.images[0].url))
+  // }
+
+  // function GetTemperatureByZipcode(event){
+  //   event.preventDefault();
+  //   phzmapi.getTemperatureByZipcode(99518)
+  //     .then(res=> {
+  //       console.log(res.data.temperature_range.split(' ')[0])
+  //   })
+  // }
+
+  function loadSuggestions(event) {
     event.preventDefault();
-    Trefle.getPlantsByImage()
-      .then(res=>console.log(res.data.images[0].url))
+    phzmapi.getTemperatureByZipcode(99518)
+      .then(res => {
+        const minTemp = res.data.temperature_range.split(' ')[0];
+        Trefle.getPlantsByMinTemp(minTemp)
+          .then(res => {
+            // console.log(res);
+            setSearchResults(res);
+          })  
+    })
   }
 
   function GetPlantsByCommonName(event){
@@ -131,8 +158,12 @@ function Plants() {
               onClick={GetPlantsByMinTemp}>Submit Temp</FormBtn>
           </form>
 
-          <form>
+          {/* <form>
             <FormBtn onClick={GetPlantImage}>Get Image URL</FormBtn>
+          </form> */}
+
+          <form>
+            <FormBtn onClick={loadSuggestions}>Get Suggestions</FormBtn>
           </form>
 
           <form>
