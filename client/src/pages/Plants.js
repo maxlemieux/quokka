@@ -8,7 +8,7 @@ import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
 import Trefle from "../utils/trefle"
 
-function Books() {
+function Plants() {
   const [books, setBooks] = useState([])
   const [formObject, setFormObject] = useState({})
   const [searchObject, setSearchObject] = useState('');
@@ -77,9 +77,9 @@ function Books() {
       <Row>
         <Col size="md-6">
           <Jumbotron>
-            <h1>What Books Should I Read?</h1>
+            <h1>What Should I Plant?</h1>
           </Jumbotron>
-          <form>
+          {/* <form>
             <Input
               onChange={handleInputChange}
               name="title"
@@ -101,7 +101,7 @@ function Books() {
             >
               Submit Book
             </FormBtn>
-          </form>
+          </form> */}
           <form>
             <Input onChange={handleInputChange} name="minTemp" placeholder="MinTemp"/>
             <FormBtn onClick={GetPlantsByMinTemp}>Submit Temp</FormBtn>
@@ -116,7 +116,7 @@ function Books() {
         </Col>
         <Col size="md-6 sm-12">
           <Jumbotron>
-            <h1>Books On My List</h1>
+            <h1>Plants On My List</h1>
           </Jumbotron>
           {books.length ? (
             <List>
@@ -140,5 +140,4 @@ function Books() {
   );
 }
 
-
-export default Books;
+export default Plants;

@@ -1,5 +1,5 @@
 import React from "react";
-import Books from "./pages/Books";
+import Plants from "./pages/Plants";
 import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
@@ -21,10 +21,10 @@ function App() {
      <div>
         <Switch>
           <Route exact path="/">
-            <Books />
+            <Plants />
           </Route> 
           <Route exact path="/books">
-            <Books />
+            <Plants />
           </Route>
           <Route path="/books/:id" children={<Detail />} />
           <Route>
