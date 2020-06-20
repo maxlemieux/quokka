@@ -10,27 +10,27 @@ import { SearchResults } from "../components/SearchResults";
 import Trefle from "../utils/trefle"
 
 function Plants() {
-  const [books, setBooks] = useState([])
+  const [plants, setPlants] = useState([])
   // const [formObject, setFormObject] = useState({})
   // const [searchObject, setSearchObject] = useState('');
   const [temperatureObject, setTemperatureObject] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    loadBooks()
+    loadPlants()
   }, [])
 
-  function loadBooks() {
-    API.getBooks()
+  function loadPlants() {
+    API.getPlants()
       .then(res => 
-        setBooks(res.data)
+        setPlants(res.data)
       )
       .catch(err => console.log(err));
   };
 
-  function deleteBook(id) {
-    API.deleteBook(id)
-      .then(res => loadBooks())
+  function deletePlant(id) {
+    API.deletePlants(id)
+      .then(res => loadPlants())
       .catch(err => console.log(err));
   }
 
@@ -147,16 +147,16 @@ function Plants() {
           <Jumbotron>
             <h1>Plants On My List</h1>
           </Jumbotron>
-          {books.length ? (
+          {plants.length ? (
             <List>
-              {books.map(book => (
-                <ListItem key={book._id}>
-                  <Link to={"/books/" + book._id}>
+              {plants.map(plant => (
+                <ListItem key={plant._id}>
+                  <Link to={"/plants/" + plant._id}>
                     <strong>
-                      {book.title} by {book.author}
+                      {plant.title} by {plant.author}
                     </strong>
                   </Link>
-                  <DeleteBtn onClick={() => deleteBook(book._id)} />
+                  <DeleteBtn onClick={() => deletePlant(plant._id)} />
                 </ListItem>
               ))}
             </List>

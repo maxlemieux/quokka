@@ -1,6 +1,18 @@
 const axios = require("axios");
 const router = require("express").Router();
 
+router.route("/species/:id")
+	.get(function(req, res) {
+		axios.get(`https://trefle.io/api/species/${req.params.id}?token=${process.env.REACT_APP_TREFLE}`)
+		.then(function(response) {
+			res.json(response.data);
+		})
+		.catch(function(err) {
+			console.log("backend axios error getting trefle data");
+			res.status(err.response.status).send(err.response.statusText);
+		})
+	});
+
 router.route("/temperature_minimum_deg_f/:minTemp")
 	.get(function(req, res) {
 		// console.log(process.env.REACT_APP_TREFLE)
