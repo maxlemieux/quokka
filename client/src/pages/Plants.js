@@ -120,7 +120,7 @@ function Plants() {
   return (
     <Container fluid>
       <Row>
-        <Col size="md-6">
+        <Col size="md-5">
           <Jumbotron>
             <h1>What Should I Plant?</h1>
           </Jumbotron>
@@ -147,34 +147,44 @@ function Plants() {
               Submit Book
             </FormBtn>
           </form> */}
+        <Row>
+        <form>
+            <FormBtn onClick={loadSuggestions}>Get Suggestions</FormBtn>
+          </form>
+          </Row>
 
+          <Row>
           <form>
             <Input
               name="minTemp" 
               onChange={handleTemperatureChange}
               placeholder="MinTemp" />
-            <FormBtn 
+              <FormBtn 
               disabled={!temperatureObject.minTemp}
               onClick={GetPlantsByMinTemp}>Submit Temp</FormBtn>
           </form>
+          </Row>
+          
 
           {/* <form>
             <FormBtn onClick={GetPlantImage}>Get Image URL</FormBtn>
           </form> */}
 
-          <form>
-            <FormBtn onClick={loadSuggestions}>Get Suggestions</FormBtn>
-          </form>
-
+          
+          <Row>
           <form>
             <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
             <FormBtn onClick={GetPlantsByName}>Get Plants By Name</FormBtn>
           </form>
+          </Row>
+          
 
+          
           <SearchResults searchResults={searchResults} />
+          
 
         </Col>
-        <Col size="md-6 sm-12">
+        <Col size="md-4 sm-12">
           <Jumbotron>
             <h1>Plants On My List</h1>
           </Jumbotron>
@@ -194,6 +204,11 @@ function Plants() {
           ) : (
             <h3>No Results to Display</h3>
           )}
+        </Col>
+        <Col size="md-3">
+          <Jumbotron>
+            <h1>Fav Live Feed</h1>
+          </Jumbotron>
         </Col>
       </Row>
     </Container>
