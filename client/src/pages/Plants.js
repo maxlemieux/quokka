@@ -6,13 +6,15 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
+import { SearchResults } from "../components/SearchResults";
 import Trefle from "../utils/trefle"
 
 function Plants() {
   const [books, setBooks] = useState([])
-  const [formObject, setFormObject] = useState({})
+  // const [formObject, setFormObject] = useState({})
   const [searchObject, setSearchObject] = useState('');
   const [temperatureObject, setTemperatureObject] = useState(0);
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     loadBooks()
@@ -32,10 +34,10 @@ function Plants() {
       .catch(err => console.log(err));
   }
 
-  function handleInputChange(event) {
-    const { name, value } = event.target;
-    setFormObject({...formObject, [name]: value});
-  };
+  // function handleInputChange(event) {
+  //   const { name, value } = event.target;
+  //   setFormObject({...formObject, [name]: value});
+  // };
 
   function handleSearchChange(event) {
     const { name, value } = event.target;
@@ -47,23 +49,26 @@ function Plants() {
     setTemperatureObject({...temperatureObject, [name]: value});
   }
 
-  function handleFormSubmit(event) {
-    event.preventDefault();
-    if (formObject.title && formObject.author) {
-      API.saveBook({
-        title: formObject.title,
-        author: formObject.author,
-        synopsis: formObject.synopsis
-      })
-        .then(res => loadBooks())
-        .catch(err => console.log(err));
-    }
-  };
+  // function handleFormSubmit(event) {
+  //   event.preventDefault();
+  //   if (formObject.title && formObject.author) {
+  //     API.saveBook({
+  //       title: formObject.title,
+  //       author: formObject.author,
+  //       synopsis: formObject.synopsis
+  //     })
+  //       .then(res => loadBooks())
+  //       .catch(err => console.log(err));
+  //   }
+  // };
 
   function GetPlantsByMinTemp(event){
     event.preventDefault();
     Trefle.getPlantsByMinTemp(temperatureObject.minTemp)
-      .then(res=>console.log(res))
+      .then(res=>{
+        console.log(res)
+        setSearchResults({...searchResults, ...res});
+      })
   }
 
   function GetPlantImage(event){
@@ -127,6 +132,8 @@ function Plants() {
             <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
             <FormBtn onClick={GetPlantsByCommonName}>Get Plants By Common Name</FormBtn>
           </form>
+
+          <SearchResults searchResults={searchResults} />
 
         </Col>
         <Col size="md-6 sm-12">

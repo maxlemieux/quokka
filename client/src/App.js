@@ -7,8 +7,8 @@ import {
   BrowserRouter,
   Switch,
   Route,
-  Link,
-  useParams
+  // Link,
+  // useParams
 } from "react-router-dom";
 
 // The app will not render correctly until you setup a Route component.

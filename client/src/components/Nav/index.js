@@ -30,8 +30,8 @@ const Nav = () => {
         
       >
         <img src="../img/quokka-logo.png" 
-          alt="quokka-image"
-          style = {imgStyle} 
+          alt="logo"
+          style={imgStyle} 
         />
            <p style={wordStyle}>quokka</p>
       </a>
