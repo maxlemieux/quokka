@@ -5,7 +5,7 @@ import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
+import { Input, FormBtn } from "../components/Form";
 import Trefle from "../utils/trefle"
 
 function Plants() {
@@ -62,7 +62,7 @@ function Plants() {
 
   function GetPlantsByMinTemp(event){
     event.preventDefault();
-    Trefle.getPlantsByMinTemp(formObject.minTemp)
+    Trefle.getPlantsByMinTemp(temperatureObject.minTemp)
       .then(res=>console.log(res))
   }
 
@@ -108,23 +108,26 @@ function Plants() {
               Submit Book
             </FormBtn>
           </form> */}
+
           <form>
             <Input
-              onChange={handleInputChange}
               name="minTemp" 
               onChange={handleTemperatureChange}
               placeholder="MinTemp" />
             <FormBtn 
-              disabled={!(formObject.minTemp && formObject.title)}
+              disabled={!temperatureObject.minTemp}
               onClick={GetPlantsByMinTemp}>Submit Temp</FormBtn>
           </form>
+
           <form>
             <FormBtn onClick={GetPlantImage}>Get Image URL</FormBtn>
           </form>
+
           <form>
             <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
             <FormBtn onClick={GetPlantsByCommonName}>Get Plants By Common Name</FormBtn>
           </form>
+
         </Col>
         <Col size="md-6 sm-12">
           <Jumbotron>
