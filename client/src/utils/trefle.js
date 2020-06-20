@@ -9,7 +9,7 @@ export default {
     getPlantsByImage: function(){
         return axios.get(`/api/trefle/species/984782`)
     },
-    getPlantsByCommonName: function(commonName){
-        return axios.get(`/api/trefle/common_name/${commonName}`);
+    getPlantsByName: function(name){
+        return axios.get(`/api/trefle/name/${name}`);
     },
 }

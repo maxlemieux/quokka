@@ -11,8 +11,8 @@ module.exports = {
         // return axios.get(`https://trefle.io/api/species/${id}?token=${process.env.REACT_APP_TREFLE}`,{crossDomain:true , headers: {
         //     'Access-Control-Allow-Origin': '*'}})
     },
-    getPlantsByCommonName: function(req,res){
+    getPlantsByName: function(req,res){
       console.log(process.env.REACT_APP_TREFLE)
-      return axios.get(`https://trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&common_name=${req.params.commonName}`);
+      return axios.get(`https://trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&q=${req.params.name}`);
     },
 };
