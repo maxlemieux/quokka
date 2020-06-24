@@ -9,7 +9,7 @@ import {
     ResponsiveHeader4,
     MutedSpan,
     VerticalCenterWrapper,
-    SubmitButtom
+    SubmitButton
 } from "./styles";
 
 const SignUpLoginForm = () => {
@@ -88,7 +88,7 @@ const SignUpLoginForm = () => {
                 </Row>
             </Form.Group>
             <VerticalCenterWrapper>
-                <SubmitButtom type="submit">Submit</SubmitButtom>
+                <SubmitButton type="submit">Submit</SubmitButton>
             </VerticalCenterWrapper>
         </Form>
     );
