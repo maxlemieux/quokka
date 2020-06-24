@@ -124,29 +124,6 @@ function Plants() {
           <Jumbotron>
             <h1>What Should I Plant?</h1>
           </Jumbotron>
-          {/* <form>
-            <Input
-              onChange={handleInputChange}
-              name="title"
-              placeholder="Title (required)"
-            />
-            <Input
-              onChange={handleInputChange}
-              name="author"
-              placeholder="Author (required)"
-            />
-            <TextArea
-              onChange={handleInputChange}
-              name="synopsis"
-              placeholder="Synopsis (Optional)"
-            />
-            <FormBtn
-              disabled={!(formObject.author && formObject.title)}
-              onClick={handleFormSubmit}
-            >
-              Submit Book
-            </FormBtn>
-          </form> */}
         <Row>
         <form>
             <FormBtn onClick={loadSuggestions}>Get Suggestions</FormBtn>
@@ -192,11 +169,11 @@ function Plants() {
             <List>
               {plants.map(plant => (
                 <ListItem key={plant._id}>
-                  <Link to={"/plants/" + plant._id}>
+                  {/* <Link to={"/plants/" + plant._id}> */}
                     <strong>
-                      {plant.title} by {plant.author}
+                      {plant.scientific_name}
                     </strong>
-                  </Link>
+                  {/* </Link> */}
                   <DeleteBtn onClick={() => deletePlant(plant._id)} />
                 </ListItem>
               ))}
