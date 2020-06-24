@@ -3,9 +3,10 @@ import "./style.css";
 import { List, ListItem } from "../List";
 import API from "../../utils/API";
 
-export function SearchResults(props, { children }) {
+export function SearchResults(props) {
   const [plants, setPlants] = useState([])
   function loadPlants() {
+    console.log('loadPlants fired')
     API.getPlants()
       .then(res => 
         setPlants(res.data)
@@ -15,13 +16,14 @@ export function SearchResults(props, { children }) {
   // console.log(props);
   return (
     <div className="list-overflow-container">
-      {props.searchResults.data && props.searchResults.data.map(result => <Result loadPlants={loadPlants} result={result} key={result.id} />)}
-      <ul className="list-group">{children}</ul>
+      <ul className="list-group">
+        {props.searchResults.data && props.searchResults.data.map(result => <Result loadPlants={() => loadPlants} result={result} key={result.id} />)}
+      </ul>
     </div>
   );
 }
 
-export function Result(props, { children }) {
+export function Result(props) {
   console.log(props.result.id)
   function savePlant(plantId) {
     API.plantDetails(plantId)
@@ -39,7 +41,7 @@ export function Result(props, { children }) {
         {props.result.common_name && <ListItem>Common Name: {props.result.common_name}</ListItem>}
       </List>
       <button onClick={() => { savePlant(props.result.id) }}>Save to Favorites</button>
-      {children}
+      {/* {children} */}
     </li>
   );
 }

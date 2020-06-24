@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
+import { Favorites } from "../components/Favorites";
 import { SearchResults } from "../components/SearchResults";
 import Trefle from "../utils/trefle"
 import phzmapi from "../utils/phzmapi"
@@ -99,6 +100,7 @@ function Plants() {
     phzmapi.getTemperatureByZipcode(99518)
       .then(res => {
         const minTemp = res.data.temperature_range.split(' ')[0];
+        console.log(minTemp)
         Trefle.getPlantsByMinTemp(minTemp)
           .then(res => {
             // console.log(res);
@@ -186,6 +188,7 @@ function Plants() {
           <Jumbotron>
             <h1>Fav Live Feed</h1>
           </Jumbotron>
+          <Favorites />
         </Col>
       </Row>
     </Container>
