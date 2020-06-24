@@ -6,7 +6,7 @@ function Jumbotron({ children }) {
       style={{ 
         height: 300, 
         clear: "both", 
-        paddingTop: 120, 
+        paddingTop: 120,
         textAlign: "center",
         boxShadow: "0px 5px 5px 5px #78C2AD",
       }}
