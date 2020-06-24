@@ -16,7 +16,7 @@ function Detail() {
     API.getBook(id)
       .then(res => setBook(res.data))
       .catch(err => console.log(err));
-  }, [])
+  }, [ id ])
 
   return (
       <Container fluid>
