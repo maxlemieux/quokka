@@ -4,6 +4,8 @@ const Schema = mongoose.Schema;
 const plantSchema = new Schema({
   common_name: String,
   scientific_name: { type: String, required: true },
+  soils_adaptation: Object,
+  images: Array,
 });
 
 const Plant = mongoose.model("Plant", plantSchema);
