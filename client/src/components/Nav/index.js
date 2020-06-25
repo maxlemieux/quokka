@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import SignupLoginModal from "../SignupLoginModal";
 
 const Nav = () => {
+  const [show, setShow] = useState(false);
+
   const imgStyle = {
     width: "65px",
     height: "65px",
@@ -35,6 +38,9 @@ const Nav = () => {
         />
            <p style={wordStyle}>quokka</p>
       </a>
+
+      <SignupLoginModal show={show} setShow={setShow} />
+      <button onClick={() => setShow(true)}>Login</button>
     </nav>
     
   );

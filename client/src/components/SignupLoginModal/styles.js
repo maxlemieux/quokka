@@ -35,7 +35,7 @@ export const VerticalCenterWrapper = styled("div")`
     margin-bottom: 15px;
 `;
 
-export const SubmitButtom = styled(Button)`
+export const SubmitButton = styled(Button)`
     background: #114b74;
     color: #fff;
     border-radius: 5px;

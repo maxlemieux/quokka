@@ -9,10 +9,10 @@ import {
     ResponsiveHeader4,
     MutedSpan,
     VerticalCenterWrapper,
-    SubmitButtom
+    SubmitButton
 } from "./styles";
 
-const SignUpLoginForm = () => {
+const SignUpLoginForm = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -88,7 +88,7 @@ const SignUpLoginForm = () => {
                 </Row>
             </Form.Group>
             <VerticalCenterWrapper>
-                <SubmitButtom type="submit">Submit</SubmitButtom>
+                <SubmitButton onClick={() => props.setShow(false)} type="submit">Submit</SubmitButton>
             </VerticalCenterWrapper>
         </Form>
     );
@@ -103,7 +103,7 @@ const SignupLoginModal = props => {
             <PaddedContainer>
                 <ResponsiveHeader4>With email:</ResponsiveHeader4>
                 <br />
-                <SignUpLoginForm />
+                <SignUpLoginForm setShow={props.setShow} />
                 <Row style={{ borderBottom: "1px solid #dee2e6" }} />
             </PaddedContainer>
         </Modal>
