@@ -16,7 +16,7 @@ export function Favorites(props) {
   return (
     <div>
       <ul>
-        {props.data.map(favorite => <li>{favorite.scientific_name}</li>)}
+        {props.data.map(favorite => <li key={favorite._id}>{favorite.scientific_name}</li>)}
       </ul>
     </div>  
   );
