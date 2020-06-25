@@ -14,6 +14,8 @@ import phzmapi from "../utils/phzmapi"
 
 function Plants() {
   const [plants, setPlants] = useState([])
+  const [favorites, setFavorites] = useState([])
+
   // const [formObject, setFormObject] = useState({})
   // const [searchObject, setSearchObject] = useState('');
   const [temperatureObject, setTemperatureObject] = useState(0);
@@ -21,6 +23,10 @@ function Plants() {
 
   useEffect(() => {
     loadPlants()
+  }, []);
+
+  useEffect(() => {
+    loadFavorites()
   }, []);
 
   /* Run the automatic plant suggestion code on component render */
@@ -32,6 +38,14 @@ function Plants() {
     API.getPlants()
       .then(res => 
         setPlants(res.data)
+      )
+      .catch(err => console.log(err));
+  };
+
+  function loadFavorites() {
+    API.findRecent()
+      .then(res => 
+        setFavorites(res.data)
       )
       .catch(err => console.log(err));
   };
@@ -193,7 +207,9 @@ function Plants() {
           <Jumbotron>
             <h1>Fav Live Feed</h1>
           </Jumbotron>
-          <Favorites />
+
+          <Favorites data={favorites}/>
+
         </Col>
       </Row>
     </Container>

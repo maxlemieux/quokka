@@ -3,7 +3,7 @@ import "./style.css";
 import { List, ListItem } from "../List";
 import API from "../../utils/API";
 
-export function Favorites() {
+export function Favorites(props) {
   function getFavorites() {
     API.findRecent()
       .then(res => console.log(res))
@@ -15,7 +15,9 @@ export function Favorites() {
 
   return (
     <div>
-      Favorites here
+      <ul>
+        {props.data.map(favorite => <li>{favorite.scientific_name}</li>)}
+      </ul>
     </div>  
   );
 }
