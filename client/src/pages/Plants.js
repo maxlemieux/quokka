@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
+// import { getPostalCode } from "../utils/geoip";
 // import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
@@ -113,6 +114,7 @@ function Plants() {
   function loadSuggestions(event) {
     event.preventDefault();
     /* Here is where we need to call GeoIP to figure out the zip code. */
+    // console.log(this);
     phzmapi.getTemperatureByZipcode(99518)
       .then(res => {
         const minTemp = res.data.temperature_range.split(' ')[0];
@@ -178,7 +180,7 @@ function Plants() {
           
 
           
-          <SearchResults searchResults={searchResults} setPlants={setPlants}/>
+          <SearchResults searchResults={searchResults} loadFavorites={loadFavorites} setPlants={setPlants}/>
           
 
         </Col>

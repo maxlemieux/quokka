@@ -21,7 +21,7 @@ export function SearchResults(props) {
     <div className="list-overflow-container">
       <ul className="list-group">
         {props.searchResults.data && 
-           props.searchResults.data.map(result => <Result loadPlants={loadPlants} result={result} key={result.id} />)}
+           props.searchResults.data.map(result => <Result loadFavorites={props.loadFavorites} loadPlants={loadPlants} result={result} key={result.id} />)}
       </ul>
     </div>
   );
@@ -31,7 +31,10 @@ export function Result(props) {
   function savePlant(plantId) {
     API.plantDetails(plantId)
       .then(res => API.savePlant(res.data)
-        .then(res => props.loadPlants())
+        .then(res => {
+          props.loadPlants();
+          props.loadFavorites();
+        })
       )
       .catch(err => console.log(err))
   }
