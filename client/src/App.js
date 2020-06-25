@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Plants from "./pages/Plants";
 import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
+import SignupLoginModal from "./components/SignupLoginModal";
 import Nav from "./components/Nav";
 import { 
   BrowserRouter,
@@ -15,6 +16,8 @@ import {
 // Refer to the Basic Example documentation if you need to.
 // (https://reacttraining.com/react-router/web/example/basic)
 function App() {
+  const [show, setShow] = useState(false);
+
   return (
     <BrowserRouter>
       <Nav />  
@@ -23,15 +26,16 @@ function App() {
           <Route exact path="/">
             <Plants />
           </Route> 
-          <Route exact path="/books">
+          <Route exact path="/plants">
             <Plants />
           </Route>
-          <Route path="/books/:id" children={<Detail />} />
+          <Route path="/plants/:id" children={<Detail />} />
           <Route>
             <NoMatch />
           </Route>
         </Switch>
       </div>
+      <SignupLoginModal show={show} setShow={setShow} />
     </BrowserRouter>
   );
 }

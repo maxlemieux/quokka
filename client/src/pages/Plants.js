@@ -36,7 +36,7 @@ function Plants() {
   };
 
   function deletePlant(id) {
-    API.deletePlants(id)
+    API.deletePlant(id)
       .then(res => loadPlants())
       .catch(err => console.log(err));
   }
