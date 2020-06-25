@@ -1,10 +1,12 @@
 const axios = require("axios");
 const router = require("express").Router();
 
-router.route("/species/:id")
+router.route("/species/:plantId")
 	.get(function(req, res) {
-		axios.get(`https://trefle.io/api/species/${req.params.id}?token=${process.env.REACT_APP_TREFLE}`)
+		axios.get(`https://trefle.io/api/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
 		.then(function(response) {
+			// console.log('We got a response on the plant details from trefle. The response is')
+			// console.log(response)
 			res.json(response.data);
 		})
 		.catch(function(err) {
@@ -28,7 +30,7 @@ router.route("/temperature_minimum_deg_f/:minTemp")
 
 router.route("/name/:name")
 	.get(function(req, res) {
-		console.log(req.params.name);
+		// console.log(req.params.name);
 		axios.get(`https://trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&q=${req.params.name}`)
 		.then(function(response) {
 			res.json(response.data);
