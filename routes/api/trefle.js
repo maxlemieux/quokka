@@ -3,7 +3,7 @@ const router = require("express").Router();
 
 router.route("/species/:plantId")
 	.get(function(req, res) {
-		axios.get(`https://trefle.io/api/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
+		axios.get(`https://v0.trefle.io/api/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
 		.then(function(response) {
 			// console.log('We got a response on the plant details from trefle. The response is')
 			// console.log(response)
@@ -18,7 +18,7 @@ router.route("/species/:plantId")
 router.route("/temperature_minimum_deg_f/:minTemp")
 	.get(function(req, res) {
 		// console.log(process.env.REACT_APP_TREFLE)
-		axios.get(`https://trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&temperature_minimum_deg_f>${req.params.minTemp}`)
+		axios.get(`https://v0.trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&temperature_minimum_deg_f>${req.params.minTemp}`)
 		.then(function(response) {
 			res.json(response.data);
 		})
@@ -31,7 +31,7 @@ router.route("/temperature_minimum_deg_f/:minTemp")
 router.route("/name/:name")
 	.get(function(req, res) {
 		// console.log(req.params.name);
-		axios.get(`https://trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&q=${req.params.name}`)
+		axios.get(`https://v0.trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&q=${req.params.name}`)
 		.then(function(response) {
 			res.json(response.data);
 		})
