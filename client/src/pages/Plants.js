@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
+import { Favorites } from "../components/Favorites";
 import { SearchResults } from "../components/SearchResults";
 import Trefle from "../utils/trefle"
 import phzmapi from "../utils/phzmapi"
@@ -99,6 +100,7 @@ function Plants() {
     phzmapi.getTemperatureByZipcode(99518)
       .then(res => {
         const minTemp = res.data.temperature_range.split(' ')[0];
+        console.log(minTemp)
         Trefle.getPlantsByMinTemp(minTemp)
           .then(res => {
             // console.log(res);
@@ -124,29 +126,6 @@ function Plants() {
           <Jumbotron>
             <h1>What Should I Plant?</h1>
           </Jumbotron>
-          {/* <form>
-            <Input
-              onChange={handleInputChange}
-              name="title"
-              placeholder="Title (required)"
-            />
-            <Input
-              onChange={handleInputChange}
-              name="author"
-              placeholder="Author (required)"
-            />
-            <TextArea
-              onChange={handleInputChange}
-              name="synopsis"
-              placeholder="Synopsis (Optional)"
-            />
-            <FormBtn
-              disabled={!(formObject.author && formObject.title)}
-              onClick={handleFormSubmit}
-            >
-              Submit Book
-            </FormBtn>
-          </form> */}
         <Row>
         <form>
             <FormBtn onClick={loadSuggestions}>Get Suggestions</FormBtn>
@@ -192,11 +171,11 @@ function Plants() {
             <List>
               {plants.map(plant => (
                 <ListItem key={plant._id}>
-                  <Link to={"/plants/" + plant._id}>
+                  {/* <Link to={"/plants/" + plant._id}> */}
                     <strong>
-                      {plant.title} by {plant.author}
+                      {plant.scientific_name}
                     </strong>
-                  </Link>
+                  {/* </Link> */}
                   <DeleteBtn onClick={() => deletePlant(plant._id)} />
                 </ListItem>
               ))}
@@ -209,6 +188,7 @@ function Plants() {
           <Jumbotron>
             <h1>Fav Live Feed</h1>
           </Jumbotron>
+          <Favorites />
         </Col>
       </Row>
     </Container>
