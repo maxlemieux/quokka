@@ -21,6 +21,8 @@ function Plants() {
   // const [searchObject, setSearchObject] = useState('');
   const [temperatureObject, setTemperatureObject] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
+  const [searchPlants, setSearchPlants] = useState([]);
+
 
   useEffect(() => {
     loadPlants()
@@ -64,7 +66,7 @@ function Plants() {
 
   function handleSearchChange(event) {
     const { value } = event.target;
-    setSearchResults(value);
+    setSearchPlants(value);
   };
 
   function handleTemperatureChange(event) {
@@ -130,7 +132,7 @@ function Plants() {
   function GetPlantsByName(event){
     event.preventDefault();
     // console.log(searchResults)
-    Trefle.getPlantsByName(searchResults)
+    Trefle.getPlantsByName(searchPlants)
       .then(res=>{
         //console.log(res);
         setSearchResults(res);
