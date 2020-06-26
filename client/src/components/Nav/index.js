@@ -1,8 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SignupLoginModal from "../SignupLoginModal";
+import axios from "axios";
 
 const Nav = () => {
   const [show, setShow] = useState(false);
+  const [userName, setUserName] = useState("guest");
+
+  function getUserName() {
+    axios.get("/api/auth/user_data")
+      .then(res =>{
+        if (res) { 
+          setUserName(res.user)
+          console.log(res.user)
+        }
+      } )
+  }
+  useEffect(() => {
+    getUserName()
+  }, []);
+
 
   const imgStyle = {
     width: "65px",
@@ -22,6 +38,7 @@ const Nav = () => {
     marginBottom: "20px"
   }
  
+
   return (
     <nav 
     className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top"
@@ -38,6 +55,7 @@ const Nav = () => {
         />
            <p style={wordStyle}>quokka</p>
       </a>
+      <p></p>
 
       <SignupLoginModal show={show} setShow={setShow} />
       <button onClick={() => setShow(true)}>Login</button>

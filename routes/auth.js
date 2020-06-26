@@ -4,6 +4,7 @@ const passport = require("passport");
 
 // Route for getting some data about our user to be used client side
 router.get('/user_data', (req, res) => {
+    
 if (!req.user) {
     // The user is not logged in, send back an empty object
     res.json({});
