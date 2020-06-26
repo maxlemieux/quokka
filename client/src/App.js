@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 import Plants from "./pages/Plants";
 import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
@@ -16,9 +18,27 @@ import {
 // Refer to the Basic Example documentation if you need to.
 // (https://reacttraining.com/react-router/web/example/basic)
 function App() {
+  const [userName, setUserName] = useState("guest");
+
+  function getUserName() {
+    axios.get("/api/auth/user_data")
+      .then(res => {
+        if (res.data.email) { 
+          setUserName(res.data.email)
+        // } else {
+          // console.log('no email on response')
+        }
+        // console.log(res.data)
+      })
+  }
+  useEffect(() => {
+    // console.log('useeffect fired')
+    getUserName()
+  }, []);
+
   return (
     <BrowserRouter>
-      <Nav />  
+      <Nav userName={userName} />  
       <div>
         <Switch>
           <Route exact path="/">
