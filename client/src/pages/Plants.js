@@ -90,12 +90,14 @@ function Plants(props) {
   const styleTabs = {
     border: '.1px solid black',
     textAlign: 'center',
+    marginBottom: '70px'
     
   }
 
 
+
   return (
-    <Container>
+    <Container fluid>
       <Row>
         {/* What should I plant column */}
         <Col size="md-5">
@@ -103,40 +105,23 @@ function Plants(props) {
             <h1>What Should I Plant?</h1>
           </Jumbotron>
         
-        <div style={styleTabs}>
+      <div style={styleTabs}>
         <Tabs defaultActiveKey="Get Suggestions">
           {/* Get Plant Suggestions */}
           <Tab eventKey="Get Suggestions" title="Get Suggestions">
-          
+          <p>Click the Button to Get Suggestions!</p>
               <Button onClick={loadSuggestions}>Get Suggestions</Button>
-            
-            
-            <p>Click the Button to Get Suggestions!</p>
-            
-          
           </Tab>
 
           {/* Search By Name */}
           <Tab eventKey="Search By Name" title="Search By Name">
-          
             <p>If you'd like to search for a plant by name, you can search here.</p>
-            <form>
               <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
-              <FormBtn onClick={GetPlantsByName}>Get Plants By Name</FormBtn>
-            </form>
-          
+              <Button onClick={GetPlantsByName}>Get Plants By Name</Button>
           </Tab>
         </Tabs>
-          
-          </div>
-          
-
-
-          <Row>
           <SearchResults userName={props.userName} searchResults={searchResults} loadFavorites={loadFavorites} setPlants={setPlants}/>
-          </Row>
-          
-          
+        </div>
         </Col>
         
 
