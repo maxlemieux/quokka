@@ -10,6 +10,8 @@ import { Input, FormBtn } from "../components/Form";
 import { Favorites } from "../components/Favorites";
 import { SearchResults } from "../components/SearchResults";
 
+import { Tabs, Tab, Button } from "react-bootstrap"; //Added for navtab effect on "What should I Plant column"
+
 import Trefle from "../utils/trefle"
 import phzmapi from "../utils/phzmapi"
 
@@ -85,47 +87,51 @@ function Plants(props) {
       });
   }
 
-  const styleRow = {
-    color: "red",
-    margin: 'auto'
+  const styleTabs = {
+    border: '.1px solid black',
+    textAlign: 'center',
+    
   }
 
+
   return (
-    <Container fluid>
+    <Container>
       <Row>
         {/* What should I plant column */}
         <Col size="md-5">
           <Jumbotron>
             <h1>What Should I Plant?</h1>
           </Jumbotron>
-        <Row>
-          <ul className="nav nav-tabs">
-            <li className="nav-item">
-              <a className="nav-link active" data-toggle="tab" href="#home">Get Suggest</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" data-toggle="tab" href="#profile">Search by Name Smarty</a>
-            </li>
-          </ul>
+        
+        <div style={styleTabs}>
+        <Tabs defaultActiveKey="Get Suggestions">
+          {/* Get Plant Suggestions */}
+          <Tab eventKey="Get Suggestions" title="Get Suggestions">
+          
+              <Button onClick={loadSuggestions}>Get Suggestions</Button>
+            
+            
+            <p>Click the Button to Get Suggestions!</p>
+            
+          
+          </Tab>
 
-      <div id="myTabContent" className="tab-content">
-          <div classname="tab-pane fade active show" id="home">
-            <p style={styleRow}>Looking for suggestions on what to plant? Click this button!</p>
-            <form>
-              <FormBtn onClick={loadSuggestions}>Get Suggestions</FormBtn>
-            </form>
-          </div>
-
-          <div className="tab-pane fade" id="profile">
+          {/* Search By Name */}
+          <Tab eventKey="Search By Name" title="Search By Name">
+          
             <p>If you'd like to search for a plant by name, you can search here.</p>
             <form>
               <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
               <FormBtn onClick={GetPlantsByName}>Get Plants By Name</FormBtn>
             </form>
-          </div>
-      </div>
-          </Row>
           
+          </Tab>
+        </Tabs>
+          
+          </div>
+          
+
+
           <Row>
           <SearchResults userName={props.userName} searchResults={searchResults} loadFavorites={loadFavorites} setPlants={setPlants}/>
           </Row>
