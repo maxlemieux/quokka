@@ -19,7 +19,7 @@ function Plants() {
 
   // const [formObject, setFormObject] = useState({})
   // const [searchObject, setSearchObject] = useState('');
-  const [temperatureObject, setTemperatureObject] = useState(0);
+  // const [temperatureObject, setTemperatureObject] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
   const [searchPlants, setSearchPlants] = useState([]);
 
@@ -69,12 +69,12 @@ function Plants() {
     setSearchPlants(value);
   };
 
-  function handleTemperatureChange(event) {
-    const { name, value } = event.target;
-    console.log(`name ${name}`);
-    console.log(`value ${value}`);
-    setTemperatureObject({ minTemp: value });
-  }
+  // function handleTemperatureChange(event) {
+  //   const { name, value } = event.target;
+  //   console.log(`name ${name}`);
+  //   console.log(`value ${value}`);
+  //   setTemperatureObject({ minTemp: value });
+  // }
 
   // function handleFormSubmit(event) {
   //   event.preventDefault();
@@ -89,15 +89,15 @@ function Plants() {
   //   }
   // };
 
-  function GetPlantsByMinTemp(event){
-    event.preventDefault();
-    console.log(`search with min temp ${temperatureObject.minTemp}`);
-    Trefle.getPlantsByMinTemp(temperatureObject.minTemp)
-      .then(res=>{
-        console.log(res)
-        setSearchResults(res);
-      })
-  }
+  // function GetPlantsByMinTemp(event){
+  //   event.preventDefault();
+  //   console.log(`search with min temp ${temperatureObject.minTemp}`);
+  //   Trefle.getPlantsByMinTemp(temperatureObject.minTemp)
+  //     .then(res=>{
+  //       console.log(res)
+  //       setSearchResults(res);
+  //     })
+  // }
 
   // function GetPlantImage(event){
   //   event.preventDefault();
