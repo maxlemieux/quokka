@@ -85,31 +85,55 @@ function Plants(props) {
       });
   }
 
+  const styleRow = {
+    color: "red",
+    margin: 'auto'
+  }
+
   return (
     <Container fluid>
       <Row>
+        {/* What should I plant column */}
         <Col size="md-5">
           <Jumbotron>
             <h1>What Should I Plant?</h1>
           </Jumbotron>
         <Row>
-        <p>Looking for suggestions on what to plant? Click this button!</p>
-        <form>
-          
-            <FormBtn onClick={loadSuggestions}>Get Suggestions</FormBtn>
-          </form>
+          <ul className="nav nav-tabs">
+            <li className="nav-item">
+              <a className="nav-link active" data-toggle="tab" href="#home">Get Suggest</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" data-toggle="tab" href="#profile">Search by Name Smarty</a>
+            </li>
+          </ul>
+
+      <div id="myTabContent" className="tab-content">
+          <div classname="tab-pane fade active show" id="home">
+            <p style={styleRow}>Looking for suggestions on what to plant? Click this button!</p>
+            <form>
+              <FormBtn onClick={loadSuggestions}>Get Suggestions</FormBtn>
+            </form>
+          </div>
+
+          <div className="tab-pane fade" id="profile">
+            <p>If you'd like to search for a plant by name, you can search here.</p>
+            <form>
+              <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
+              <FormBtn onClick={GetPlantsByName}>Get Plants By Name</FormBtn>
+            </form>
+          </div>
+      </div>
           </Row>
           
           <Row>
-          <p>If you'd like to search for a plant by name, you can search here.</p>
-          <form>
-            <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
-            <FormBtn onClick={GetPlantsByName}>Get Plants By Name</FormBtn>
-          </form>
+          <SearchResults userName={props.userName} searchResults={searchResults} loadFavorites={loadFavorites} setPlants={setPlants}/>
           </Row>
           
-          <SearchResults userName={props.userName} searchResults={searchResults} loadFavorites={loadFavorites} setPlants={setPlants}/>
+          
         </Col>
+        
+
         <Col size="md-4 sm-12">
           <Jumbotron>
             <h1>Plants On My List</h1>
