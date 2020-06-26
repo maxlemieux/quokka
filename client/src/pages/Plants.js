@@ -62,14 +62,11 @@ function Plants(props) {
   function loadSuggestions(event) {
     event.preventDefault();
     /* Here is where we need to call GeoIP to figure out the zip code. */
-    // console.log(this);
     phzmapi.getTemperatureByZipcode(99518)
       .then(res => {
         const minTemp = res.data.temperature_range.split(' ')[0];
-        // console.log(minTemp)
         Trefle.getPlantsByMinTemp(minTemp)
           .then(res => {
-            // console.log(res);
             setSearchResults(res);
           })  
     })
@@ -77,10 +74,8 @@ function Plants(props) {
 
   function GetPlantsByName(event){
     event.preventDefault();
-    // console.log(searchResults)
     Trefle.getPlantsByName(searchPlants)
       .then(res=>{
-        //console.log(res);
         setSearchResults(res);
       });
   }
@@ -92,20 +87,18 @@ function Plants(props) {
           <Jumbotron>
             <h1>What Should I Plant?</h1>
           </Jumbotron>
-        <Row>
-        <p>Looking for suggestions on what to plant? Click this button!</p>
-        <form>
-          
-            <FormBtn onClick={loadSuggestions}>Get Suggestions</FormBtn>
-          </form>
-          </Row>
-          
           <Row>
-          <p>If you'd like to search for a plant by name, you can search here.</p>
-          <form>
-            <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
-            <FormBtn onClick={GetPlantsByName}>Get Plants By Name</FormBtn>
-          </form>
+            <p>Looking for suggestions on what to plant? Click this button!</p>
+            <form>
+              <FormBtn onClick={loadSuggestions}>Get Suggestions</FormBtn>
+            </form>
+          </Row>
+          <Row>
+            <p>If you'd like to search for a plant by name, you can search here.</p>
+            <form>
+              <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
+              <FormBtn onClick={GetPlantsByName}>Get Plants By Name</FormBtn>
+            </form>
           </Row>
           
           <SearchResults userName={props.userName} searchResults={searchResults} loadFavorites={loadFavorites} setPlants={setPlants}/>
@@ -118,11 +111,9 @@ function Plants(props) {
             <List>
               {plants.map(plant => (
                 <ListItem key={plant._id}>
-                  {/* <Link to={"/plants/" + plant._id}> */}
                     <strong>
                       {plant.scientific_name}
                     </strong>
-                  {/* </Link> */}
                   <DeleteBtn onClick={() => deletePlant(plant._id)} />
                 </ListItem>
               ))}

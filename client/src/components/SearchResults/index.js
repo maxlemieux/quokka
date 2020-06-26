@@ -4,13 +4,9 @@ import { List, ListItem } from "../List";
 import API from "../../utils/API";
 
 export function SearchResults(props) {
-  // const [plants, setPlants] = useState([])
   function loadPlants() {
-    console.log('loadPlants fired')
     API.getPlants()
       .then(res => {
-          console.log('we got back this response from API.getPlants:');
-          console.log(res)
           props.setPlants(res.data)
         }
       )
