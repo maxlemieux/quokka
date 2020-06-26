@@ -27,7 +27,6 @@ export default {
   },
   // Get details on a specific plant
   plantDetails: function(plantId) {
-    console.log(`called utils/API.js plantDetails for id ${plantId}`)
     return axios.get(`/api/trefle/species/${plantId}`);
   }
 };
