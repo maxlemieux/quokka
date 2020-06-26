@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import { Link } from "react-router-dom";
+// import { getPostalCode } from "../utils/geoip";
+// import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
@@ -14,6 +15,8 @@ import phzmapi from "../utils/phzmapi"
 
 function Plants() {
   const [plants, setPlants] = useState([])
+  const [favorites, setFavorites] = useState([])
+
   // const [formObject, setFormObject] = useState({})
   // const [searchObject, setSearchObject] = useState('');
   const [temperatureObject, setTemperatureObject] = useState(0);
@@ -21,6 +24,10 @@ function Plants() {
 
   useEffect(() => {
     loadPlants()
+  }, []);
+
+  useEffect(() => {
+    loadFavorites()
   }, []);
 
   /* Run the automatic plant suggestion code on component render */
@@ -32,6 +39,14 @@ function Plants() {
     API.getPlants()
       .then(res => 
         setPlants(res.data)
+      )
+      .catch(err => console.log(err));
+  };
+
+  function loadFavorites() {
+    API.findRecent()
+      .then(res => 
+        setFavorites(res.data)
       )
       .catch(err => console.log(err));
   };
@@ -98,10 +113,12 @@ function Plants() {
 
   function loadSuggestions(event) {
     event.preventDefault();
+    /* Here is where we need to call GeoIP to figure out the zip code. */
+    // console.log(this);
     phzmapi.getTemperatureByZipcode(99518)
       .then(res => {
         const minTemp = res.data.temperature_range.split(' ')[0];
-        console.log(minTemp)
+        // console.log(minTemp)
         Trefle.getPlantsByMinTemp(minTemp)
           .then(res => {
             // console.log(res);
@@ -128,12 +145,14 @@ function Plants() {
             <h1>What Should I Plant?</h1>
           </Jumbotron>
         <Row>
+        <p>Looking for suggestions on what to plant? Click this button!</p>
         <form>
+          
             <FormBtn onClick={loadSuggestions}>Get Suggestions</FormBtn>
           </form>
           </Row>
 
-          <Row>
+          {/* <Row>
           <form>
             <Input
               name="minTemp" 
@@ -143,7 +162,7 @@ function Plants() {
               disabled={!temperatureObject.minTemp}
               onClick={GetPlantsByMinTemp}>Submit Temp</FormBtn>
           </form>
-          </Row>
+          </Row> */}
           
 
           {/* <form>
@@ -152,6 +171,7 @@ function Plants() {
 
           
           <Row>
+          <p>If you'd like to search for a plant by name, you can search here.</p>
           <form>
             <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
             <FormBtn onClick={GetPlantsByName}>Get Plants By Name</FormBtn>
@@ -160,7 +180,7 @@ function Plants() {
           
 
           
-          <SearchResults searchResults={searchResults} />
+          <SearchResults searchResults={searchResults} loadFavorites={loadFavorites} setPlants={setPlants}/>
           
 
         </Col>
@@ -189,7 +209,9 @@ function Plants() {
           <Jumbotron>
             <h1>Fav Live Feed</h1>
           </Jumbotron>
-          <Favorites />
+
+          <Favorites data={favorites}/>
+
         </Col>
       </Row>
     </Container>
