@@ -62,6 +62,7 @@ function Plants(props) {
   function loadSuggestions(event) {
     event.preventDefault();
     /* Here is where we need to call GeoIP to figure out the zip code. */
+    console.log(`User ip address for geoip is ${props.userIp}`);
     phzmapi.getTemperatureByZipcode(99518)
       .then(res => {
         const minTemp = res.data.temperature_range.split(' ')[0];
