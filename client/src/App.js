@@ -2,6 +2,7 @@ import React from "react";
 import Plants from "./pages/Plants";
 import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
+import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 import { 
   BrowserRouter,
@@ -18,7 +19,7 @@ function App() {
   return (
     <BrowserRouter>
       <Nav />  
-     <div>
+      <div>
         <Switch>
           <Route exact path="/">
             <Plants />
@@ -32,6 +33,7 @@ function App() {
           </Route>
         </Switch>
       </div>
+      <Footer />
     </BrowserRouter>
   );
 }
