@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import SignupLoginModal from "../SignupLoginModal";
+// import axios from "axios";
 
-
-const Nav = () => {
+const Nav = (props) => {
   const [show, setShow] = useState(false);
 
   const imgStyle = {
@@ -22,7 +22,7 @@ const Nav = () => {
     boxShadow: "0px 5px 10px 5px pink",
     marginBottom: "20px"
   }
- 
+
   return (
     <nav 
     className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top"
@@ -32,7 +32,8 @@ const Nav = () => {
       />
           <p style={wordStyle}>quokka</p>
       </a>
-
+      <p>{props.userName}</p>
+      
       <SignupLoginModal show={show} setShow={setShow} />
       <button onClick={() => setShow(true)}>Login</button>
     </nav>
