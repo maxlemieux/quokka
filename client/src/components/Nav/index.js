@@ -8,14 +8,17 @@ const Nav = () => {
 
   function getUserName() {
     axios.get("/api/auth/user_data")
-      .then(res =>{
-        if (res) { 
-          setUserName(res.user)
-          console.log(res.user)
+      .then(res => {
+        if (res.data.email) { 
+          setUserName(res.data.email)
+        } else {
+          console.log('no email on response')
         }
-      } )
+        // console.log(res.data)
+      })
   }
   useEffect(() => {
+    console.log('useeffect fired')
     getUserName()
   }, []);
 
@@ -55,8 +58,8 @@ const Nav = () => {
         />
            <p style={wordStyle}>quokka</p>
       </a>
-      <p></p>
-
+      <p>{userName}</p>
+      
       <SignupLoginModal show={show} setShow={setShow} />
       <button onClick={() => setShow(true)}>Login</button>
     </nav>
