@@ -88,10 +88,15 @@ function Plants(props) {
   }
 
   const styleTabs = {
-    border: '.1px solid black',
+    border: '3px solid #78C2AD',
+    borderRadius: '10px',
     textAlign: 'center',
-    marginBottom: '70px'
-    
+    boxShadow: "0px 5px 5px 3px #F3969A",
+    paddingBottom: '10px'
+  }
+
+  const styleLi = {
+    marginBottom: '100px',
   }
 
 
@@ -120,8 +125,10 @@ function Plants(props) {
               <Button onClick={GetPlantsByName}>Get Plants By Name</Button>
           </Tab>
         </Tabs>
-          <SearchResults userName={props.userName} searchResults={searchResults} loadFavorites={loadFavorites} setPlants={setPlants}/>
         </div>
+        <div style={styleLi}>
+          <SearchResults userName={props.userName} searchResults={searchResults} loadFavorites={loadFavorites} setPlants={setPlants}/>
+          </div>
         </Col>
         
 

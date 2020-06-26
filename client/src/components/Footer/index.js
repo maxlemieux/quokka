@@ -9,7 +9,7 @@ const Footer = () => {
     textAlign: 'center',
     backgroundColor: '#78C2AD',
     color: 'cornsilk',
-    boxShadow: "0px 0px 10px 15px pink",
+    boxShadow: "0px 0px 10px 10px pink",
     height: '40px'
   }
   const styleA = {
