@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import Plants from "./pages/Plants";
-import Detail from "./pages/Detail";
+// import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
@@ -42,12 +42,12 @@ function App() {
       <div>
         <Switch>
           <Route exact path="/">
-            <Plants />
+            <Plants userName={userName} />
           </Route> 
           <Route exact path="/plants">
-            <Plants />
+            <Plants userName={userName} />
           </Route>
-          <Route path="/plants/:id" children={<Detail />} />
+          {/* <Route path="/plants/:id" children={<Detail />} /> */}
           <Route>
             <NoMatch />
           </Route>
