@@ -21,7 +21,16 @@ export function SearchResults(props) {
     <div className="list-overflow-container">
       <ul className="list-group">
         {props.searchResults.data && 
-           props.searchResults.data.map(result => <Result userName={props.userName} loadFavorites={props.loadFavorites} loadPlants={loadPlants} result={result} key={result.id} />)}
+           props.searchResults.data.map(result => 
+            <Result
+              userName={props.userName}
+              loadFavorites={props.loadFavorites}
+              loadPlants={loadPlants}
+              result={result}
+              key={result.id}
+            />
+          )
+        } 
       </ul>
     </div>
   );
@@ -44,10 +53,10 @@ export function Result(props) {
   return (
     <li className="list-group-item">
       <List>
+        {props.result.common_name && <ListItem><b>{props.result.common_name}</b></ListItem>}
         <ListItem>
           Scientific Name: {props.result.scientific_name}
         </ListItem>
-        {props.result.common_name && <ListItem>Common Name: {props.result.common_name}</ListItem>}
       </List>
       <button onClick={() => { savePlant(props.result.id) }}>Save to Favorites</button>
     </li>
