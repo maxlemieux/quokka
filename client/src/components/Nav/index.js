@@ -1,27 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SignupLoginModal from "../SignupLoginModal";
-import axios from "axios";
+// import axios from "axios";
 
-const Nav = () => {
+const Nav = (props) => {
   const [show, setShow] = useState(false);
-  const [userName, setUserName] = useState("guest");
-
-  function getUserName() {
-    axios.get("/api/auth/user_data")
-      .then(res => {
-        if (res.data.email) { 
-          setUserName(res.data.email)
-        } else {
-          console.log('no email on response')
-        }
-        // console.log(res.data)
-      })
-  }
-  useEffect(() => {
-    console.log('useeffect fired')
-    getUserName()
-  }, []);
-
 
   const imgStyle = {
     width: "65px",
@@ -40,7 +22,6 @@ const Nav = () => {
     boxShadow: "0px 5px 10px 5px pink",
     marginBottom: "20px"
   }
- 
 
   return (
     <nav 
@@ -58,7 +39,7 @@ const Nav = () => {
         />
            <p style={wordStyle}>quokka</p>
       </a>
-      <p>{userName}</p>
+      <p>{props.userName}</p>
       
       <SignupLoginModal show={show} setShow={setShow} />
       <button onClick={() => setShow(true)}>Login</button>

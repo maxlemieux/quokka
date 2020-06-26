@@ -23,7 +23,6 @@ function Plants() {
   const [searchResults, setSearchResults] = useState([]);
   const [searchPlants, setSearchPlants] = useState([]);
 
-
   useEffect(() => {
     loadPlants()
   }, []);
