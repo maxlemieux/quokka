@@ -38,16 +38,12 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Nav userName={userName} />  
+      <Nav userName={userName} setUserName={setUserName} />  
       <div>
         <Switch>
           <Route exact path="/">
             <Plants userName={userName} />
-          </Route> 
-          <Route exact path="/plants">
-            <Plants userName={userName} />
           </Route>
-          {/* <Route path="/plants/:id" children={<Detail />} /> */}
           <Route>
             <NoMatch />
           </Route>

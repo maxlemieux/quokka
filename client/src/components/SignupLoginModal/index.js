@@ -16,7 +16,7 @@ const SignUpLoginForm = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const onSubmit = e => {
+    const onSubmit = (e) => {
         e.preventDefault();
 
         const userData = {
@@ -26,11 +26,10 @@ const SignUpLoginForm = (props) => {
         axios
             .post("/api/auth/register_login", userData)
             .then(res => {
-                console.log(res);
+                props.setUserName(res.data.email)
             })
             .catch(err => {
                 console.log(err);
-                console.log(err.response);
             });
     };
 
@@ -103,7 +102,7 @@ const SignupLoginModal = props => {
             <PaddedContainer>
                 <ResponsiveHeader4>With email:</ResponsiveHeader4>
                 <br />
-                <SignUpLoginForm setShow={props.setShow} />
+                <SignUpLoginForm setUserName={props.setUserName} setShow={props.setShow} />
                 <Row style={{ borderBottom: "1px solid #dee2e6" }} />
             </PaddedContainer>
         </Modal>
