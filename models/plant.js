@@ -7,6 +7,7 @@ const plantSchema = new Schema({
   soils_adaptation: Object,
   images: Array,
   growth: Object,
+  user_name: String,
 });
 
 const Plant = mongoose.model("Plant", plantSchema);

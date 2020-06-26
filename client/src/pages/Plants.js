@@ -13,13 +13,9 @@ import { SearchResults } from "../components/SearchResults";
 import Trefle from "../utils/trefle"
 import phzmapi from "../utils/phzmapi"
 
-function Plants() {
+function Plants(props) {
   const [plants, setPlants] = useState([])
   const [favorites, setFavorites] = useState([])
-
-  // const [formObject, setFormObject] = useState({})
-  // const [searchObject, setSearchObject] = useState('');
-  // const [temperatureObject, setTemperatureObject] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
   const [searchPlants, setSearchPlants] = useState([]);
 
@@ -58,60 +54,11 @@ function Plants() {
       .catch(err => console.log(err));
   }
 
-  // function handleInputChange(event) {
-  //   const { name, value } = event.target;
-  //   setFormObject({...formObject, [name]: value});
-  // };
-
   function handleSearchChange(event) {
     const { value } = event.target;
     setSearchPlants(value);
   };
-
-  // function handleTemperatureChange(event) {
-  //   const { name, value } = event.target;
-  //   console.log(`name ${name}`);
-  //   console.log(`value ${value}`);
-  //   setTemperatureObject({ minTemp: value });
-  // }
-
-  // function handleFormSubmit(event) {
-  //   event.preventDefault();
-  //   if (formObject.title && formObject.author) {
-  //     API.saveBook({
-  //       title: formObject.title,
-  //       author: formObject.author,
-  //       synopsis: formObject.synopsis
-  //     })
-  //       .then(res => loadBooks())
-  //       .catch(err => console.log(err));
-  //   }
-  // };
-
-  // function GetPlantsByMinTemp(event){
-  //   event.preventDefault();
-  //   console.log(`search with min temp ${temperatureObject.minTemp}`);
-  //   Trefle.getPlantsByMinTemp(temperatureObject.minTemp)
-  //     .then(res=>{
-  //       console.log(res)
-  //       setSearchResults(res);
-  //     })
-  // }
-
-  // function GetPlantImage(event){
-  //   event.preventDefault();
-  //   Trefle.getPlantsByImage()
-  //     .then(res=>console.log(res.data.images[0].url))
-  // }
-
-  // function GetTemperatureByZipcode(event){
-  //   event.preventDefault();
-  //   phzmapi.getTemperatureByZipcode(99518)
-  //     .then(res=> {
-  //       console.log(res.data.temperature_range.split(' ')[0])
-  //   })
-  // }
-
+  
   function loadSuggestions(event) {
     event.preventDefault();
     /* Here is where we need to call GeoIP to figure out the zip code. */
@@ -152,24 +99,6 @@ function Plants() {
             <FormBtn onClick={loadSuggestions}>Get Suggestions</FormBtn>
           </form>
           </Row>
-
-          {/* <Row>
-          <form>
-            <Input
-              name="minTemp" 
-              onChange={handleTemperatureChange}
-              placeholder="MinTemp" />
-              <FormBtn 
-              disabled={!temperatureObject.minTemp}
-              onClick={GetPlantsByMinTemp}>Submit Temp</FormBtn>
-          </form>
-          </Row> */}
-          
-
-          {/* <form>
-            <FormBtn onClick={GetPlantImage}>Get Image URL</FormBtn>
-          </form> */}
-
           
           <Row>
           <p>If you'd like to search for a plant by name, you can search here.</p>
@@ -179,11 +108,7 @@ function Plants() {
           </form>
           </Row>
           
-
-          
-          <SearchResults searchResults={searchResults} loadFavorites={loadFavorites} setPlants={setPlants}/>
-          
-
+          <SearchResults userName={props.userName} searchResults={searchResults} loadFavorites={loadFavorites} setPlants={setPlants}/>
         </Col>
         <Col size="md-4 sm-12">
           <Jumbotron>
