@@ -23,10 +23,10 @@ function App() {
           <Route exact path="/">
             <Plants />
           </Route> 
-          <Route exact path="/books">
+          <Route exact path="/plants">
             <Plants />
           </Route>
-          <Route path="/books/:id" children={<Detail />} />
+          <Route path="/plants/:id" children={<Detail />} />
           <Route>
             <NoMatch />
           </Route>

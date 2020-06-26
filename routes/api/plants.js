@@ -6,6 +6,10 @@ router.route("/")
   .get(plantsController.findAll)
   .post(plantsController.create);
 
+// Matches with "/api/plants/recent"
+router.route("/recent")
+.get(plantsController.findRecent)
+
 // Matches with "/api/plants/:id"
 router
   .route("/:id")

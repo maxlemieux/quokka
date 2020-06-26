@@ -1,10 +1,12 @@
 const axios = require("axios");
 const router = require("express").Router();
 
-router.route("/species/:id")
+router.route("/species/:plantId")
 	.get(function(req, res) {
-		axios.get(`https://trefle.io/api/species/${req.params.id}?token=${process.env.REACT_APP_TREFLE}`)
+		axios.get(`https://v0.trefle.io/api/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
 		.then(function(response) {
+			// console.log('We got a response on the plant details from trefle. The response is')
+			// console.log(response)
 			res.json(response.data);
 		})
 		.catch(function(err) {
@@ -16,7 +18,7 @@ router.route("/species/:id")
 router.route("/temperature_minimum_deg_f/:minTemp")
 	.get(function(req, res) {
 		// console.log(process.env.REACT_APP_TREFLE)
-		axios.get(`https://trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&temperature_minimum_deg_f>${req.params.minTemp}`)
+		axios.get(`https://v0.trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&temperature_minimum_deg_f>${req.params.minTemp}`)
 		.then(function(response) {
 			res.json(response.data);
 		})
@@ -26,15 +28,15 @@ router.route("/temperature_minimum_deg_f/:minTemp")
 		})
 	});
 
-router.route("/common_name/:commonName")
+router.route("/name/:name")
 	.get(function(req, res) {
-		// console.log(req.params.commonName);
-		axios.get(`https://trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&common_name=${req.params.commonName}`)
+		// console.log(req.params.name);
+		axios.get(`https://v0.trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&q=${req.params.name}`)
 		.then(function(response) {
 			res.json(response.data);
 		})
 		.catch(function(err) {
-			console.log("backend axios error getting trefle data on common name");
+			console.log("backend axios error getting trefle data on name");
 			res.status(err.response.status).send(err.response.statusText);
 		})
 	});
