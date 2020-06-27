@@ -3,11 +3,23 @@ const db = require("../models");
 // Defining methods for the plantsController
 module.exports = {
   findAll: function(req, res) {
-    db.Plant
-      .find(req.query)
-      .sort({ date: -1 })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+    if (req.user) {
+      console.log(req.user)
+      db.Plant
+        .find({ user_name: req.user.email })
+        .sort({ date: 1 })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+    } else {
+      console.log(req.user)
+      console.log(req.ip)
+      // It's a guest, filter by IP instead of user
+      db.Plant
+        .find({ ip: req.ip, user_name: 'guest' })
+        .sort({ date: 1 })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+    }
   },
   findRecent: function(req, res) {
     db.Plant

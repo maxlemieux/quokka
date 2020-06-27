@@ -8,6 +8,8 @@ const plantSchema = new Schema({
   images: Array,
   growth: Object,
   user_name: String,
+  ip: String,
+  date: { type: Date, default: Date.now },
 });
 
 const Plant = mongoose.model("Plant", plantSchema);

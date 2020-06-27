@@ -4,13 +4,9 @@ import { List, ListItem } from "../List";
 import API from "../../utils/API";
 
 export function SearchResults(props) {
-  // const [plants, setPlants] = useState([])
   function loadPlants() {
-    console.log('loadPlants fired')
     API.getPlants()
       .then(res => {
-          console.log('we got back this response from API.getPlants:');
-          console.log(res)
           props.setPlants(res.data)
         }
       )
@@ -21,7 +17,17 @@ export function SearchResults(props) {
     <div className="list-overflow-container">
       <ul className="list-group">
         {props.searchResults.data && 
-           props.searchResults.data.map(result => <Result userName={props.userName} loadFavorites={props.loadFavorites} loadPlants={loadPlants} result={result} key={result.id} />)}
+           props.searchResults.data.map(result => 
+            <Result
+              userName={props.userName}
+              userIp={props.userIp}
+              loadFavorites={props.loadFavorites}
+              loadPlants={loadPlants}
+              result={result}
+              key={result.id}
+            />
+          )
+        } 
       </ul>
     </div>
   );
@@ -32,8 +38,10 @@ export function Result(props) {
     API.plantDetails(plantId)
       .then(res => {
         res.data.user_name = props.userName;
+        res.data.ip = props.userIp;
         API.savePlant(res.data)
           .then(res => {
+            console.log('savePlant fired in Result component')
             props.loadPlants();
             props.loadFavorites();
           })
@@ -44,10 +52,10 @@ export function Result(props) {
   return (
     <li className="list-group-item">
       <List>
+        {props.result.common_name && <ListItem><b>{props.result.common_name}</b></ListItem>}
         <ListItem>
           Scientific Name: {props.result.scientific_name}
         </ListItem>
-        {props.result.common_name && <ListItem>Common Name: {props.result.common_name}</ListItem>}
       </List>
       <button onClick={() => { savePlant(props.result.id) }}>Save to Favorites</button>
     </li>

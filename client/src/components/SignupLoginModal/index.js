@@ -16,7 +16,7 @@ const SignUpLoginForm = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const onSubmit = e => {
+    const onSubmit = (e) => {
         e.preventDefault();
 
         const userData = {
@@ -26,11 +26,10 @@ const SignUpLoginForm = (props) => {
         axios
             .post("/api/auth/register_login", userData)
             .then(res => {
-                console.log(res);
+                props.setUserName(res.data.email)
             })
             .catch(err => {
                 console.log(err);
-                console.log(err.response);
             });
     };
 
@@ -80,8 +79,7 @@ const SignUpLoginForm = (props) => {
                     <Col xs="10" sm="11">
                         <Form.Label>
                             <MutedSpan>
-                                I hereby confirm that the referral app is allowed to send me emails, up until I
-                                unsuscribe
+                                Yes, please send me occasional updates about the app
                             </MutedSpan>
                         </Form.Label>
                     </Col>
@@ -103,7 +101,7 @@ const SignupLoginModal = props => {
             <PaddedContainer>
                 <ResponsiveHeader4>With email:</ResponsiveHeader4>
                 <br />
-                <SignUpLoginForm setShow={props.setShow} />
+                <SignUpLoginForm setUserName={props.setUserName} setShow={props.setShow} />
                 <Row style={{ borderBottom: "1px solid #dee2e6" }} />
             </PaddedContainer>
         </Modal>

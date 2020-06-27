@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SignupLoginModal from "../SignupLoginModal";
-// import axios from "axios";
+import axios from "axios";
 
 const Nav = (props) => {
   const [show, setShow] = useState(false);
@@ -32,10 +32,18 @@ const Nav = (props) => {
       />
           <p style={wordStyle}>quokka</p>
       </a>
-      <p>{props.userName}</p>
+      <p>Welcome, <b>{props.userName}</b></p>
       
-      <SignupLoginModal show={show} setShow={setShow} />
-      <button onClick={() => setShow(true)}>Login</button>
+      <SignupLoginModal show={show} setShow={setShow} setUserName={props.setUserName} />
+
+      <div className="container">
+      {props.userName === 'guest' && 
+        <button onClick={() => setShow(true)}>Login</button>
+      }
+      {props.userName !== 'guest' && 
+        <button onClick={() => axios.get('/api/auth/logout').then(props.setUserName('guest'))}>Logout</button>
+      }
+      </div>
     </nav>
     
   );

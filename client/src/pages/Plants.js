@@ -64,14 +64,12 @@ function Plants(props) {
   function loadSuggestions(event) {
     event.preventDefault();
     /* Here is where we need to call GeoIP to figure out the zip code. */
-    // console.log(this);
+    console.log(`User ip address for geoip is ${props.userIp}`);
     phzmapi.getTemperatureByZipcode(99518)
       .then(res => {
         const minTemp = res.data.temperature_range.split(' ')[0];
-        // console.log(minTemp)
         Trefle.getPlantsByMinTemp(minTemp)
           .then(res => {
-            // console.log(res);
             setSearchResults(res);
           })  
     })
@@ -79,10 +77,8 @@ function Plants(props) {
 
   function GetPlantsByName(event){
     event.preventDefault();
-    // console.log(searchResults)
     Trefle.getPlantsByName(searchPlants)
       .then(res=>{
-        //console.log(res);
         setSearchResults(res);
       });
   }
@@ -99,8 +95,6 @@ function Plants(props) {
     marginBottom: '100px',
   }
 
-
-
   return (
     <Container fluid>
       <Row>
@@ -109,27 +103,33 @@ function Plants(props) {
           <Jumbotron>
             <h1>What Should I Plant?</h1>
           </Jumbotron>
-        
-      <div style={styleTabs}>
-        <Tabs defaultActiveKey="Get Suggestions">
-          {/* Get Plant Suggestions */}
-          <Tab eventKey="Get Suggestions" title="Get Suggestions">
-          <p>Click the Button to Get Suggestions!</p>
-              <Button onClick={loadSuggestions}>Get Suggestions</Button>
-          </Tab>
 
-          {/* Search By Name */}
-          <Tab eventKey="Search By Name" title="Search By Name">
-            <p>If you'd like to search for a plant by name, you can search here.</p>
-              <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
-              <Button onClick={GetPlantsByName}>Get Plants By Name</Button>
-          </Tab>
-        </Tabs>
+          <div style={styleTabs}>
+          <Tabs defaultActiveKey="Get Suggestions">
+            {/* Get Plant Suggestions */}
+            <Tab eventKey="Get Suggestions" title="Get Suggestions">
+            <p>Click the Button to Get Suggestions!</p>
+                <Button onClick={loadSuggestions}>Get Suggestions</Button>
+            </Tab>
+
+            {/* Search By Name */}
+            <Tab eventKey="Search By Name" title="Search By Name">
+              <p>If you'd like to search for a plant by name, you can search here.</p>
+                <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
+                <Button onClick={GetPlantsByName}>Get Plants By Name</Button>
+            </Tab>
+          </Tabs>
         </div>
         <div style={styleLi}>
-          <SearchResults userName={props.userName} searchResults={searchResults} loadFavorites={loadFavorites} setPlants={setPlants}/>
-          </div>
-        </Col>
+          <SearchResults 
+            userName={props.userName} 
+            userIp={props.userIp} 
+            searchResults={searchResults} 
+            loadFavorites={loadFavorites} 
+            setPlants={setPlants}
+          />
+        </div>
+      </Col>
         
 
         <Col size="md-4 sm-12">
@@ -140,17 +140,19 @@ function Plants(props) {
             <List>
               {plants.map(plant => (
                 <ListItem key={plant._id}>
-                  {/* <Link to={"/plants/" + plant._id}> */}
                     <strong>
                       {plant.scientific_name}
                     </strong>
-                  {/* </Link> */}
                   <DeleteBtn onClick={() => deletePlant(plant._id)} />
                 </ListItem>
               ))}
             </List>
           ) : (
             <h3>No Results to Display</h3>
+          )}
+          {plants.length && props.userName === 'guest' ? (
+            <p>Want to view your favorite plants from anywhere? Sign up for an account - it's always free!</p>
+          ) : (<></>
           )}
         </Col>
         <Col size="md-3">
