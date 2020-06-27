@@ -53,13 +53,15 @@ export function Result(props) {
 
   API.getPlant(props.result.id)
     .then(res => {
-      if (res.data.id){
+      console.log(`response from getPlant for the id ${props.result.id}`)
+      console.log(res)
+      if (res.data.exists){
         setIsFavorite(true)}
       else {
         setIsFavorite(false)
       }
       console.log(`${props.result.scientific_name} isFavorite Status is ${isFavorite }`)
-      console.log(res)
+      // console.log(res)
     })
     .catch(err => console.log(err))
   
@@ -71,7 +73,12 @@ export function Result(props) {
           Scientific Name: {props.result.scientific_name}
         </ListItem>
       </List>
-      <button onClick={() => { savePlant(props.result.id) }}>Save to Favorites</button>
+      {!isFavorite &&
+        <button onClick={() => { savePlant(props.result.id) }}>Save to Favorites</button>
+      }
+      {isFavorite &&
+        <strong>Favorite!</strong>
+      }
     </li>
   );
 }

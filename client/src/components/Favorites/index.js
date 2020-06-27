@@ -6,7 +6,7 @@ export function Favorites(props) {
     <div>
       <ul>
         {props.data.map(favorite => (
-          <li key={favorite.user_name}>{favorite.user_name} quokked {favorite.scientific_name}</li>
+          <li key={favorite._id}>{favorite.user_name} quokked {favorite.scientific_name}</li>
           )
         )}
       </ul>
