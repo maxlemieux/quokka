@@ -2,10 +2,8 @@ import React, {useState} from "react";
 import "./style.css";
 import { List, ListItem } from "../List";
 import API from "../../utils/API";
-import { Spinner } from 'react-bootstrap';
-import ReactSpinner from 'react-bootstrap-spinner';
-
-
+// import { Spinner } from 'react-bootstrap';
+// import ReactSpinner from 'react-bootstrap-spinner';
 
 export function SearchResults(props) {
   function loadPlants() {
@@ -17,12 +15,11 @@ export function SearchResults(props) {
       .catch(err => console.log(err));
   };
   
-
   return (
     <div className="list-overflow-container">
   {props.showSpinner && 
   <div>
-    <ReactSpinner type='border' color='primary' size='5' />
+    {/* <ReactSpinner type='border' color='primary' size='5' /> */}
     <p>Loading...</p>
     </div>
   }
@@ -48,11 +45,14 @@ export function SearchResults(props) {
 export function Result(props) {
   const [isFavorite, setIsFavorite] = useState(false)
   function savePlant(plantId) {
+    console.log(`saving plant with id ${plantId}`)
     API.plantDetails(plantId)
       .then(res => {
         res.data.user_name = props.userName;
         res.data.ip = props.userIp;
         res.data.trefle_id = res.data.id
+        console.log('attempting to call API.savePlant with res.data:')
+        console.log(res.data)
         API.savePlant(res.data)
           .then(res => {
             console.log('savePlant fired in Result component')
@@ -66,7 +66,7 @@ export function Result(props) {
   API.getPlant(props.result.id)
     .then(res => {
       console.log(`response from getPlant for the id ${props.result.id}`)
-      console.log(res)
+      // console.log(res)
       if (res.data.exists){
         setIsFavorite(true)}
       else {

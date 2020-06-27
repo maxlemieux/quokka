@@ -50,7 +50,7 @@ module.exports = {
           trefle_id: req.params.id 
         })
         .then(dbModel => {
-          console.log(dbModel)
+          // console.log(dbModel)
           if (dbModel[0]) {
             res.json({ exists: true })
           } else {
