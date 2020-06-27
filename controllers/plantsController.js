@@ -4,15 +4,12 @@ const db = require("../models");
 module.exports = {
   findAll: function(req, res) {
     if (req.user) {
-      console.log(req.user)
       db.Plant
         .find({ user_name: req.user.email })
         .sort({ date: 1 })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     } else {
-      console.log(req.user)
-      console.log(req.ip)
       // It's a guest, filter by IP instead of user
       db.Plant
         .find({ ip: req.ip, user_name: 'guest' })
@@ -30,10 +27,38 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    db.Plant
-      .findById(req.params.id)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+    if (req.user) {
+      db.Plant
+        .find({ 
+          user_name: req.user.email,
+          trefle_id: req.params.id
+        })
+        .then(dbModel => {
+          console.log(dbModel)
+          if (dbModel[0]) {
+            res.json({ exists: true })
+          } else {
+            res.json({ exists: false })
+          }
+        })
+        // .catch(err => res.status(422).json({ exists: false }));
+    } else {
+      db.Plant
+        .find({
+          ip: req.ip,
+          user_name: 'guest',
+          trefle_id: req.params.id 
+        })
+        .then(dbModel => {
+          console.log(dbModel)
+          if (dbModel[0]) {
+            res.json({ exists: true })
+          } else {
+            res.json({ exists: false })
+          }
+        })
+        // .catch(err => res.status(422).json({ exists: false }));
+    }
   },
   create: function(req, res) {
     db.Plant
