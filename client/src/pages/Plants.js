@@ -1,34 +1,46 @@
-import React, { useState, useEffect } from "react";
-import DeleteBtn from "../components/DeleteBtn";
-import Jumbotron from "../components/Jumbotron";
-import API from "../utils/API";
+import React, { useState, useEffect } from 'react';
+import DeleteBtn from '../components/DeleteBtn';
+import Jumbotron from '../components/Jumbotron';
+import API from '../utils/API';
 // import { getPostalCode } from "../utils/geoip";
 // import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
-import { Input } from "../components/Form";
-import { Favorites } from "../components/Favorites";
-import { SearchResults } from "../components/SearchResults";
+import { Col, Row, Container } from '../components/Grid';
+import { List, ListItem } from '../components/List';
+import { Input } from '../components/Form';
+import Favorites from '../components/Favorites';
+import { SearchResults } from '../components/SearchResults';
 
-import { Tabs, Tab, Button } from "react-bootstrap"; //Added for navtab effect on "What should I Plant column"
+import { Tabs, Tab, Button } from 'react-bootstrap'; //Added for navtab effect on "What should I Plant column"
 
-import Trefle from "../utils/trefle"
-import phzmapi from "../utils/phzmapi"
+import Trefle from '../utils/trefle';
+import phzmapi from '../utils/phzmapi';
 
 
 function Plants(props) {
-  const [plants, setPlants] = useState([])
-  const [favorites, setFavorites] = useState([])
+  const [plants, setPlants] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [searchPlants, setSearchPlants] = useState([]);
   const [showSpinner, setShowSpinner] = useState(false);
 
-  useEffect(() => {
-    loadPlants()
-  }, []);
+  function loadPlants() {
+    API.getPlants()
+      .then((res) => setPlants(res.data))
+      .catch((err) => console.log(err));
+  }
 
   useEffect(() => {
-    loadFavorites()
+    loadPlants();
+  }, []);
+
+  function loadFavorites() {
+    API.findRecent()
+      .then((res) => setFavorites(res.data))
+      .catch((err) => console.log(err));
+  }
+
+  useEffect(() => {
+    loadFavorites();
   }, []);
 
   /* Run the automatic plant suggestion code on component render */
@@ -36,40 +48,24 @@ function Plants(props) {
     // loadSuggestions()
   });
 
-  function loadPlants() {
-    API.getPlants()
-      .then(res => 
-        setPlants(res.data)
-      )
-      .catch(err => console.log(err));
-  };
-
-  function loadFavorites() {
-    API.findRecent()
-      .then(res => 
-        setFavorites(res.data)
-      )
-      .catch(err => console.log(err));
-  };
-
   function deletePlant(id) {
     API.deletePlant(id)
-      .then(res => loadPlants())
-      .catch(err => console.log(err));
+      .then(() => loadPlants())
+      .catch((err) => console.log(err));
   }
 
   function handleSearchChange(event) {
     const { value } = event.target;
     setSearchPlants(value);
-  };
-  
+  }
+
   function loadSuggestions(event) {
     event.preventDefault();
     setShowSpinner(true);
     /* Here is where we need to call GeoIP to figure out the zip code. */
     console.log(`User ip address for geoip is ${props.userIp}`);
     phzmapi.getTemperatureByZipcode(99518)
-      .then(res => {
+      .then((res) => {
         const minTemp = res.data.temperature_range.split(' ')[0];
         Trefle.getPlantsByMinTemp(minTemp)
           .then(res => {
@@ -91,7 +87,7 @@ function Plants(props) {
     border: '3px solid #78C2AD',
     borderRadius: '10px',
     textAlign: 'center',
-    boxShadow: "0px 5px 5px 3px #F3969A",
+    boxShadow: '0px 5px 5px 3px #F3969A',
     paddingBottom: '10px'
   }
 
@@ -144,7 +140,7 @@ function Plants(props) {
           </Jumbotron>
           {plants.length ? (
             <List>
-              {plants.map(plant => (
+              {plants.map((plant) => (
                 <ListItem key={plant._id}>
                     <strong>
                       {plant.scientific_name}

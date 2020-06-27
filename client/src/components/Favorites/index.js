@@ -1,15 +1,19 @@
-import React from "react";
-import "./style.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import './style.css';
 
-export function Favorites(props) {
+export default function Favorites(props) {
   return (
     <div>
       <ul>
-        {props.data.map(favorite => (
-          <li key={favorite._id}>{favorite.user_name} quokked {favorite.scientific_name}</li>
-          )
-        )}
+        {props.data.map((favorite) => (
+          <li key={favorite.id}>{favorite.user_name} quokked {favorite.scientific_name}</li>
+        ))}
       </ul>
-    </div>  
+    </div>
   );
 }
+
+Favorites.propTypes = {
+  data: PropTypes.object,
+};
