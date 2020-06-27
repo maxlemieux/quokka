@@ -36,6 +36,7 @@
     "mongoose": "^5.3.16",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "prop-types": "^15.7.2",
     "verifalia": "^2.5.1"
   }
 }

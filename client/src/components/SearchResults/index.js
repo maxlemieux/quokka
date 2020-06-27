@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import './style.css';
 import { List, ListItem } from '../List';
 import API from '../../utils/API';
@@ -40,6 +42,15 @@ export function SearchResults(props) {
   );
 }
 
+SearchResults.propTypes = {
+  userName: PropTypes.array,
+  searchResults: PropTypes.object,
+  setPlants: PropTypes.func,
+  loadFavorites: PropTypes.func,
+  showSpinner: PropTypes.func,
+  userIp: PropTypes.string,
+};
+
 export function Result(props) {
   const [isFavorite, setIsFavorite] = useState(false);
   function savePlant(plantId) {
@@ -49,10 +60,10 @@ export function Result(props) {
         res.data.ip = props.userIp;
         res.data.trefle_id = res.data.id;
         API.savePlant(res.data)
-          .then(res => {
+          .then(() => {
             props.loadPlants();
             props.loadFavorites();
-          })
+          });
       })
       .catch((err) => console.log(err));
   }
@@ -86,3 +97,11 @@ export function Result(props) {
     </li>
   );
 }
+
+Result.propTypes = {
+  userName: PropTypes.array,
+  result: PropTypes.object,
+  loadPlants: PropTypes.func,
+  loadFavorites: PropTypes.func,
+  userIp: PropTypes.string,
+};
