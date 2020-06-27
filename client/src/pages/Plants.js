@@ -6,9 +6,11 @@ import API from "../utils/API";
 // import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
-import { Input, FormBtn } from "../components/Form";
+import { Input } from "../components/Form";
 import { Favorites } from "../components/Favorites";
 import { SearchResults } from "../components/SearchResults";
+
+import { Tabs, Tab, Button } from "react-bootstrap"; //Added for navtab effect on "What should I Plant column"
 
 import Trefle from "../utils/trefle"
 import phzmapi from "../utils/phzmapi"
@@ -24,6 +26,7 @@ function Plants(props) {
   }, []);
 
   useEffect(() => {
+    console.log('useEffect fired for loadFavorites')
     loadFavorites()
   }, []);
 
@@ -81,29 +84,51 @@ function Plants(props) {
       });
   }
 
+  const styleTabs = {
+    border: '3px solid #78C2AD',
+    borderRadius: '10px',
+    textAlign: 'center',
+    boxShadow: "0px 5px 5px 3px #F3969A",
+    paddingBottom: '10px'
+  }
+
+  const styleLi = {
+    marginBottom: '100px',
+  }
+
+
+
   return (
     <Container fluid>
       <Row>
+        {/* What should I plant column */}
         <Col size="md-5">
           <Jumbotron>
             <h1>What Should I Plant?</h1>
           </Jumbotron>
-          <Row>
-            <p>Looking for suggestions on what to plant? Click this button!</p>
-            <form>
-              <FormBtn onClick={loadSuggestions}>Get Suggestions</FormBtn>
-            </form>
-          </Row>
-          <Row>
-            <p>If you'd like to search for a plant by name, you can search here.</p>
-            <form>
-              <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
-              <FormBtn onClick={GetPlantsByName}>Get Plants By Name</FormBtn>
-            </form>
-          </Row>
-          
+
+          <div style={styleTabs}>
+          <Tabs defaultActiveKey="Get Suggestions">
+            {/* Get Plant Suggestions */}
+            <Tab eventKey="Get Suggestions" title="Get Suggestions">
+            <p>Click the Button to Get Suggestions!</p>
+                <Button onClick={loadSuggestions}>Get Suggestions</Button>
+            </Tab>
+
+            {/* Search By Name */}
+            <Tab eventKey="Search By Name" title="Search By Name">
+              <p>If you'd like to search for a plant by name, you can search here.</p>
+                <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
+                <Button onClick={GetPlantsByName}>Get Plants By Name</Button>
+            </Tab>
+          </Tabs>
+        </div>
+        <div style={styleLi}>
           <SearchResults userName={props.userName} searchResults={searchResults} loadFavorites={loadFavorites} setPlants={setPlants}/>
+          </div>
         </Col>
+        
+
         <Col size="md-4 sm-12">
           <Jumbotron>
             <h1>Plants On My List</h1>

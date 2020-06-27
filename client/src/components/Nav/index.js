@@ -28,16 +28,9 @@ const Nav = (props) => {
     className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top"
     style= {navStyle}
     >
-      <a 
-        className="navbar-brand" 
-        href="/"
-        
-      >
-        <img src="../img/quokka-logo.png" 
-          alt="logo"
-          style={imgStyle} 
-        />
-           <p style={wordStyle}>quokka</p>
+      <a className="navbar-brand" href="/"><img src="../img/quokka-logo.png" alt="logo"style={imgStyle} 
+      />
+          <p style={wordStyle}>quokka</p>
       </a>
       <p>Welcome, <b>{props.userName}</b></p>
       
