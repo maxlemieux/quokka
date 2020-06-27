@@ -96,8 +96,6 @@ function Plants(props) {
     marginBottom: '100px',
   }
 
-
-
   return (
     <Container fluid>
       <Row>
@@ -124,9 +122,15 @@ function Plants(props) {
           </Tabs>
         </div>
         <div style={styleLi}>
-          <SearchResults userName={props.userName} searchResults={searchResults} loadFavorites={loadFavorites} setPlants={setPlants}/>
-          </div>
-        </Col>
+          <SearchResults 
+            userName={props.userName} 
+            userIp={props.userIp} 
+            searchResults={searchResults} 
+            loadFavorites={loadFavorites} 
+            setPlants={setPlants}
+          />
+        </div>
+      </Col>
         
 
         <Col size="md-4 sm-12">

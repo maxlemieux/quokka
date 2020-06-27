@@ -20,6 +20,7 @@ export function SearchResults(props) {
            props.searchResults.data.map(result => 
             <Result
               userName={props.userName}
+              userIp={props.userIp}
               loadFavorites={props.loadFavorites}
               loadPlants={loadPlants}
               result={result}
@@ -37,8 +38,10 @@ export function Result(props) {
     API.plantDetails(plantId)
       .then(res => {
         res.data.user_name = props.userName;
+        res.data.ip = props.userIp;
         API.savePlant(res.data)
           .then(res => {
+            console.log('savePlant fired in Result component')
             props.loadPlants();
             props.loadFavorites();
           })
