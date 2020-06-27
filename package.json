@@ -31,6 +31,7 @@
     "mongoose": "^5.3.16",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "react-bootstrap-spinner": "^1.0.0",
     "verifalia": "^2.5.1"
   }
 }

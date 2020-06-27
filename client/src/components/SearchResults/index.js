@@ -2,6 +2,10 @@ import React, {useState} from "react";
 import "./style.css";
 import { List, ListItem } from "../List";
 import API from "../../utils/API";
+import { Spinner } from 'react-bootstrap';
+import ReactSpinner from 'react-bootstrap-spinner';
+
+
 
 export function SearchResults(props) {
   function loadPlants() {
@@ -12,9 +16,16 @@ export function SearchResults(props) {
       )
       .catch(err => console.log(err));
   };
+  
 
   return (
     <div className="list-overflow-container">
+  {props.showSpinner && 
+  <div>
+    <ReactSpinner type='border' color='primary' size='5' />
+    <p>Loading...</p>
+    </div>
+  }
       <ul className="list-group">
         {props.searchResults.data && 
            props.searchResults.data.map(result => 
@@ -30,6 +41,7 @@ export function SearchResults(props) {
         } 
       </ul>
     </div>
+    
   );
 }
 

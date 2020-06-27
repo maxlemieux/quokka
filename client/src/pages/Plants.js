@@ -15,11 +15,13 @@ import { Tabs, Tab, Button } from "react-bootstrap"; //Added for navtab effect o
 import Trefle from "../utils/trefle"
 import phzmapi from "../utils/phzmapi"
 
+
 function Plants(props) {
   const [plants, setPlants] = useState([])
   const [favorites, setFavorites] = useState([])
   const [searchResults, setSearchResults] = useState([]);
   const [searchPlants, setSearchPlants] = useState([]);
+  const [showSpinner, setShowSpinner] = useState(false);
 
   useEffect(() => {
     loadPlants()
@@ -63,6 +65,7 @@ function Plants(props) {
   
   function loadSuggestions(event) {
     event.preventDefault();
+    setShowSpinner(true);
     /* Here is where we need to call GeoIP to figure out the zip code. */
     console.log(`User ip address for geoip is ${props.userIp}`);
     phzmapi.getTemperatureByZipcode(99518)
@@ -71,6 +74,7 @@ function Plants(props) {
         Trefle.getPlantsByMinTemp(minTemp)
           .then(res => {
             setSearchResults(res);
+            setShowSpinner(false);
           })  
     })
   }
@@ -127,6 +131,8 @@ function Plants(props) {
             searchResults={searchResults} 
             loadFavorites={loadFavorites} 
             setPlants={setPlants}
+            setShowSpinner={setShowSpinner}
+            showSpinner={showSpinner}
           />
         </div>
       </Col>
