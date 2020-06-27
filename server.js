@@ -25,7 +25,7 @@ const MONGO_OPTS = {
 };
 
 mongoose
-  .connect(MONGO_URI, MONGO_OPTS)
+  .connect(process.env.MONGODB_URI || MONGO_URI, MONGO_OPTS)
   .then(console.log(`MongoDB connected ${MONGO_URI}`))
   .catch(err => console.log(err));
 
