@@ -31,9 +31,9 @@ module.exports = {
   },
   findById: function(req, res) {
     db.Plant
-      .findById(req.params.id)
+      .find({trefle_id: req.params.id})
       .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      .catch(err => res.json({}));
   },
   create: function(req, res) {
     db.Plant

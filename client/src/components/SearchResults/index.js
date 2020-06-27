@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./style.css";
 import { List, ListItem } from "../List";
 import API from "../../utils/API";
@@ -34,11 +34,13 @@ export function SearchResults(props) {
 }
 
 export function Result(props) {
+  const [isFavorite, setIsFavorite] = useState(false)
   function savePlant(plantId) {
     API.plantDetails(plantId)
       .then(res => {
         res.data.user_name = props.userName;
         res.data.ip = props.userIp;
+        res.data.trefle_id = res.data.id
         API.savePlant(res.data)
           .then(res => {
             console.log('savePlant fired in Result component')
@@ -49,6 +51,18 @@ export function Result(props) {
       .catch(err => console.log(err))
   }
 
+  API.getPlant(props.result.id)
+    .then(res => {
+      if (res.data.id){
+        setIsFavorite(true)}
+      else {
+        setIsFavorite(false)
+      }
+      console.log(`${props.result.scientific_name} isFavorite Status is ${isFavorite }`)
+      console.log(res)
+    })
+    .catch(err => console.log(err))
+  
   return (
     <li className="list-group-item">
       <List>
