@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+
+const { Schema } = mongoose;
 
 const plantSchema = new Schema({
   trefle_id: String,
@@ -15,6 +16,6 @@ const plantSchema = new Schema({
   date: { type: Date, default: Date.now },
 });
 
-const Plant = mongoose.model("Plant", plantSchema);
+const Plant = mongoose.model('Plant', plantSchema);
 
 module.exports = Plant;
