@@ -15,7 +15,7 @@ module.exports = {
       console.log(req.ip)
       // It's a guest, filter by IP instead of user
       db.Plant
-        .find({ ip: req.ip })
+        .find({ ip: req.ip, user_name: 'guest' })
         .sort({ date: 1 })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
