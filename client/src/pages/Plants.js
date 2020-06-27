@@ -26,7 +26,6 @@ function Plants(props) {
   }, []);
 
   useEffect(() => {
-    console.log('useEffect fired for loadFavorites')
     loadFavorites()
   }, []);
 
@@ -150,6 +149,10 @@ function Plants(props) {
             </List>
           ) : (
             <h3>No Results to Display</h3>
+          )}
+          {plants.length && props.userName === 'guest' ? (
+            <p>Want to view your favorite plants from anywhere? Sign up for an account - it's always free!</p>
+          ) : (<></>
           )}
         </Col>
         <Col size="md-3">

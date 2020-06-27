@@ -21,6 +21,8 @@ function App() {
         if (res.data.email) { 
           setUserName(res.data.email);
           setUserIp(res.data.ip);
+        } else {
+          setUserIp(res.data.ip);
         }
       });
   }
