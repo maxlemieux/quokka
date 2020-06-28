@@ -17,6 +17,9 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
                 {plant.scientific_name}
               </strong>
             <DeleteBtn onClick={() => deleteFavorite(plant._id)} />
+            <br />
+            {plant.images[0]
+              && <img width="300px" src={plant.images[0].url} alt={plant.scientific_name} />}
           </ListItem>
         ))}
       </List>
