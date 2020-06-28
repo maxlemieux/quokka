@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import './style.css';
@@ -53,6 +53,19 @@ SearchResults.propTypes = {
 
 export function Result(props) {
   const [isFavorite, setIsFavorite] = useState(false);
+  const [imageUrl, setImageUrl] = useState('');
+  function getImageUrl(plantId) {
+    API.plantDetails(props.result.id)
+      .then((res) => {
+        if (res.data.images[0]) {
+          setImageUrl(res.data.images[0].url);
+        }
+      });
+  }
+  useEffect(() => {
+    getImageUrl(props.result.id);
+  });
+
   function savePlant(plantId) {
     API.plantDetails(plantId)
       .then((res) => {
@@ -82,15 +95,15 @@ export function Result(props) {
     <li className="list-group-item">
       <List>
         {props.result.common_name && <ListItem><b>{props.result.common_name}</b></ListItem>}
-        {props.result.images && props.result.images[1]
-          && <img src={props.result.images[1].url} alt='FOOBARBAZ' />
+        {imageUrl
+          && <div className="container"><img src={imageUrl} width="200" alt={props.result.scientific_name} /></div>
         }
         <ListItem>
           Scientific Name: {props.result.scientific_name}
         </ListItem>
       </List>
       {!isFavorite
-        && <button onClick={() => { savePlant(props.result.id); }}>Save to Favorites</button>
+        && <button onClick={() => savePlant(props.result.id)}>Save to Favorites</button>
       }
       {isFavorite
         && <strong>Favorite! This plant is on your list.</strong>
