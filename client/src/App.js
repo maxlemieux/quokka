@@ -11,7 +11,7 @@ import Footer from './components/Footer';
 import Nav from './components/Nav';
 
 function App() {
-  const [userName, setUserName] = useState('guest');
+  const [userName, setUserName] = useState('');
   const [userIp, setUserIp] = useState('');
 
   function getUserName() {
@@ -21,6 +21,7 @@ function App() {
           setUserName(res.data.email);
           setUserIp(res.data.ip);
         } else {
+          setUserName('guest');
           setUserIp(res.data.ip);
         }
       });
