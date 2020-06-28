@@ -11,7 +11,7 @@ export function SearchResults(props) {
   function loadPlants() {
     API.getPlants()
       .then((res) => {
-        props.setPlants(res.data);
+        props.setUserFavorites(res.data);
       })
       .catch((err) => console.log(err));
   }
@@ -30,7 +30,7 @@ export function SearchResults(props) {
             <Result
               userName={props.userName}
               userIp={props.userIp}
-              loadFavorites={props.loadFavorites}
+              loadActivityFeed={props.loadActivityFeed}
               loadPlants={loadPlants}
               result={result}
               key={result.id}
@@ -45,8 +45,8 @@ export function SearchResults(props) {
 SearchResults.propTypes = {
   userName: PropTypes.array,
   searchResults: PropTypes.object,
-  setPlants: PropTypes.func,
-  loadFavorites: PropTypes.func,
+  setUserFavorites: PropTypes.func,
+  loadActivityFeed: PropTypes.func,
   showSpinner: PropTypes.func,
   userIp: PropTypes.string,
 };
@@ -62,7 +62,7 @@ export function Result(props) {
         API.savePlant(res.data)
           .then(() => {
             props.loadPlants();
-            props.loadFavorites();
+            props.loadActivityFeed();
           });
       })
       .catch((err) => err);
@@ -105,6 +105,6 @@ Result.propTypes = {
   userName: PropTypes.array,
   result: PropTypes.object,
   loadPlants: PropTypes.func,
-  loadFavorites: PropTypes.func,
+  loadActivityFeed: PropTypes.func,
   userIp: PropTypes.string,
 };

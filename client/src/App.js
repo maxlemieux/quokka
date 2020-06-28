@@ -13,6 +13,7 @@ import Nav from './components/Nav';
 function App() {
   const [userName, setUserName] = useState('');
   const [userIp, setUserIp] = useState('');
+  const [userFavorites, setUserFavorites] = useState([]);
 
   function getUserName() {
     axios.get('/api/auth/user_data')
@@ -36,7 +37,12 @@ function App() {
       <div>
         <Switch>
           <Route exact path="/">
-            <Plants userName={userName} userIp={userIp} />
+            <Plants
+              userFavorites={userFavorites}
+              setUserFavorites={setUserFavorites}
+              userName={userName}
+              userIp={userIp}
+            />
           </Route>
           <Route>
             <NoMatch />

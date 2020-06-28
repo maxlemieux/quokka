@@ -7,9 +7,7 @@ import PropTypes from 'prop-types';
 import Jumbotron from '../components/Jumbotron';
 import API from '../utils/API';
 // import { getPostalCode } from "../utils/geoip";
-// import { Link } from "react-router-dom";
 import { Col, Row, Container } from '../components/Grid';
-import { List, ListItem } from '../components/List';
 import { Input } from '../components/Form';
 import ActivityFeed from '../components/ActivityFeed';
 import { SearchResults } from '../components/SearchResults';
@@ -19,15 +17,18 @@ import Trefle from '../utils/trefle';
 import phzmapi from '../utils/phzmapi';
 
 function Plants(props) {
-  const [plants, setPlants] = useState([]);
-  const [favorites, setFavorites] = useState([]);
+  // const [plants, setPlants] = useState([]);
+  const [activityData, setActivityData] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [searchPlants, setSearchPlants] = useState([]);
   const [showSpinner, setShowSpinner] = useState(false);
 
   function loadPlants() {
     API.getPlants()
-      .then((res) => setPlants(res.data))
+      .then((res) => {
+        // setPlants(res.data);
+        props.setUserFavorites(res.data);
+      })
       .catch((err) => err);
   }
 
@@ -35,14 +36,14 @@ function Plants(props) {
     loadPlants();
   }, []);
 
-  function loadFavorites() {
+  function loadActivityFeed() {
     API.findRecent()
-      .then((res) => setFavorites(res.data))
+      .then((res) => setActivityData(res.data))
       .catch((err) => err);
   }
 
   useEffect(() => {
-    loadFavorites();
+    loadActivityFeed();
   }, []);
 
   /* Run the automatic plant suggestion code on component render */
@@ -129,8 +130,9 @@ function Plants(props) {
             userName={props.userName}
             userIp={props.userIp}
             searchResults={searchResults}
-            loadFavorites={loadFavorites}
-            setPlants={setPlants}
+            loadActivityFeed={loadActivityFeed}
+            setUserFavorites={props.setUserFavorites}
+            // setPlants={setPlants}
             setShowSpinner={setShowSpinner}
             showSpinner={showSpinner}
           />
@@ -140,7 +142,8 @@ function Plants(props) {
           <Jumbotron>
             <h1>Plants On My List</h1>
           </Jumbotron>
-          <UserFavorites deleteFavorite={deletePlant} favorites={plants} />
+          {/* <UserFavorites deleteFavorite={deletePlant} favorites={plants} /> */}
+          <UserFavorites deleteFavorite={deletePlant} favorites={props.userFavorites} />
         </Col>
 
         <Col size="md-3">
@@ -148,7 +151,7 @@ function Plants(props) {
             <h1>Fav Live Feed</h1>
           </Jumbotron>
 
-          <ActivityFeed data={favorites}/>
+          <ActivityFeed data={activityData}/>
 
         </Col>
       </Row>
@@ -157,6 +160,8 @@ function Plants(props) {
 }
 
 Plants.propTypes = {
+  userFavorites: PropTypes.array,
+  setUserFavorites: PropTypes.func,
   userName: PropTypes.string,
   userIp: PropTypes.string,
 };
