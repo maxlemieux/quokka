@@ -1,9 +1,9 @@
-const maxmind = require('maxmind');
+const Reader = require('@maxmind/geoip2-node').Reader;
 
-const geoipDb = '../../../geoip/GeoLite2-City.mmdb';
+Reader.open('../../../geoip/GeoLite2-City.mmdb').then(reader => {
+  console.log(reader.city('1.1.1.1'))
+});
 
-async function getPostalCode(ipAddress) {
-  await maxmind.open(geoipDb).then((lookup) => lookup.get(ipAddress).postal.code);
-}
-
-export default getPostalCode;
+// exports = {
+//   getPostalCode
+// };
