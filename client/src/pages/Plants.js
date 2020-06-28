@@ -34,7 +34,7 @@ function Plants(props) {
 
   useEffect(() => {
     loadPlants();
-  }, []);
+  });
 
   function loadActivityFeed() {
     API.findRecent()
