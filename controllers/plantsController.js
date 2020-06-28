@@ -10,9 +10,15 @@ module.exports = {
         .then((dbModel) => res.json(dbModel))
         .catch((err) => res.status(422).json(err));
     } else {
+      let ip = '';
+      let ipAddr = req.headers["x-forwarded-for"];
+      if (ipAddr) {
+          let addrList = ipAddr.split(',');
+          ip = addrList[addrList.length-1];
+      }    
       // It's a guest, filter by IP instead of user
       db.Plant
-        .find({ ip: req.ip, user_name: 'guest' })
+        .find({ ip: ip, user_name: 'guest' })
         .sort({ date: 1 })
         .then((dbModel) => res.json(dbModel))
         .catch((err) => res.status(422).json(err));
@@ -42,9 +48,15 @@ module.exports = {
         });
       // .catch(err => res.status(422).json({ exists: false }));
     } else {
+      let ip = '';
+      const ipAddr = req.headers["x-forwarded-for"];
+      if (ipAddr) {
+          const addrList = ipAddr.split(',');
+          ip = addrList[addrList.length-1];
+      }    
       db.Plant
         .find({
-          ip: req.ip,
+          ip: ip,
           user_name: 'guest',
           trefle_id: req.params.id,
         })
