@@ -132,7 +132,6 @@ function Plants(props) {
             searchResults={searchResults}
             loadActivityFeed={loadActivityFeed}
             setUserFavorites={props.setUserFavorites}
-            // setPlants={setPlants}
             setShowSpinner={setShowSpinner}
             showSpinner={showSpinner}
           />
