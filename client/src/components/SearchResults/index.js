@@ -18,12 +18,12 @@ export function SearchResults(props) {
 
   return (
     <div className="list-overflow-container">
-  {props.showSpinner
-    && <div>
-    {/* <ReactSpinner type='border' color='primary' size='5' /> */}
-    <p>Loading...</p>
-    </div>
-  }
+      {props.showSpinner
+        && <div>
+          {/* <ReactSpinner type='border' color='primary' size='5' /> */}
+          <p>Loading...</p>
+        </div>
+      }
       <ul className="list-group">
         {props.searchResults.data
           && props.searchResults.data.map((result) => (
@@ -65,7 +65,7 @@ export function Result(props) {
             props.loadFavorites();
           });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => err);
   }
 
   API.getPlant(props.result.id)
@@ -75,10 +75,8 @@ export function Result(props) {
       } else {
         setIsFavorite(false);
       }
-      console.log(`${props.result.scientific_name} isFavorite Status is ${isFavorite}`);
-      // console.log(res)
     })
-    .catch((err) => console.log(err));
+    .catch((err) => err);
 
   return (
     <li className="list-group-item">

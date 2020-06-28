@@ -1,4 +1,9 @@
+/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
+
 import React, { useState, useEffect } from 'react';
+import { Tabs, Tab, Button } from 'react-bootstrap'; // Added for navtab effect on "What should I Plant column"
+import PropTypes from 'prop-types';
+
 import DeleteBtn from '../components/DeleteBtn';
 import Jumbotron from '../components/Jumbotron';
 import API from '../utils/API';
@@ -10,11 +15,8 @@ import { Input } from '../components/Form';
 import Favorites from '../components/Favorites';
 import { SearchResults } from '../components/SearchResults';
 
-import { Tabs, Tab, Button } from 'react-bootstrap'; //Added for navtab effect on "What should I Plant column"
-
 import Trefle from '../utils/trefle';
 import phzmapi from '../utils/phzmapi';
-
 
 function Plants(props) {
   const [plants, setPlants] = useState([]);
@@ -26,7 +28,7 @@ function Plants(props) {
   function loadPlants() {
     API.getPlants()
       .then((res) => setPlants(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => err);
   }
 
   useEffect(() => {
@@ -36,7 +38,7 @@ function Plants(props) {
   function loadFavorites() {
     API.findRecent()
       .then((res) => setFavorites(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => err);
   }
 
   useEffect(() => {
@@ -51,7 +53,7 @@ function Plants(props) {
   function deletePlant(id) {
     API.deletePlant(id)
       .then(() => loadPlants())
-      .catch((err) => console.log(err));
+      .catch((err) => err);
   }
 
   function handleSearchChange(event) {
@@ -63,22 +65,22 @@ function Plants(props) {
     event.preventDefault();
     setShowSpinner(true);
     /* Here is where we need to call GeoIP to figure out the zip code. */
-    console.log(`User ip address for geoip is ${props.userIp}`);
+    // console.log(`User ip address for geoip is ${props.userIp}`);
     phzmapi.getTemperatureByZipcode(99518)
       .then((res) => {
         const minTemp = res.data.temperature_range.split(' ')[0];
         Trefle.getPlantsByMinTemp(minTemp)
-          .then(res => {
-            setSearchResults(res);
+          .then((trefleRes) => {
+            setSearchResults(trefleRes);
             setShowSpinner(false);
-          })  
-    })
+          });
+      });
   }
 
-  function GetPlantsByName(event){
+  function GetPlantsByName(event) {
     event.preventDefault();
     Trefle.getPlantsByName(searchPlants)
-      .then(res=>{
+      .then((res) => {
         setSearchResults(res);
       });
   }
@@ -88,12 +90,12 @@ function Plants(props) {
     borderRadius: '10px',
     textAlign: 'center',
     boxShadow: '0px 5px 5px 3px #F3969A',
-    paddingBottom: '10px'
-  }
+    paddingBottom: '10px',
+  };
 
   const styleLi = {
     marginBottom: '100px',
-  }
+  };
 
   return (
     <Container fluid>
@@ -114,25 +116,24 @@ function Plants(props) {
 
             {/* Search By Name */}
             <Tab eventKey="Search By Name" title="Search By Name">
-              <p>If you'd like to search for a plant by name, you can search here.</p>
+              <p>If you&apos;d like to search for a plant by name, you can search here.</p>
                 <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
                 <Button onClick={GetPlantsByName}>Get Plants By Name</Button>
             </Tab>
           </Tabs>
         </div>
         <div style={styleLi}>
-          <SearchResults 
-            userName={props.userName} 
-            userIp={props.userIp} 
-            searchResults={searchResults} 
-            loadFavorites={loadFavorites} 
+          <SearchResults
+            userName={props.userName}
+            userIp={props.userIp}
+            searchResults={searchResults}
+            loadFavorites={loadFavorites}
             setPlants={setPlants}
             setShowSpinner={setShowSpinner}
             showSpinner={showSpinner}
           />
         </div>
       </Col>
-        
 
         <Col size="md-4 sm-12">
           <Jumbotron>
@@ -153,7 +154,10 @@ function Plants(props) {
             <h3>No Results to Display</h3>
           )}
           {plants.length && props.userName === 'guest' ? (
-            <p>Want to view your favorite plants from anywhere? Sign up for an account - it's always free!</p>
+            <>
+              <p>Want to view your favorite plants from anywhere?</p>
+              <p>Sign up for an account - it&apos;s always free!</p>
+            </>
           ) : (<></>
           )}
         </Col>
@@ -169,5 +173,10 @@ function Plants(props) {
     </Container>
   );
 }
+
+Plants.propTypes = {
+  userName: PropTypes.string,
+  userIp: PropTypes.string,
+};
 
 export default Plants;

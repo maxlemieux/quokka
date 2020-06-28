@@ -1,30 +1,31 @@
 /* https://medium.com/swlh/set-up-an-express-js-app-with-passport-js-and-mongodb-for-password-authentication-6ea05d95335c */
 
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema(
   {
     name: {
-      type: String
+      type: String,
     },
     email: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
     email_is_verified: {
       type: Boolean,
-      default: false
+      default: false,
     },
     password: {
-      type: String
+      type: String,
     },
     date: {
       type: Date,
-      default: Date.now
-    }
+      default: Date.now,
+    },
   },
-  { strict: false }
+  { strict: false },
 );
 
-module.exports = User = mongoose.model('users', UserSchema);
+const User = mongoose.model('users', UserSchema);
+module.exports = User;

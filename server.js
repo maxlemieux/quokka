@@ -1,3 +1,5 @@
+/* eslint-disable global-require */
+
 /*
   Loosely according to https://medium.com/swlh/set-up-an-express-js-app-with-passport-js-and-mongodb-for-password-authentication-6ea05d95335c
 */
