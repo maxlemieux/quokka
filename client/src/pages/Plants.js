@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { Tabs, Tab, Button } from 'react-bootstrap'; // Added for navtab effect on "What should I Plant column"
 import PropTypes from 'prop-types';
 
-import DeleteBtn from '../components/DeleteBtn';
 import Jumbotron from '../components/Jumbotron';
 import API from '../utils/API';
 // import { getPostalCode } from "../utils/geoip";
@@ -14,6 +13,7 @@ import { List, ListItem } from '../components/List';
 import { Input } from '../components/Form';
 import ActivityFeed from '../components/ActivityFeed';
 import { SearchResults } from '../components/SearchResults';
+import UserFavorites from '../components/UserFavorites';
 
 import Trefle from '../utils/trefle';
 import phzmapi from '../utils/phzmapi';
@@ -136,33 +136,13 @@ function Plants(props) {
           />
         </div>
       </Col>
-
-        <Col size="md-4 sm-12">
+      <Col size="md-4 sm-12">
           <Jumbotron>
             <h1>Plants On My List</h1>
           </Jumbotron>
-          {plants.length ? (
-            <List>
-              {plants.map((plant) => (
-                <ListItem key={plant._id}>
-                    <strong>
-                      {plant.scientific_name}
-                    </strong>
-                  <DeleteBtn onClick={() => deletePlant(plant._id)} />
-                </ListItem>
-              ))}
-            </List>
-          ) : (
-            <h3>No Results to Display</h3>
-          )}
-          {plants.length && props.userName === 'guest' ? (
-            <>
-              <p>Want to view your favorite plants from anywhere?</p>
-              <p>Sign up for an account - it&apos;s always free!</p>
-            </>
-          ) : (<></>
-          )}
+          <UserFavorites deleteFavorite={deletePlant} favorites={plants} />
         </Col>
+
         <Col size="md-3">
           <Jumbotron>
             <h1>Fav Live Feed</h1>
