@@ -12,7 +12,7 @@ import API from '../utils/API';
 import { Col, Row, Container } from '../components/Grid';
 import { List, ListItem } from '../components/List';
 import { Input } from '../components/Form';
-import Favorites from '../components/Favorites';
+import ActivityFeed from '../components/ActivityFeed';
 import { SearchResults } from '../components/SearchResults';
 
 import Trefle from '../utils/trefle';
@@ -166,7 +166,7 @@ function Plants(props) {
             <h1>Fav Live Feed</h1>
           </Jumbotron>
 
-          <Favorites data={favorites}/>
+          <ActivityFeed data={favorites}/>
 
         </Col>
       </Row>
