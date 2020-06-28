@@ -1,10 +1,10 @@
 // https://github.com/FBosler/fb-tutorial-social-login/blob/steps/3_backend_1/client/src/components/layout/SignupLoginModal/styles.js
 
-import styled from "styled-components";
-import { Container, Button } from "react-bootstrap";
+import styled from 'styled-components';
+import { Container, Button } from 'react-bootstrap';
 
-import { AiOutlineMail } from "react-icons/ai";
-import { FiKey } from "react-icons/fi";
+import { AiOutlineMail } from 'react-icons/ai';
+import { FiKey } from 'react-icons/fi';
 
 export const PaddedContainer = styled(Container)`
     padding: 0 25px 25px 25px;
@@ -18,17 +18,17 @@ export const PasswordSymbol = styled(FiKey)`
     font-size: 160%;
 `;
 
-export const ResponsiveHeader4 = styled("h4")`
+export const ResponsiveHeader4 = styled('h4')`
     padding: 20px 0 0 0;
     font-weight: bolder;
 `;
 
-export const MutedSpan = styled("span")`
+export const MutedSpan = styled('span')`
     font-size: 80%;
     font-weight: 400;
 `;
 
-export const VerticalCenterWrapper = styled("div")`
+export const VerticalCenterWrapper = styled('div')`
     height: 100% !important;
     display: flex;
     margin-top: -15px;

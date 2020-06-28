@@ -1,82 +1,92 @@
-const db = require("../models");
+const db = require('../models');
 
 // Defining methods for the plantsController
 module.exports = {
-  findAll: function(req, res) {
+  findAll(req, res) {
     if (req.user) {
       db.Plant
         .find({ user_name: req.user.email })
         .sort({ date: 1 })
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
+        .then((dbModel) => res.json(dbModel))
+        .catch((err) => res.status(422).json(err));
     } else {
+      let ip = '';
+      let ipAddr = req.headers["x-forwarded-for"];
+      if (ipAddr) {
+          let addrList = ipAddr.split(',');
+          ip = addrList[addrList.length-1];
+      }    
       // It's a guest, filter by IP instead of user
       db.Plant
-        .find({ ip: req.ip, user_name: 'guest' })
+        .find({ ip: ip, user_name: 'guest' })
         .sort({ date: 1 })
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
+        .then((dbModel) => res.json(dbModel))
+        .catch((err) => res.status(422).json(err));
     }
   },
-  findRecent: function(req, res) {
+  findRecent(req, res) {
     db.Plant
       .find(req.query)
       .sort({ date: -1 })
       .limit(10)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
   },
-  findById: function(req, res) {
+  findById(req, res) {
     if (req.user) {
       db.Plant
-        .find({ 
+        .find({
           user_name: req.user.email,
-          trefle_id: req.params.id
+          trefle_id: req.params.id,
         })
-        .then(dbModel => {
-          console.log(dbModel)
+        .then((dbModel) => {
           if (dbModel[0]) {
-            res.json({ exists: true })
+            res.json({ exists: true });
           } else {
-            res.json({ exists: false })
+            res.json({ exists: false });
           }
-        })
-        // .catch(err => res.status(422).json({ exists: false }));
+        });
+      // .catch(err => res.status(422).json({ exists: false }));
     } else {
+      let ip = '';
+      const ipAddr = req.headers["x-forwarded-for"];
+      if (ipAddr) {
+          const addrList = ipAddr.split(',');
+          ip = addrList[addrList.length-1];
+      }    
       db.Plant
         .find({
-          ip: req.ip,
+          ip: ip,
           user_name: 'guest',
-          trefle_id: req.params.id 
+          trefle_id: req.params.id,
         })
-        .then(dbModel => {
-          // console.log(dbModel)
+        .then((dbModel) => {
           if (dbModel[0]) {
-            res.json({ exists: true })
+            res.json({ exists: true });
           } else {
-            res.json({ exists: false })
+            res.json({ exists: false });
           }
-        })
-        // .catch(err => res.status(422).json({ exists: false }));
+        });
+      // .catch(err => res.status(422).json({ exists: false }));
     }
   },
-  create: function(req, res) {
+  create(req, res) {
     db.Plant
       .create(req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
   },
-  update: function(req, res) {
+  update(req, res) {
     db.Plant
       .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
   },
-  remove: function(req, res) {
+  remove(req, res) {
     db.Plant
       .findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  }
+      .then((dbModel) => dbModel.remove())
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
 };

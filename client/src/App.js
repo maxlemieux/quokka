@@ -1,42 +1,48 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-
-import Plants from "./pages/Plants";
-import NoMatch from "./pages/NoMatch";
-import Footer from "./components/Footer";
-import Nav from "./components/Nav";
-import { 
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import {
   BrowserRouter,
   Switch,
   Route,
-} from "react-router-dom";
+} from 'react-router-dom';
+import Plants from './pages/Plants';
+import NoMatch from './pages/NoMatch';
+import Footer from './components/Footer';
+import Nav from './components/Nav';
 
 function App() {
-  const [userName, setUserName] = useState("guest");
-  const [userIp, setUserIp] = useState("");
+  const [userName, setUserName] = useState('');
+  const [userIp, setUserIp] = useState('');
+  const [userFavorites, setUserFavorites] = useState([]);
 
   function getUserName() {
-    axios.get("/api/auth/user_data")
-      .then(res => {
-        if (res.data.email) { 
+    axios.get('/api/auth/user_data')
+      .then((res) => {
+        if (res.data.email) {
           setUserName(res.data.email);
           setUserIp(res.data.ip);
         } else {
+          setUserName('guest');
           setUserIp(res.data.ip);
         }
       });
   }
   useEffect(() => {
-    getUserName()
+    getUserName();
   }, []);
 
   return (
     <BrowserRouter>
-      <Nav userName={userName} setUserName={setUserName} />  
+      <Nav userName={userName} setUserName={setUserName} />
       <div>
         <Switch>
           <Route exact path="/">
-            <Plants userName={userName} userIp={userIp} />
+            <Plants
+              userFavorites={userFavorites}
+              setUserFavorites={setUserFavorites}
+              userName={userName}
+              userIp={userIp}
+            />
           </Route>
           <Route>
             <NoMatch />

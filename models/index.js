@@ -1,3 +1,5 @@
+const plant = require('./plant');
+
 module.exports = {
-  Plant: require("./plant")
+  Plant: plant,
 };

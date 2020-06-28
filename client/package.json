@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "maxmind": "^4.1.2",
+    "prop-types": "^15.7.2",
     "react": "^16.6.3",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.6.3",

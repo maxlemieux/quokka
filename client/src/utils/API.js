@@ -1,32 +1,32 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   // Gets all plants
-  getPlants: function() {
-    return axios.get("/api/plants");
+  getPlants() {
+    return axios.get('/api/plants');
   },
   // Gets the plant with the given id
-  getPlant: function(id) {
-    return axios.get("/api/plants/" + id);
+  getPlant(id) {
+    return axios.get(`/api/plants/${id}`);
   },
   // Deletes the plant with the given id
-  deletePlant: function(id) {
-    return axios.delete("/api/plants/" + id);
+  deletePlant(id) {
+    return axios.delete(`/api/plants/${id}`);
   },
   // Saves a plant to the database
-  savePlant: function(plantData) {
-    return axios.post("/api/plants", plantData);
+  savePlant(plantData) {
+    return axios.post('/api/plants', plantData);
   },
   // Searches Trefle through our back end
-  searchPlantName: function(searchName) {
+  searchPlantName(searchName) {
     return axios.get(`/api/plants/species/${searchName}`);
   },
   // Find recent plants saved to the db
-  findRecent: function() {
+  findRecent() {
     return axios.get('/api/plants/recent');
   },
   // Get details on a specific plant
-  plantDetails: function(plantId) {
+  plantDetails(plantId) {
     return axios.get(`/api/trefle/species/${plantId}`);
-  }
+  },
 };

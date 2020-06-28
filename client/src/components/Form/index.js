@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // This file exports the Input, TextArea, and FormBtn components
 
@@ -20,8 +21,12 @@ export function TextArea(props) {
 
 export function FormBtn(props) {
   return (
-    <button {...props} style={{ float: "right", marginBottom: 10 }} className="btn btn-success">
+    <button {...props} style={{ float: 'right', marginBottom: 10 }} className="btn btn-success">
       {props.children}
     </button>
   );
 }
+
+FormBtn.propTypes = {
+  children: PropTypes.any,
+};
