@@ -25,8 +25,8 @@ export function SearchResults(props) {
         </div>
       }
       <ul className="list-group">
-        {props.searchResults.data
-          && props.searchResults.data.map((result) => (
+        {props.searchResults
+          && props.searchResults.map((result) => (
             <Result
               userName={props.userName}
               userIp={props.userIp}
@@ -93,7 +93,7 @@ export function Result(props) {
         && <button onClick={() => { savePlant(props.result.id); }}>Save to Favorites</button>
       }
       {isFavorite
-        && <strong>Favorite! This plant is already on your list.</strong>
+        && <strong>Favorite! This plant is on your list.</strong>
       }
     </li>
   );

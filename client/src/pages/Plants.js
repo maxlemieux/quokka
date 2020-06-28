@@ -72,7 +72,7 @@ function Plants(props) {
         const minTemp = res.data.temperature_range.split(' ')[0];
         Trefle.getPlantsByMinTemp(minTemp)
           .then((trefleRes) => {
-            setSearchResults(trefleRes);
+            setSearchResults(trefleRes.data);
             setShowSpinner(false);
           });
       });
@@ -83,7 +83,7 @@ function Plants(props) {
     setShowSpinner(true);
     Trefle.getPlantsByName(searchPlants)
       .then((res) => {
-        setSearchResults(res);
+        setSearchResults(res.data);
         setShowSpinner(false);
       });
   }
@@ -137,22 +137,22 @@ function Plants(props) {
           />
         </div>
       </Col>
+
       <Col size="md-4 sm-12">
-          <Jumbotron>
-            <h1>Plants On My List</h1>
-          </Jumbotron>
-          {/* <UserFavorites deleteFavorite={deletePlant} favorites={plants} /> */}
-          <UserFavorites deleteFavorite={deletePlant} favorites={props.userFavorites} />
-        </Col>
+        <Jumbotron>
+          <h1>Plants On My List</h1>
+        </Jumbotron>
+        <UserFavorites deleteFavorite={deletePlant} favorites={props.userFavorites} />
+      </Col>
 
-        <Col size="md-3">
-          <Jumbotron>
-            <h1>Fav Live Feed</h1>
-          </Jumbotron>
+      <Col size="md-3">
+        <Jumbotron>
+          <h1>Fav Live Feed</h1>
+        </Jumbotron>
 
-          <ActivityFeed data={activityData}/>
+        <ActivityFeed data={activityData}/>
+      </Col>
 
-        </Col>
       </Row>
     </Container>
   );
