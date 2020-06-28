@@ -79,9 +79,11 @@ function Plants(props) {
 
   function GetPlantsByName(event) {
     event.preventDefault();
+    setShowSpinner(true);
     Trefle.getPlantsByName(searchPlants)
       .then((res) => {
         setSearchResults(res);
+        setShowSpinner(false);
       });
   }
 

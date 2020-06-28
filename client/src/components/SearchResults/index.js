@@ -81,7 +81,12 @@ export function Result(props) {
   return (
     <li className="list-group-item">
       <List>
+
         {props.result.common_name && <ListItem><b>{props.result.common_name}</b></ListItem>}
+        {props.result.images && props.result.images[1]
+          && (<>
+          <h1>IMAGE HERE</h1><img src={props.result.images[1]} alt={props.result.scientific_name} />
+          </>)}
         <ListItem>
           Scientific Name: {props.result.scientific_name}
         </ListItem>

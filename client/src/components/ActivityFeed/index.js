@@ -7,7 +7,11 @@ export default function ActivityFeed(props) {
     <div>
       <ul>
         {props.data.map((favorite) => (
-          <li key={favorite.id}>{favorite.user_name} quokked {favorite.common_name ? favorite.common_name : favorite.scientific_name}</li>
+          <li key={favorite.id}>
+            {favorite.images[1] && <img src={favorite.images[1]} alt={favorite.scientific_name} />}
+            {favorite.user_name} quokked {favorite.common_name
+              ? favorite.common_name : favorite.scientific_name}
+          </li>
         ))}
       </ul>
     </div>
