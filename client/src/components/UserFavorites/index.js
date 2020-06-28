@@ -13,9 +13,14 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
       <List>
         {favorites.map((plant) => (
           <ListItem key={plant.trefle_id}>
-              <strong>
-                {plant.scientific_name}
+              <p>
+                <strong>
+                {plant.common_name}
               </strong>
+              </p>
+              <p>
+                {plant.scientific_name}
+              </p>
             <DeleteBtn onClick={() => deleteFavorite(plant._id)} />
             <br />
             {plant.images[0]
