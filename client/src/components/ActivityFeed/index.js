@@ -21,5 +21,5 @@ export default function ActivityFeed(props) {
 }
 
 ActivityFeed.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.array,
 };

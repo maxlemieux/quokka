@@ -43,11 +43,11 @@ export function SearchResults(props) {
 }
 
 SearchResults.propTypes = {
-  userName: PropTypes.array,
-  searchResults: PropTypes.object,
+  userName: PropTypes.string,
+  searchResults: PropTypes.array,
   setUserFavorites: PropTypes.func,
   loadActivityFeed: PropTypes.func,
-  showSpinner: PropTypes.func,
+  showSpinner: PropTypes.bool,
   userIp: PropTypes.string,
 };
 
