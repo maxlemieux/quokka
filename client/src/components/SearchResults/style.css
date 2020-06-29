@@ -4,21 +4,29 @@
   overflow-y: scroll;
   overflow-x: hidden;
   margin-top: 10px;
-  /* border: 1px solid #F3969A; */
+  color: black;
+  
+  
 }
 
 .list-overflow-container ul {
-  margin-bottom: 20px;
+  margin-bottom: 0px;
+  
+  
+  
 }
 
 .list-overflow-container li {
   border-radius: 0px;
   border-left: none;
   border-right: none;
+  
 }
 
 .list-overflow-container li a {
   color: #2A878C;
+  
+  
 }
 
 .list-overflow-container li:first-child {
@@ -26,5 +34,6 @@
 }
 
 .list-overflow-container li:last-child {
-  border-bottom: none;
+  border-top: 2px solid #F3969A;
+  
 }

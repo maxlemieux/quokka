@@ -19,6 +19,7 @@ export function SearchResults(props) {
     {props.searchResults[0]
         && <div className="list-overflow-container">  
       <p>Results for postal code {props.userZip} (autodetected from public IP address {props.userIp})</p>
+      <hr style={{border: "1px #F3969A solid"}}></hr>
       <ul className="list-group">
         {props.searchResults
           && props.searchResults.map((result) => (
@@ -83,8 +84,9 @@ export function Result(props) {
           Scientific Name: {props.result.scientific_name}
         </ListItem>
       </List>
+      <i className="fa fa-leaf" style={{color: "green", padding: "2px"}}icon="leaf"></i>
       {!isFavorite
-        && <button onClick={() => savePlant(props.result.id)}>Save to Favorites</button>
+        && <button onClick={() => savePlant(props.result.id)}>Save to Favs</button>
       }
       {isFavorite
         && <strong>Favorite! This plant is on your list.</strong>

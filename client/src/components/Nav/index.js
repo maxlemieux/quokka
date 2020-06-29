@@ -26,7 +26,7 @@ const Nav = (props) => {
   const styleLogin = {
     position: "absolute",
     left: "85%",
-    textAlign:"center"
+    textAlign: "center"
   }
 
   return (

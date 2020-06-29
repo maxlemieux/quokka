@@ -88,12 +88,18 @@ function Plants(props) {
     borderRadius: '10px',
     textAlign: 'center',
     boxShadow: '0px 5px 5px 3px #F3969A',
-    paddingBottom: '10px',
+    padding: '10px 1px 15px 1px',
   };
 
   const styleLi = {
     marginBottom: '100px',
   };
+  
+  const styleInput = {
+    maxWidth: "75%", 
+    marginLeft: "10%",
+    border: "1px solid #78C2AD"
+  }
 
   return (
     <Container fluid>
@@ -108,14 +114,14 @@ function Plants(props) {
           <Tabs defaultActiveKey="Get Suggestions">
             {/* Get Plant Suggestions */}
             <Tab eventKey="Get Suggestions" title="Get Suggestions">
-            <p>Click the Button to Get Suggestions!</p>
+            <p style={{paddingTop: "10px"}}>Click the Button to Get Suggestions!</p>
                 <Button onClick={loadSuggestions}>Get Suggestions</Button>
             </Tab>
 
             {/* Search By Name */}
             <Tab eventKey="Search By Name" title="Search By Name">
-              <p>If you&apos;d like to search for a plant by name, you can search here.</p>
-                <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
+              <p style={{paddingTop: "10px", color: "#5a5a5"}}>If you&apos;d like to search for a plant by name, you can search here:</p>
+                <Input style={styleInput} onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
                 <Button onClick={GetPlantsByName}>Get Plants By Name</Button>
             </Tab>
           </Tabs>
