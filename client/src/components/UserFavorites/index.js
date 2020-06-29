@@ -14,7 +14,8 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
       messagesEndRef.current.scrollIntoView({behavior: "smooth"});
     }
   }
-  useEffect(scrollToBottom, [favorites]);
+  /* This works well but needs a fixed height layout to avoid jarring the user */
+  // useEffect(scrollToBottom, [favorites]);
 
   if (favorites.length) {
     return (
