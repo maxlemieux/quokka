@@ -21,20 +21,20 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
   if (favorites.length) {
     return (
       <List>
-        {favorites.map((plant) => (
-          <ListItem key={plant.trefle_id}>
+        {favorites.map((favorite) => (
+          <ListItem key={favorite.trefle_id}>
               <p>
                 <strong>
-                {plant.common_name}
+                {favorite.common_name}
               </strong>
               </p>
               <p>
-                {plant.scientific_name}
+                {favorite.scientific_name}
               </p>
-            <DeleteBtn onClick={() => deleteFavorite(plant._id)} />
+            <DeleteBtn onClick={() => deleteFavorite(favorite._id)} />
             <br />
-            {plant.images[0]
-              && <img width="300px" src={plant.images[0].url} alt={plant.scientific_name} />}
+            {favorite.images[0]
+              && <img width="300px" src={favorite.images[0].url} alt={favorite.scientific_name} />}
           </ListItem>
         ))}
         {/* <div ref={messagesEndRef} /> */}
