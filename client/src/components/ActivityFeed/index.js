@@ -10,7 +10,7 @@ export default function ActivityFeed(props) {
       <ul>
         {props.data.map((favorite) => (
           <li className='list-overflow-container' key={favorite._id}>
-            {favorite.images[1] && <img width='100%' src={favorite.images[1].url} alt={favorite.scientific_name} />}
+            {favorite.images[0] && <img width='100%' src={favorite.images[0].url} alt={favorite.scientific_name} />}
             {favorite.user_name} quokked {favorite.common_name
               ? favorite.common_name : favorite.scientific_name}
           </li>
