@@ -13,6 +13,7 @@ import Nav from './components/Nav';
 function App() {
   const [userName, setUserName] = useState('');
   const [userIp, setUserIp] = useState('');
+  const [userZip, setUserZip] = useState('');
   const [userFavorites, setUserFavorites] = useState([]);
 
   function getUserName() {
@@ -42,6 +43,8 @@ function App() {
               setUserFavorites={setUserFavorites}
               userName={userName}
               userIp={userIp}
+              userZip={userZip}
+              setUserZip={setUserZip}
             />
           </Route>
           <Route>

@@ -1,9 +1,7 @@
-const maxmind = require('maxmind');
+import axios from 'axios';
 
-const geoipDb = '../../../geoip/GeoLite2-City.mmdb';
-
-async function getPostalCode(ipAddress) {
-  await maxmind.open(geoipDb).then((lookup) => lookup.get(ipAddress).postal.code);
-}
-
-export default getPostalCode;
+export default {
+  getZipCodeByIp(ip) {
+    return axios.get(`/api/geoip/${ip}`);
+  },
+};
