@@ -67,8 +67,8 @@ function Plants(props) {
     setShowSpinner(true);
     /* Here is where we need to call GeoIP to figure out the zip code. */
     // console.log(`User ip address for geoip is ${props.userIp}`);
-    // geoip(props.userIp);
-    phzmapi.getTemperatureByZipcode(99518)
+
+    phzmapi.getTemperatureByZipcode(97203)
       .then((res) => {
         const minTemp = res.data.temperature_range.split(' ')[0];
         Trefle.getPlantsByMinTemp(minTemp)
