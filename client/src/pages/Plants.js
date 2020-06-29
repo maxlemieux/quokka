@@ -23,19 +23,6 @@ function Plants(props) {
   const [searchPlants, setSearchPlants] = useState([]);
   const [showSpinner, setShowSpinner] = useState(false);
 
-  function loadPlants() {
-    API.getPlants()
-      .then((res) => {
-        // setPlants(res.data);
-        props.setUserFavorites(res.data);
-      })
-      .catch((err) => err);
-  }
-
-  useEffect(() => {
-    loadPlants();
-  });
-
   function loadActivityFeed() {
     API.findRecent()
       .then((res) => setActivityData(res.data))
@@ -53,7 +40,7 @@ function Plants(props) {
 
   function deletePlant(id) {
     API.deletePlant(id)
-      .then(() => loadPlants())
+      .then(() => props.loadFavorites())
       .catch((err) => err);
   }
 
@@ -65,9 +52,7 @@ function Plants(props) {
   function loadSuggestions(event) {
     event.preventDefault();
     setShowSpinner(true);
-    /* Here is where we need to call GeoIP to figure out the zip code. */
-    // console.log(`User ip address for geoip is ${props.userIp}`);
-    // geoip.getZipCodeByIp('73.180.53.30').then(res => console.log(res.data))
+
     geoip.getZipCodeByIp(props.userIp).then(geoipRes => {
       let zip = '97201';
       if (geoipRes.data) {
@@ -142,7 +127,7 @@ function Plants(props) {
             userZip={props.userZip}
             searchResults={searchResults}
             loadActivityFeed={loadActivityFeed}
-            setUserFavorites={props.setUserFavorites}
+            loadFavorites={props.loadFavorites}
             setShowSpinner={setShowSpinner}
             showSpinner={showSpinner}
           />

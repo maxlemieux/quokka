@@ -8,14 +8,6 @@ import API from '../../utils/API';
 // import ReactSpinner from 'react-bootstrap-spinner';
 
 export function SearchResults(props) {
-  function loadPlants() {
-    API.getPlants()
-      .then((res) => {
-        props.setUserFavorites(res.data);
-      })
-      .catch((err) => console.log(err));
-  }
-
   return (
     <>
     {props.showSpinner
@@ -26,7 +18,7 @@ export function SearchResults(props) {
     }
     {props.searchResults[0]
         && <div className="list-overflow-container">  
-      <p>Results for postal code {props.userZip} (autodetected from IP address {props.userIp})</p>
+      <p>Results for postal code {props.userZip} (autodetected from public IP address {props.userIp})</p>
       <ul className="list-group">
         {props.searchResults
           && props.searchResults.map((result) => (
@@ -34,7 +26,7 @@ export function SearchResults(props) {
               userName={props.userName}
               userIp={props.userIp}
               loadActivityFeed={props.loadActivityFeed}
-              loadPlants={loadPlants}
+              loadFavorites={props.loadFavorites}
               result={result}
               key={result.id}
             />
@@ -49,7 +41,7 @@ export function SearchResults(props) {
 SearchResults.propTypes = {
   userName: PropTypes.string,
   searchResults: PropTypes.array,
-  setUserFavorites: PropTypes.func,
+  loadFavorites: PropTypes.func,
   loadActivityFeed: PropTypes.func,
   showSpinner: PropTypes.bool,
   userIp: PropTypes.string,
@@ -66,7 +58,7 @@ export function Result(props) {
         res.data.trefle_id = res.data.id;
         API.savePlant(res.data)
           .then(() => {
-            props.loadPlants();
+            props.loadFavorites();
             props.loadActivityFeed();
           });
       })

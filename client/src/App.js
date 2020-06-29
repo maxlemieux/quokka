@@ -5,6 +5,9 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+
+import API from './utils/API';
+
 import Plants from './pages/Plants';
 import NoMatch from './pages/NoMatch';
 import Footer from './components/Footer';
@@ -32,6 +35,18 @@ function App() {
     getUserName();
   }, []);
 
+  function loadFavorites() {
+    API.getPlants()
+      .then((res) => {
+        setUserFavorites(res.data);
+      })
+      .catch((err) => err);
+  }
+  useEffect(() => {
+    loadFavorites();
+  }, [userName])
+
+
   return (
     <BrowserRouter>
       <Nav userName={userName} setUserName={setUserName} />
@@ -40,7 +55,7 @@ function App() {
           <Route exact path="/">
             <Plants
               userFavorites={userFavorites}
-              setUserFavorites={setUserFavorites}
+              loadFavorites={loadFavorites}
               userName={userName}
               userIp={userIp}
               userZip={userZip}
