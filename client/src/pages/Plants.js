@@ -14,6 +14,7 @@ import UserFavorites from '../components/UserFavorites';
 import API from '../utils/API';
 import Trefle from '../utils/trefle';
 import phzmapi from '../utils/phzmapi';
+import geoip from '../utils/geoip';
 
 function Plants(props) {
   // const [plants, setPlants] = useState([]);
@@ -66,16 +67,25 @@ function Plants(props) {
     setShowSpinner(true);
     /* Here is where we need to call GeoIP to figure out the zip code. */
     // console.log(`User ip address for geoip is ${props.userIp}`);
+    // geoip.getZipCodeByIp('73.180.53.30').then(res => console.log(res.data))
+    geoip.getZipCodeByIp(props.userIp).then(geoipRes => {
+      let zip = '97201';
+      if (geoipRes.data) {
+        zip = geoipRes.data.postal.code;
+      } 
+      phzmapi.getTemperatureByZipcode(zip)
+        .then((res) => {
+          const minTemp = res.data.temperature_range.split(' ')[0];
+          Trefle.getPlantsByMinTemp(minTemp)
+            .then((trefleRes) => {
+              setSearchResults(trefleRes.data);
+              setShowSpinner(false);
+              props.setUserZip(zip);
+            });
+        });
+    });
 
-    phzmapi.getTemperatureByZipcode(97203)
-      .then((res) => {
-        const minTemp = res.data.temperature_range.split(' ')[0];
-        Trefle.getPlantsByMinTemp(minTemp)
-          .then((trefleRes) => {
-            setSearchResults(trefleRes.data);
-            setShowSpinner(false);
-          });
-      });
+    
   }
 
   function GetPlantsByName(event) {
@@ -129,6 +139,7 @@ function Plants(props) {
           <SearchResults
             userName={props.userName}
             userIp={props.userIp}
+            userZip={props.userZip}
             searchResults={searchResults}
             loadActivityFeed={loadActivityFeed}
             setUserFavorites={props.setUserFavorites}
@@ -163,6 +174,8 @@ Plants.propTypes = {
   setUserFavorites: PropTypes.func,
   userName: PropTypes.string,
   userIp: PropTypes.string,
+  userZip: PropTypes.string,
+  setUserZip: PropTypes.func,
 };
 
 export default Plants;

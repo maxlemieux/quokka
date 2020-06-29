@@ -17,13 +17,16 @@ export function SearchResults(props) {
   }
 
   return (
-    <div className="list-overflow-container">
-      {props.showSpinner
+    <>
+    {props.showSpinner
         && <div>
           {/* <ReactSpinner type='border' color='primary' size='5' /> */}
           <p>Loading...</p>
         </div>
-      }
+    }
+    {props.searchResults[0]
+        && <div className="list-overflow-container">  
+      <p>Results for postal code {props.userZip} (autodetected from IP address {props.userIp})</p>
       <ul className="list-group">
         {props.searchResults
           && props.searchResults.map((result) => (
@@ -38,7 +41,8 @@ export function SearchResults(props) {
           ))
         }
       </ul>
-    </div>
+    </div>}
+    </>
   );
 }
 
