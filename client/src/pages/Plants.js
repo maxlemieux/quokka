@@ -5,14 +5,13 @@ import { Tabs, Tab, Button } from 'react-bootstrap'; // Added for navtab effect 
 import PropTypes from 'prop-types';
 
 import Jumbotron from '../components/Jumbotron';
-import API from '../utils/API';
-// import { getPostalCode } from "../utils/geoip";
 import { Col, Row, Container } from '../components/Grid';
 import { Input } from '../components/Form';
 import ActivityFeed from '../components/ActivityFeed';
 import { SearchResults } from '../components/SearchResults';
 import UserFavorites from '../components/UserFavorites';
 
+import API from '../utils/API';
 import Trefle from '../utils/trefle';
 import phzmapi from '../utils/phzmapi';
 
