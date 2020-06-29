@@ -21,8 +21,13 @@ const Nav = (props) => {
   };
   const navStyle = {
     boxShadow: '0px 5px 10px 5px pink',
-    marginBottom: '20px',
+    marginBottom: '30px',
   };
+  const styleLogin = {
+    position: "absolute",
+    left: "85%",
+    textAlign:"center"
+  }
 
   return (
     <nav
@@ -33,11 +38,10 @@ const Nav = (props) => {
       />
           <p style={wordStyle}>quokka</p>
       </a>
+
+      <div style={styleLogin}>
       <p>Welcome, <b>{props.userName}</b></p>
-
       <SignupLoginModal show={show} setShow={setShow} setUserName={props.setUserName} />
-
-      <div className="container">
       {props.userName === 'guest'
         && <button onClick={() => setShow(true)}>Login</button>
       }
