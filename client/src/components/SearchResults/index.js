@@ -17,7 +17,7 @@ export function SearchResults(props) {
     {props.searchResults[0]
         && <div className='list-overflow-container' style={{ paddingTop: '20px', marginTop: '30px' }}>
       <p>
-        Results for postal code {props.userZip} (autodetected from public IP address {props.userIp})
+        Results for minimum temperature {props.userTemp} degrees(F), postal code {props.userZip} (autodetected from public IP address {props.userIp})
       </p>
       <ul className="list-group">
         {props.searchResults
@@ -46,6 +46,7 @@ SearchResults.propTypes = {
   showSpinner: PropTypes.bool,
   userIp: PropTypes.string,
   userZip: PropTypes.string,
+  userTemp: PropTypes.string,
 };
 
 export function Result(props) {
