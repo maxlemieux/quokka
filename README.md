@@ -40,8 +40,21 @@ Start the server:
 
 Load the app at [http://localhost:3000](http://localhost:3000).
 
+Click "Get Suggestions" to load a list of suggestions based on your plant hardiness zone / lowest temperature range.
+
+Save a result to your favorites list, remove a favorite, or view the current favorites activity feed for the site on the right side.
+
 ## Demo
 https://boiling-peak-23377.herokuapp.com/
+
+## Technologies
+* Trefle.io API
+* Frostline API
+* React.js
+* React State Hooks
+* react-bootstrap
+* MongoDB/Mongoose
+* Heroku/mLab
 
 ## Wireframe
 Development wireframe showing recommendation feed and activity feed.
