@@ -17,9 +17,7 @@ import phzmapi from '../utils/phzmapi';
 import geoip from '../utils/geoip';
 
 function Plants(props) {
-  // const [plants, setPlants] = useState([]);
   const [activityData, setActivityData] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
   const [searchPlants, setSearchPlants] = useState('');
   const [showSpinner, setShowSpinner] = useState(false);
 
@@ -47,7 +45,7 @@ function Plants(props) {
   function loadSuggestions(event) {
     event.preventDefault();
     setShowSpinner(true);
-    setSearchResults([]);
+    props.setSearchResults('');
 
     geoip.getZipCodeByIp(props.userIp).then(geoipRes => {
       let zip = '97201';
@@ -59,7 +57,7 @@ function Plants(props) {
           const minTemp = res.data.temperature_range.split(' ')[0];
           Trefle.getPlantsByMinTemp(minTemp)
             .then((trefleRes) => {
-              setSearchResults(trefleRes.data);
+              props.setSearchResults(trefleRes.data);
               setShowSpinner(false);
               props.setUserZip(zip);
             });
@@ -72,7 +70,7 @@ function Plants(props) {
     setShowSpinner(true);
     Trefle.getPlantsByName(searchPlants)
       .then((res) => {
-        setSearchResults(res.data);
+        props.setSearchResults(res.data);
         setShowSpinner(false);
       });
   }
@@ -125,7 +123,7 @@ function Plants(props) {
             userName={props.userName}
             userIp={props.userIp}
             userZip={props.userZip}
-            searchResults={searchResults}
+            searchResults={props.searchResults}
             loadActivityFeed={loadActivityFeed}
             loadFavorites={props.loadFavorites}
             setShowSpinner={setShowSpinner}

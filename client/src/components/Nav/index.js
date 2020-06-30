@@ -46,7 +46,18 @@ const Nav = (props) => {
         && <button onClick={() => setShow(true)}>Login</button>
       }
       {props.userName !== 'guest'
-        && <button onClick={() => axios.get('/api/auth/logout').then(props.setUserName('guest'))}>Logout</button>
+        && <button
+          onClick={
+            () => {
+              axios.get('/api/auth/logout')
+                .then(
+                  () => {
+                    props.setUserName('guest');
+                    props.setSearchResults('');
+                  }
+                )}
+          }
+        >Logout</button>
       }
       </div>
     </nav>
