@@ -18,6 +18,7 @@ function App() {
   const [userIp, setUserIp] = useState('');
   const [userZip, setUserZip] = useState('');
   const [userFavorites, setUserFavorites] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
 
   function getUserName() {
     axios.get('/api/auth/user_data')
@@ -49,7 +50,12 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Nav userName={userName} setUserName={setUserName} />
+      <Nav
+        userName={userName}
+        setUserName={setUserName} 
+        searchResults={searchResults}
+        setSearchResults={setSearchResults}
+      />
       <div>
         <Switch>
           <Route exact path="/">
@@ -60,6 +66,8 @@ function App() {
               userIp={userIp}
               userZip={userZip}
               setUserZip={setUserZip}
+              searchResults={searchResults}
+              setSearchResults={setSearchResults}
             />
           </Route>
           <Route>

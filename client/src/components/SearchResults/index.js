@@ -3,21 +3,19 @@ import PropTypes from 'prop-types';
 
 import './style.css';
 import { List, ListItem } from '../List';
+import Spinner from '../Spinner';
 import API from '../../utils/API';
-// import { Spinner } from 'react-bootstrap';
-// import ReactSpinner from 'react-bootstrap-spinner';
 
 export function SearchResults(props) {
   return (
     <>
     {props.showSpinner
-        && <div>
-          {/* <ReactSpinner type='border' color='primary' size='5' /> */}
-          <p>Loading...</p>
-        </div>
+      && <div>
+        <Spinner />
+      </div>
     }
     {props.searchResults[0]
-        && <div className="list-overflow-container">  
+        && <div className='list-overflow-container' style={{paddingTop: '20px', marginTop: '30px'}}>  
       <p>Results for postal code {props.userZip} (autodetected from public IP address {props.userIp})</p>
       <ul className="list-group">
         {props.searchResults
@@ -82,13 +80,17 @@ export function Result(props) {
         <ListItem>
           Scientific Name: {props.result.scientific_name}
         </ListItem>
-      </List>
-      {!isFavorite
-        && <button onClick={() => savePlant(props.result.id)}>Save to Favorites</button>
+        <div style={{margin: 'auto', paddingTop: '20px'}}>
+        {!isFavorite
+        && <button onClick={() => savePlant(props.result.id)}><i className="fa fa-leaf" style={{color: "green", padding: "5px"}}icon="leaf"> Save to Favs</i></button>
       }
       {isFavorite
         && <strong>Favorite! This plant is on your list.</strong>
       }
+      </div>
+      </List>
+      
+      
     </li>
   );
 }
