@@ -99,6 +99,7 @@ const SignUpLoginForm = (props) => {
 };
 
 SignUpLoginForm.propTypes = {
+  setSearchResults: PropTypes.func,
   setUserName: PropTypes.func,
   setShow: PropTypes.func,
 };

@@ -45,14 +45,13 @@ function App() {
   }
   useEffect(() => {
     loadFavorites();
-  }, [userName])
-
+  }, [userName]);
 
   return (
     <BrowserRouter>
       <Nav
         userName={userName}
-        setUserName={setUserName} 
+        setUserName={setUserName}
         searchResults={searchResults}
         setSearchResults={setSearchResults}
       />

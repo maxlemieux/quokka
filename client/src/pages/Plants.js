@@ -47,11 +47,11 @@ function Plants(props) {
     setShowSpinner(true);
     props.setSearchResults([]);
 
-    geoip.getZipCodeByIp(props.userIp).then(geoipRes => {
+    geoip.getZipCodeByIp(props.userIp).then((geoipRes) => {
       let zip = '97201';
       if (geoipRes.data) {
         zip = geoipRes.data.postal.code;
-      } 
+      }
       phzmapi.getTemperatureByZipcode(zip)
         .then((res) => {
           const minTemp = res.data.temperature_range.split(' ')[0];
@@ -88,12 +88,12 @@ function Plants(props) {
   const styleLi = {
     marginBottom: '100px',
   };
-  
+
   const styleInput = {
-    maxWidth: "75%", 
-    marginLeft: "10%",
-    border: "1px solid #78C2AD"
-  }
+    maxWidth: '75%',
+    marginLeft: '10%',
+    border: '1px solid #78C2AD',
+  };
 
   return (
     <Container fluid>
@@ -108,15 +108,24 @@ function Plants(props) {
           <Tabs defaultActiveKey="Get Suggestions">
             {/* Get Plant Suggestions */}
             <Tab eventKey="Get Suggestions" title="Get Suggestions">
-            <p style={{paddingTop: "10px"}}>Click the Button to Get Suggestions!</p>
+            <p style={{ paddingTop: '10px' }}>Click the Button to Get Suggestions!</p>
                 <Button onClick={loadSuggestions}>Get Suggestions</Button>
             </Tab>
 
             {/* Search By Name */}
             <Tab eventKey="Search By Name" title="Search By Name">
-              <p style={{paddingTop: "10px", color: "#5a5a5"}}>If you&apos;d like to search for a plant by name, you can search here:</p>
-                <Input style={styleInput} onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
-                <Button disabled={!searchPlants} onClick={GetPlantsByName}>Get Plants By Name</Button>
+              <p style={{ paddingTop: '10px', color: '#5a5a5' }}>
+                If you&apos;d like to search for a plant by name, you can search here:
+              </p>
+                <Input
+                  style={styleInput}
+                  onChange={handleSearchChange}
+                  name="searchName"
+                  placeholder="Search by Name"
+                />
+                <Button disabled={!searchPlants} onClick={GetPlantsByName}>
+                  Get Plants By Name
+                </Button>
             </Tab>
           </Tabs>
         </div>
@@ -155,6 +164,9 @@ function Plants(props) {
 }
 
 Plants.propTypes = {
+  loadFavorites: PropTypes.func,
+  searchResults: PropTypes.array,
+  setSearchResults: PropTypes.func,
   userFavorites: PropTypes.array,
   setUserFavorites: PropTypes.func,
   userName: PropTypes.string,

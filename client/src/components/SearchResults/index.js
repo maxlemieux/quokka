@@ -15,8 +15,10 @@ export function SearchResults(props) {
       </div>
     }
     {props.searchResults[0]
-        && <div className='list-overflow-container' style={{paddingTop: '20px', marginTop: '30px'}}>  
-      <p>Results for postal code {props.userZip} (autodetected from public IP address {props.userIp})</p>
+        && <div className='list-overflow-container' style={{ paddingTop: '20px', marginTop: '30px' }}>
+      <p>
+        Results for postal code {props.userZip} (autodetected from public IP address {props.userIp})
+      </p>
       <ul className="list-group">
         {props.searchResults
           && props.searchResults.map((result) => (
@@ -43,6 +45,7 @@ SearchResults.propTypes = {
   loadActivityFeed: PropTypes.func,
   showSpinner: PropTypes.bool,
   userIp: PropTypes.string,
+  userZip: PropTypes.string,
 };
 
 export function Result(props) {
@@ -80,22 +83,27 @@ export function Result(props) {
         <ListItem>
           Scientific Name: {props.result.scientific_name}
         </ListItem>
-        <div style={{margin: 'auto', paddingTop: '20px'}}>
+        <div style={{ margin: 'auto', paddingTop: '20px' }}>
         {!isFavorite
-        && <button onClick={() => savePlant(props.result.id)}><i className="fa fa-leaf" style={{color: "green", padding: "5px"}}icon="leaf"> Save to Favs</i></button>
+        && <button onClick={() => savePlant(props.result.id)}>
+          <i
+            className="fa fa-leaf"
+            style={{ color: 'green', padding: '5px' }}
+            icon="leaf"
+          > Save to Favs</i>
+        </button>
       }
       {isFavorite
         && <strong>Favorite! This plant is on your list.</strong>
       }
       </div>
       </List>
-      
-      
     </li>
   );
 }
 
 Result.propTypes = {
+  loadFavorites: PropTypes.func,
   userName: PropTypes.string,
   result: PropTypes.object,
   loadPlants: PropTypes.func,

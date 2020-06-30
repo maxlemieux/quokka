@@ -8,7 +8,7 @@ import { List, ListItem } from '../List';
 import DeleteBtn from '../DeleteBtn';
 
 export default function UserFavorites({ deleteFavorite, favorites }) {
-  const image = {url:"https://via.placeholder.com/300/d3d3d3/000000?text=No%20image%20available"}
+  const image = { url: 'https://via.placeholder.com/300/d3d3d3/000000?text=No%20image%20available' };
   if (favorites.length) {
     return (
       <List>
@@ -24,9 +24,12 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
               </p>
             <DeleteBtn onClick={() => deleteFavorite(favorite._id)} />
             <br />
-            {favorite.images[0] && <img width='50%' src={ favorite.images[0].url }  alt={favorite.scientific_name} />
-              ?favorite.images[0] && <img width='50%' src={ favorite.images[0].url }  alt={favorite.scientific_name}/> 
-              :image && <img width='50%' src ={image.url} alt ={"tex"} />
+            {favorite.images[0]
+              && <img width='50%' src={ favorite.images[0].url } alt={favorite.scientific_name} />
+              ? favorite.images[0]
+                && <img width='50%' src={ favorite.images[0].url } alt={favorite.scientific_name} />
+              : image
+                && <img width='50%' src ={image.url} alt={favorite.scientific_name} />
             }
           </ListItem>
         ))}
