@@ -68,6 +68,8 @@ function Plants(props) {
   function GetPlantsByName(event) {
     event.preventDefault();
     setShowSpinner(true);
+    props.setSearchResults([]);
+
     Trefle.getPlantsByName(searchPlants)
       .then((res) => {
         props.setSearchResults(res.data);
