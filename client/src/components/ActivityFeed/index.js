@@ -7,7 +7,7 @@ import './style.css';
 export default function ActivityFeed(props) {
   return (
     <div>
-      <ul>
+      <ul style={{paddingInlineStart: '0px'}}>
         {props.data.map((favorite) => (
           <li className='list-overflow-container' key={favorite._id}>
             {favorite.images[0] && <img width='100%' src={favorite.images[0].url} alt={favorite.scientific_name} />}

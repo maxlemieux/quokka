@@ -2,6 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   const styleFooter = {
+    zIndex: '10',
     position: 'fixed',
     left: '0',
     bottom: '0',
