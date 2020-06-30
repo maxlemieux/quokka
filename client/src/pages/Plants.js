@@ -20,6 +20,7 @@ function Plants(props) {
   const [activityData, setActivityData] = useState([]);
   const [searchPlants, setSearchPlants] = useState('');
   const [showSpinner, setShowSpinner] = useState(false);
+  const [userTemp, setUserTemp] = useState('');
 
   function loadActivityFeed() {
     API.findRecent()
@@ -55,6 +56,7 @@ function Plants(props) {
       phzmapi.getTemperatureByZipcode(zip)
         .then((res) => {
           const minTemp = res.data.temperature_range.split(' ')[0];
+          setUserTemp(minTemp);
           Trefle.getPlantsByMinTemp(minTemp)
             .then((trefleRes) => {
               props.setSearchResults(trefleRes.data);
@@ -139,6 +141,7 @@ function Plants(props) {
             loadFavorites={props.loadFavorites}
             setShowSpinner={setShowSpinner}
             showSpinner={showSpinner}
+            userTemp={userTemp}
           />
         </div>
       </Col>
