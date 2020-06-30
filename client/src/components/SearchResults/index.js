@@ -16,15 +16,16 @@ export function SearchResults(props) {
     }
     {props.searchResults[0]
         && <div className='list-overflow-container' style={{ paddingTop: '20px', marginTop: '30px' }}>
-      <p>
-        Results for minimum temperature {props.userTemp} degrees(F), postal code {props.userZip} (autodetected from public IP address {props.userIp})
-      </p>
+      <h5>Search Results</h5>
+      <p>Minimum temperature {props.userTemp} degrees(F)</p>
+      <p>Zip code {props.userZip} (autodetected from public IP address {props.userIp})</p>
       <ul className="list-group">
         {props.searchResults
           && props.searchResults.map((result) => (
             <Result
               userName={props.userName}
               userIp={props.userIp}
+              userZip={props.userZip}
               loadActivityFeed={props.loadActivityFeed}
               loadFavorites={props.loadFavorites}
               result={result}
@@ -57,6 +58,7 @@ export function Result(props) {
       .then((res) => {
         res.data.user_name = props.userName;
         res.data.ip = props.userIp;
+        res.data.user_zip = props.userZip;
         res.data.trefle_id = res.data.id;
         API.savePlant(res.data)
           .then(() => {
@@ -110,4 +112,5 @@ Result.propTypes = {
   loadPlants: PropTypes.func,
   loadActivityFeed: PropTypes.func,
   userIp: PropTypes.string,
+  userZip: PropTypes.string,
 };

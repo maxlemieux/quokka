@@ -13,6 +13,7 @@ const plantSchema = new Schema({
     type: String,
   },
   ip: String,
+  user_zip: String,
   date: { type: Date, default: Date.now },
 });
 

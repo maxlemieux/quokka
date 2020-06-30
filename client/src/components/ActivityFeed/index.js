@@ -24,7 +24,7 @@ export default function ActivityFeed(props) {
                       }
                     </Col>
                     <Col size="md-6">
-                    {favorite.user_name} quokked {favorite.common_name
+                    {favorite.user_name} ({favorite.user_zip}) quokked {favorite.common_name
                       ? favorite.common_name : favorite.scientific_name}
                     </Col>
                   </Row>
