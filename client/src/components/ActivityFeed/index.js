@@ -4,17 +4,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 import { Col, Row, Container } from '../Grid'
-
+import { List, ListItem } from '../List';
 
 export default function ActivityFeed(props) {
   console.log(props)
 
   const image = {url:"http://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg"}
   return (
-    <div>
-      <ul>
+    <List>
         {props.data.map((favorite) => (
-          <li className='list-overflow-container' key={favorite._id}>
+          <ListItem className='list-overflow-container' key={favorite._id}>
                 <Container fluid>
                   <Row>
                     <Col size="md-6" >
@@ -33,10 +32,9 @@ export default function ActivityFeed(props) {
                     </Col>
                   </Row>
                 </Container>
-          </li>
+          </ListItem>
         ))}
-      </ul>
-    </div>
+    </List>
   );
 }
 
