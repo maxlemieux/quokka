@@ -17,10 +17,8 @@ import phzmapi from '../utils/phzmapi';
 import geoip from '../utils/geoip';
 
 function Plants(props) {
-  // const [plants, setPlants] = useState([]);
   const [activityData, setActivityData] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
-  const [searchPlants, setSearchPlants] = useState([]);
+  const [searchPlants, setSearchPlants] = useState('');
   const [showSpinner, setShowSpinner] = useState(false);
 
   function loadActivityFeed() {
@@ -32,11 +30,6 @@ function Plants(props) {
   useEffect(() => {
     loadActivityFeed();
   }, []);
-
-  /* Run the automatic plant suggestion code on component render */
-  useEffect(() => {
-    // loadSuggestions()
-  });
 
   function deletePlant(id) {
     API.deletePlant(id)
@@ -52,6 +45,7 @@ function Plants(props) {
   function loadSuggestions(event) {
     event.preventDefault();
     setShowSpinner(true);
+    props.setSearchResults([]);
 
     geoip.getZipCodeByIp(props.userIp).then(geoipRes => {
       let zip = '97201';
@@ -63,14 +57,12 @@ function Plants(props) {
           const minTemp = res.data.temperature_range.split(' ')[0];
           Trefle.getPlantsByMinTemp(minTemp)
             .then((trefleRes) => {
-              setSearchResults(trefleRes.data);
+              props.setSearchResults(trefleRes.data);
               setShowSpinner(false);
               props.setUserZip(zip);
             });
         });
     });
-
-    
   }
 
   function GetPlantsByName(event) {
@@ -78,7 +70,7 @@ function Plants(props) {
     setShowSpinner(true);
     Trefle.getPlantsByName(searchPlants)
       .then((res) => {
-        setSearchResults(res.data);
+        props.setSearchResults(res.data);
         setShowSpinner(false);
       });
   }
@@ -88,12 +80,18 @@ function Plants(props) {
     borderRadius: '10px',
     textAlign: 'center',
     boxShadow: '0px 5px 5px 3px #F3969A',
-    paddingBottom: '10px',
+    padding: '10px 1px 15px 1px',
   };
 
   const styleLi = {
     marginBottom: '100px',
   };
+  
+  const styleInput = {
+    maxWidth: "75%", 
+    marginLeft: "10%",
+    border: "1px solid #78C2AD"
+  }
 
   return (
     <Container fluid>
@@ -108,15 +106,15 @@ function Plants(props) {
           <Tabs defaultActiveKey="Get Suggestions">
             {/* Get Plant Suggestions */}
             <Tab eventKey="Get Suggestions" title="Get Suggestions">
-            <p>Click the Button to Get Suggestions!</p>
+            <p style={{paddingTop: "10px"}}>Click the Button to Get Suggestions!</p>
                 <Button onClick={loadSuggestions}>Get Suggestions</Button>
             </Tab>
 
             {/* Search By Name */}
             <Tab eventKey="Search By Name" title="Search By Name">
-              <p>If you&apos;d like to search for a plant by name, you can search here.</p>
-                <Input onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
-                <Button onClick={GetPlantsByName}>Get Plants By Name</Button>
+              <p style={{paddingTop: "10px", color: "#5a5a5"}}>If you&apos;d like to search for a plant by name, you can search here:</p>
+                <Input style={styleInput} onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
+                <Button disabled={!searchPlants} onClick={GetPlantsByName}>Get Plants By Name</Button>
             </Tab>
           </Tabs>
         </div>
@@ -125,7 +123,7 @@ function Plants(props) {
             userName={props.userName}
             userIp={props.userIp}
             userZip={props.userZip}
-            searchResults={searchResults}
+            searchResults={props.searchResults}
             loadActivityFeed={loadActivityFeed}
             loadFavorites={props.loadFavorites}
             setShowSpinner={setShowSpinner}

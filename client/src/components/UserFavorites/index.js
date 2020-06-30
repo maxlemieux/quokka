@@ -1,6 +1,5 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
 
-// import React, { useRef, useEffect } from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -9,14 +8,6 @@ import { List, ListItem } from '../List';
 import DeleteBtn from '../DeleteBtn';
 
 export default function UserFavorites({ deleteFavorite, favorites }) {
-  // const messagesEndRef = useRef(null);
-  // const scrollToBottom = () => {
-  //   if (messagesEndRef.current) {
-  //     messagesEndRef.current.scrollIntoView({behavior: "smooth"});
-  //   }
-  // }
-  /* This works well but needs a fixed height layout to avoid jarring the user */
-  // useEffect(scrollToBottom, [favorites]);
   const image = {url:"https://via.placeholder.com/300/d3d3d3/000000?text=No%20image%20available"}
   if (favorites.length) {
     return (
@@ -39,7 +30,6 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
             }
           </ListItem>
         ))}
-        {/* <div ref={messagesEndRef} /> */}
       </List>
     );
   }

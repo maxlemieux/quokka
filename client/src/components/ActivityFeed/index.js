@@ -7,8 +7,6 @@ import { Col, Row, Container } from '../Grid'
 import { List, ListItem } from '../List';
 
 export default function ActivityFeed(props) {
-  console.log(props)
-
   const image = {url:"https://via.placeholder.com/300/d3d3d3/000000?text=No%20image%20available"}
   return (
     <List>
@@ -17,14 +15,10 @@ export default function ActivityFeed(props) {
                 <Container fluid>
                   <Row>
                     <Col size="md-6" >
-                      
-                      {favorite.images[0] && <img width='50%' src={ favorite.images[0].url }  alt={favorite.scientific_name} />
-                        ?favorite.images[0] && <img width='50%' src={ favorite.images[0].url }  alt={favorite.scientific_name}/> 
-                        :image && <img width='50%' src ={image.url} alt ={"tex"} />
+                      {favorite.images[0] && <img width='100%' src={ favorite.images[0].url }  alt={favorite.scientific_name} />
+                        ?favorite.images[0] && <img width='100%' src={ favorite.images[0].url }  alt={favorite.scientific_name}/> 
+                        :image && <img width='100%' src ={image.url} alt ={"tex"} />
                       }
-                        
-                        
-                      
                     </Col>
                     <Col size="md-6">
                     {favorite.user_name} quokked {favorite.common_name

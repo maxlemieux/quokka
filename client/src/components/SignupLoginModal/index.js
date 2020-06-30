@@ -35,6 +35,7 @@ const SignUpLoginForm = (props) => {
       .post('/api/auth/register_login', userData)
       .then((res) => {
         props.setUserName(res.data.email);
+        props.setSearchResults([]);
       })
       .catch((err) => err);
   };
