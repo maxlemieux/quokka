@@ -22,7 +22,7 @@ const Footer = () => {
   };
   return (
     <div style={styleFooter}>
-      <p style={styleP}>Quokka (c) 2020 by Andy J Chen, Ian Johnson, Max Lemieux. Built with <a style={styleA} href="https://trefle.io">Trefle</a></p>
+      <p style={styleP}>Quokka (c) 2020 by Andy J Chen, Ian Johnson, Max Lemieux. Built with <a style={styleA} href="https://trefle.io">Trefle</a> and <a style={styleA} href="https://github.com/waldoj/frostline">Frostline</a></p>
       <p style={styleP}>This product includes GeoLite2 data created by MaxMind, available from <a style={styleA} href="https://www.maxmind.com">https://www.maxmind.com</a></p>
     </div>
   );
