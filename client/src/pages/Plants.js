@@ -20,7 +20,7 @@ function Plants(props) {
   // const [plants, setPlants] = useState([]);
   const [activityData, setActivityData] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
-  const [searchPlants, setSearchPlants] = useState([]);
+  const [searchPlants, setSearchPlants] = useState('');
   const [showSpinner, setShowSpinner] = useState(false);
 
   function loadActivityFeed() {
@@ -116,7 +116,7 @@ function Plants(props) {
             <Tab eventKey="Search By Name" title="Search By Name">
               <p style={{paddingTop: "10px", color: "#5a5a5"}}>If you&apos;d like to search for a plant by name, you can search here:</p>
                 <Input style={styleInput} onChange={handleSearchChange} name="searchName" placeholder="Search by Name" />
-                <Button onClick={GetPlantsByName}>Get Plants By Name</Button>
+                <Button disabled={!searchPlants} onClick={GetPlantsByName}>Get Plants By Name</Button>
             </Tab>
           </Tabs>
         </div>
