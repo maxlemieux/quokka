@@ -17,7 +17,7 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
   // }
   /* This works well but needs a fixed height layout to avoid jarring the user */
   // useEffect(scrollToBottom, [favorites]);
-
+  const image = {url:"http://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg"}
   if (favorites.length) {
     return (
       <List>
@@ -33,8 +33,10 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
               </p>
             <DeleteBtn onClick={() => deleteFavorite(favorite._id)} />
             <br />
-            {favorite.images[0]
-              && <img width="300px" src={favorite.images[0].url} alt={favorite.scientific_name} />}
+            {favorite.images[0] && <img width='50%' src={ favorite.images[0].url }  alt={favorite.scientific_name} />
+              ?favorite.images[0] && <img width='50%' src={ favorite.images[0].url }  alt={favorite.scientific_name}/> 
+              :image && <img width='50%' src ={image.url} alt ={"tex"} />
+            }
           </ListItem>
         ))}
         {/* <div ref={messagesEndRef} /> */}
