@@ -9,7 +9,7 @@ import { List, ListItem } from '../List';
 export default function ActivityFeed(props) {
   console.log(props)
 
-  const image = {url:"http://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg"}
+  const image = {url:"https://via.placeholder.com/300/d3d3d3/000000?text=No%20image%20available"}
   return (
     <List>
         {props.data.map((favorite) => (

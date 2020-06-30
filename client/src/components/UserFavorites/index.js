@@ -17,7 +17,7 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
   // }
   /* This works well but needs a fixed height layout to avoid jarring the user */
   // useEffect(scrollToBottom, [favorites]);
-  const image = {url:"http://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg"}
+  const image = {url:"https://via.placeholder.com/300/d3d3d3/000000?text=No%20image%20available"}
   if (favorites.length) {
     return (
       <List>
