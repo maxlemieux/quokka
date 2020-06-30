@@ -64,6 +64,6 @@ Frostline API by Waldo Jaquith
 
 Quokka brand image by Ian Johnson
 
-Plant loading animation by [https://twitter.com/mahdif](Mahdi Farra)
+Plant loading animation by [Mahdi Farra](https://twitter.com/mahdif)
 
 https://dribbble.com/shots/4007400-Cheerful-loading-animation
