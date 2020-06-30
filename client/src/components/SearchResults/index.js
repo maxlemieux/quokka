@@ -3,18 +3,16 @@ import PropTypes from 'prop-types';
 
 import './style.css';
 import { List, ListItem } from '../List';
+import Spinner from '../Spinner';
 import API from '../../utils/API';
-// import { Spinner } from 'react-bootstrap';
-// import ReactSpinner from 'react-bootstrap-spinner';
 
 export function SearchResults(props) {
   return (
     <>
     {props.showSpinner
-        && <div>
-          {/* <ReactSpinner type='border' color='primary' size='5' /> */}
-          <p>Loading...</p>
-        </div>
+      && <div>
+        <Spinner />
+      </div>
     }
     {props.searchResults[0]
         && <div className='list-overflow-container' style={{paddingTop: '20px', marginTop: '30px'}}>  

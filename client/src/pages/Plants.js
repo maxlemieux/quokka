@@ -33,11 +33,6 @@ function Plants(props) {
     loadActivityFeed();
   }, []);
 
-  /* Run the automatic plant suggestion code on component render */
-  useEffect(() => {
-    // loadSuggestions()
-  });
-
   function deletePlant(id) {
     API.deletePlant(id)
       .then(() => props.loadFavorites())
