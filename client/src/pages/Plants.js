@@ -47,6 +47,7 @@ function Plants(props) {
   function loadSuggestions(event) {
     event.preventDefault();
     setShowSpinner(true);
+    setSearchResults([]);
 
     geoip.getZipCodeByIp(props.userIp).then(geoipRes => {
       let zip = '97201';
@@ -64,8 +65,6 @@ function Plants(props) {
             });
         });
     });
-
-    
   }
 
   function GetPlantsByName(event) {
