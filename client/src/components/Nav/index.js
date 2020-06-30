@@ -41,7 +41,7 @@ const Nav = (props) => {
 
       <div style={styleLogin}>
       <p>Welcome, <b>{props.userName}</b></p>
-      <SignupLoginModal show={show} setShow={setShow} setUserName={props.setUserName} />
+      <SignupLoginModal show={show} setShow={setShow} setSearchResults={props.setSearchResults} setUserName={props.setUserName} />
       {props.userName === 'guest'
         && <button onClick={() => setShow(true)}>Login</button>
       }
