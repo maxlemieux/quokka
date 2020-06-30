@@ -3,9 +3,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
-import { Col, Row, Container } from '../Grid';
+import { Col, Row, Container } from '../Grid'
+
 
 export default function ActivityFeed(props) {
+  console.log(props)
+
+  const image = {url:"http://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg"}
   return (
     <div>
       <ul>
@@ -13,9 +17,15 @@ export default function ActivityFeed(props) {
           <li className='list-overflow-container' key={favorite._id}>
                 <Container fluid>
                   <Row>
-                  {/* What should I plant column */}
-                    <Col size="md-6">
-                      {favorite.images[0] && <img width='50%' src={favorite.images[0].url} alt={favorite.scientific_name} />}
+                    <Col size="md-6" >
+                      
+                      {favorite.images[0] && <img width='50%' src={ favorite.images[0].url }  alt={favorite.scientific_name} />
+                        ?favorite.images[0] && <img width='50%' src={ favorite.images[0].url }  alt={favorite.scientific_name}/> 
+                        :image && <img width='50%' src ={image.url} alt ={"tex"} />
+                      }
+                        
+                        
+                      
                     </Col>
                     <Col size="md-6">
                     {favorite.user_name} quokked {favorite.common_name
