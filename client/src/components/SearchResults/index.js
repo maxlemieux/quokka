@@ -84,7 +84,7 @@ export function Result(props) {
           Scientific Name: {props.result.scientific_name}
         </ListItem>
       </List>
-      <i className="fa fa-leaf" style={{color: "green", padding: "2px"}}icon="leaf"></i>
+      <i className="fa fa-leaf" style={{color: "green", padding: "5px"}}icon="leaf"></i>
       {!isFavorite
         && <button onClick={() => savePlant(props.result.id)}>Save to Favs</button>
       }
