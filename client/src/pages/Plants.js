@@ -45,7 +45,7 @@ function Plants(props) {
   function loadSuggestions(event) {
     event.preventDefault();
     setShowSpinner(true);
-    props.setSearchResults('');
+    props.setSearchResults([]);
 
     geoip.getZipCodeByIp(props.userIp).then(geoipRes => {
       let zip = '97201';

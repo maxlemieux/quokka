@@ -53,7 +53,7 @@ const Nav = (props) => {
                 .then(
                   () => {
                     props.setUserName('guest');
-                    props.setSearchResults('');
+                    props.setSearchResults([]);
                   }
                 )}
           }
