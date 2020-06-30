@@ -1,4 +1,4 @@
-# Cangaroo
+# quokka
 ![dependencies status](https://img.shields.io/david/cwalker226/Cangaroo?style=for-the-badge)
 ![code size](https://img.shields.io/github/languages/code-size/cwalker226/Cangaroo?style=for-the-badge)
 
@@ -49,6 +49,9 @@ Development wireframe showing recommendation feed and activity feed.
 https://wireframe.cc/um07sr
 
 ## Credits
+
+Authors: Andy J Chen, Ian Johnson, Max Lemieux
+
 This project would not be possible without the following building blocks:
 
 Trefle API
@@ -58,6 +61,8 @@ Trefle API
 Frostline API by Waldo Jaquith
 
 [https://github.com/waldoj/frostline](https://github.com/waldoj/frostline)
+
+Quokka brand image by Ian Johnson
 
 Plant loading animation by [https://twitter.com/mahdif](Mahdi Farra)
 
