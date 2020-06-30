@@ -1,10 +1,44 @@
-# quokka
+# Cangaroo
+![dependencies status](https://img.shields.io/david/cwalker226/Cangaroo?style=for-the-badge)
+![code size](https://img.shields.io/github/languages/code-size/cwalker226/Cangaroo?style=for-the-badge)
+
+## Table of Contents
+* [About](#about)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Demo](#demo)
+* [Technologies](#technologies)
+* [Credits](#credits)
+* [Wireframe](#wireframe)
+
+## About
 Project 3 "Quokka"
 
 Social Gardening
 
 Enjoy garden planting recommendations from Quokka.
 
+## Installation
+
+### Get the app
+
+Clone the repo:
+
+`git clone https://github.com/maxlemieux/quokka`
+
+Install dependencies:
+
+`cd quokka`
+
+`npm i`
+
+## Usage
+
+Start the server:
+
+`npm start`
+
+Load the app at [http://localhost:3000](http://localhost:3000).
 
 ## Demo
 https://boiling-peak-23377.herokuapp.com/
@@ -15,6 +49,16 @@ Development wireframe showing recommendation feed and activity feed.
 https://wireframe.cc/um07sr
 
 ## Credits
-Plant loading animation
+This project would not be possible without the following building blocks:
+
+Trefle API
+
+[https://trefle.io/](https://trefle.io/)
+
+Frostline API by Waldo Jaquith
+
+[https://github.com/waldoj/frostline](https://github.com/waldoj/frostline)
+
+Plant loading animation by [https://twitter.com/mahdif](Mahdi Farra)
 
 https://dribbble.com/shots/4007400-Cheerful-loading-animation
