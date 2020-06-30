@@ -68,6 +68,7 @@ Authors: Andy J Chen, Ian Johnson, Max Lemieux
 This project would not be possible without the following building blocks:
 
 * Trefle API - [https://trefle.io/](https://trefle.io/)
+* PRISM plant hardiness zones dataset [https://prism.oregonstate.edu/projects/plant_hardiness_zones.php](https://prism.oregonstate.edu/projects/plant_hardiness_zones.php)
 * Frostline API by Waldo Jaquith - [https://github.com/waldoj/frostline](https://github.com/waldoj/frostline)
 * Quokka brand image by Ian Johnson
 * Plant loading animation by [Mahdi Farra](https://twitter.com/mahdif) - https://dribbble.com/shots/4007400-Cheerful-loading-animation
