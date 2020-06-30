@@ -50,6 +50,7 @@ https://boiling-peak-23377.herokuapp.com/
 ## Technologies
 * Trefle.io API
 * Frostline API
+* GeoIP location database
 * React.js
 * React State Hooks
 * react-bootstrap
