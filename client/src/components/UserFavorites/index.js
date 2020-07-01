@@ -14,6 +14,7 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
       <List>
         {favorites.map((favorite) => (
           <ListItem key={favorite.trefle_id}>
+<DeleteBtn onClick={() => deleteFavorite(favorite._id)} />
               <p>
                 <strong>
                 {favorite.common_name}
@@ -22,7 +23,6 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
               <p>
                 {favorite.scientific_name}
               </p>
-            <DeleteBtn onClick={() => deleteFavorite(favorite._id)} />
             <br />
             {favorite.images[0]
               && <img width='50%' src={ favorite.images[0].url } alt={favorite.scientific_name} />
