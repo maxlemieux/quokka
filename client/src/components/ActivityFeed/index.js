@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import './style.css';
 import { Col, Row, Container } from '../Grid';
 import { List, ListItem } from '../List';
+import UserFavorites from '../UserFavorites';
 
 export default function ActivityFeed(props) {
   const image = { url: 'https://via.placeholder.com/300/d3d3d3/000000?text=No%20image%20available' };

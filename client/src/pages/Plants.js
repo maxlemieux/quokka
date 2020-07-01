@@ -72,11 +72,19 @@ function Plants(props) {
     setShowSpinner(true);
     props.setSearchResults([]);
 
-    Trefle.getPlantsByName(searchPlants)
-      .then((res) => {
-        props.setSearchResults(res.data);
-        setShowSpinner(false);
-      });
+    geoip.getZipCodeByIp(props.userIp).then((geoipRes) => {
+      let zip = '97201';
+      if (geoipRes.data) {
+        zip = geoipRes.data.postal.code;
+      }
+      props.setUserZip(zip);
+
+      Trefle.getPlantsByName(searchPlants)
+        .then((res) => {
+          props.setSearchResults(res.data);
+          setShowSpinner(false);
+        });
+    });
   }
 
   const styleTabs = {
