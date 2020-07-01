@@ -24,14 +24,13 @@ const Nav = (props) => {
     marginBottom: '30px',
   };
   const styleLogin = {
-    position: 'absolute',
-    left: '85%',
-    textAlign: 'center',
+    // position: 'absolute',
+    // left: '80%',
   };
 
   return (
     <nav
-      className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top"
+      className="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between sticky-top"
       style= {navStyle}
       >
       <a className="navbar-brand" href="/"><img src="../img/quokka-logo.png" alt="logo"style={imgStyle}
@@ -40,7 +39,7 @@ const Nav = (props) => {
       </a>
 
       <div style={styleLogin}>
-      <p>Welcome, <b>{props.userName}</b></p>
+      <p>Welcome, <b>{props.userName}</b>&nbsp;
       <SignupLoginModal
         show={show}
         setShow={setShow}
@@ -64,7 +63,7 @@ const Nav = (props) => {
             }
           }
         >Logout</button>
-      }
+      }</p>
       </div>
     </nav>
   );
