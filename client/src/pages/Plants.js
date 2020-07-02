@@ -29,8 +29,11 @@ function Plants(props) {
   }
 
   useEffect(() => {
-    loadActivityFeed();
-  }, []);
+    const timer = setTimeout(() => {
+      loadActivityFeed()
+    }, 1000);
+    return () => clearTimeout(timer);
+  });  
 
   function deletePlant(id) {
     API.deletePlant(id)
