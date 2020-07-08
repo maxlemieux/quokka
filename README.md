@@ -1,4 +1,4 @@
-# quokka
+# quokka - social gardening
 ![dependencies status](https://img.shields.io/david/cwalker226/Cangaroo?style=for-the-badge)
 ![code size](https://img.shields.io/github/languages/code-size/cwalker226/Cangaroo?style=for-the-badge)
 
