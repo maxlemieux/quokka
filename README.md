@@ -45,7 +45,7 @@ Click "Get Suggestions" to load a list of suggestions based on your plant hardin
 Save a result to your favorites list, remove a favorite, or view the current favorites activity feed for the site on the right side.
 
 ## Demo
-https://boiling-peak-23377.herokuapp.com/
+https://quokka-social-gardening.herokuapp.com/
 
 ## Technologies
 * Trefle.io API
