@@ -31,7 +31,7 @@ function Plants(props) {
   useEffect(() => {
     const timer = setTimeout(() => {
       loadActivityFeed()
-    }, 1000);
+    }, 2000);
     return () => clearTimeout(timer);
   });  
 
