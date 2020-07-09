@@ -121,7 +121,7 @@ function Plants(props) {
           <Tabs defaultActiveKey="Get Suggestions">
             {/* Get Plant Suggestions */}
             <Tab eventKey="Get Suggestions" title="Get Suggestions">
-            <p style={{ paddingTop: '10px' }}>Click the Button to Get Suggestions!</p>
+            <p style={{ paddingTop: '10px' }}>Quokka finds the local minimum temperature for your area, then searches a database of over 800,000 species for matches! Never lose a plant to frost again - click the button below to get suggestions for your area.</p>
                 <Button onClick={loadSuggestions}>Get Suggestions</Button>
             </Tab>
 
