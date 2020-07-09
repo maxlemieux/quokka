@@ -166,7 +166,7 @@ function Plants(props) {
 
       <Col size="md-3">
         <Jumbotron>
-          <h1>Fav Live Feed</h1>
+          <h1>Live Feed</h1>
         </Jumbotron>
 
         <ActivityFeed data={activityData}/>
