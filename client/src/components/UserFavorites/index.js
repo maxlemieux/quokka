@@ -25,9 +25,9 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
               </p>
             <br />
             {favorite.images[0]
-              && <img width='50%' src={ favorite.images[0].url } alt={favorite.scientific_name} />
+              && <img width='50%' src={ favorite.images[0] } alt={favorite.scientific_name} />
               ? favorite.images[0]
-                && <img width='50%' src={ favorite.images[0].url } alt={favorite.scientific_name} />
+                && <img width='50%' src={ favorite.images[0]} alt={favorite.scientific_name} />
               : image
                 && <img width='50%' src ={image.url} alt={favorite.scientific_name} />
             }

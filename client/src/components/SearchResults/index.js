@@ -60,6 +60,8 @@ export function Result(props) {
         res.data.ip = props.userIp;
         res.data.user_zip = props.userZip;
         res.data.trefle_id = res.data.id;
+        res.data.images=[res.data.image_url]
+        console.log(res.data.images)
         API.savePlant(res.data)
           .then(() => {
             props.loadFavorites();
