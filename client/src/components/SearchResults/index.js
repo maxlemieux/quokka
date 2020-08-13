@@ -60,6 +60,8 @@ export function Result(props) {
         res.data.ip = props.userIp;
         res.data.user_zip = props.userZip;
         res.data.trefle_id = res.data.id;
+        res.data.images=[res.data.image_url]
+        //console.log(res.data.images)
         API.savePlant(res.data)
           .then(() => {
             props.loadFavorites();
@@ -93,11 +95,11 @@ export function Result(props) {
             className="fa fa-leaf"
             style={{ color: 'green', padding: '5px' }}
             icon="leaf"
-          > Save to Favs</i>
+          > Put Plant on View List</i>
         </button>
       }
       {isFavorite
-        && <strong>Favorite! This plant is on your list.</strong>
+        && <strong>Currently Viewing Plant.</strong>
       }
       </div>
       </List>

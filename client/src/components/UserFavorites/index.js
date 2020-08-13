@@ -14,20 +14,20 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
       <List>
         {favorites.map((favorite) => (
           <ListItem key={favorite.trefle_id}>
-<DeleteBtn onClick={() => deleteFavorite(favorite._id)} />
+          <DeleteBtn onClick={() => deleteFavorite(favorite._id)} />
               <p>
                 <strong>
                 {favorite.common_name}
-              </strong>
+                </strong>
               </p>
               <p>
                 {favorite.scientific_name}
               </p>
             <br />
             {favorite.images[0]
-              && <img width='50%' src={ favorite.images[0].url } alt={favorite.scientific_name} />
+              && <img width='50%' src={ favorite.images[0] } alt={favorite.scientific_name} />
               ? favorite.images[0]
-                && <img width='50%' src={ favorite.images[0].url } alt={favorite.scientific_name} />
+                && <img width='50%' src={ favorite.images[0]} alt={favorite.scientific_name} />
               : image
                 && <img width='50%' src ={image.url} alt={favorite.scientific_name} />
             }
