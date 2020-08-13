@@ -93,11 +93,11 @@ export function Result(props) {
             className="fa fa-leaf"
             style={{ color: 'green', padding: '5px' }}
             icon="leaf"
-          > Save to Favs</i>
+          > Put Plant on View List</i>
         </button>
       }
       {isFavorite
-        && <strong>Favorite! This plant is on your list.</strong>
+        && <strong>Currently Viewing Plant.</strong>
       }
       </div>
       </List>

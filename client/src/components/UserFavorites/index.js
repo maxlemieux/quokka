@@ -14,11 +14,11 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
       <List>
         {favorites.map((favorite) => (
           <ListItem key={favorite.trefle_id}>
-<DeleteBtn onClick={() => deleteFavorite(favorite._id)} />
+          <DeleteBtn onClick={() => deleteFavorite(favorite._id)} />
               <p>
                 <strong>
                 {favorite.common_name}
-              </strong>
+                </strong>
               </p>
               <p>
                 {favorite.scientific_name}

@@ -3,9 +3,10 @@ const router = require('express').Router();
 
 router.route('/species/:plantId')
   .get((req, res) => {
-    axios.get(`https://v0.trefle.io/api/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
+    // axios.get(`https://v0.trefle.io/api/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
+    axios.get(`https://trefle.io/api/v1/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
       .then((response) => {
-        res.json(response.data);
+        res.json(response.data.data);
       })
       .catch((err) => {
         console.log('backend axios error getting trefle data');
