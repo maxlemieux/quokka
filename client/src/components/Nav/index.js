@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import SignupLoginModal from '../SignupLoginModal';
+import LoginModal from '../LoginModal';
+import SignUpModal from '../SignUpModal';
 
 const Nav = (props) => {
   const [show, setShow] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
 
   const imgStyle = {
     width: '65px',
@@ -46,8 +50,20 @@ const Nav = (props) => {
         setSearchResults={props.setSearchResults}
         setUserName={props.setUserName}
       />
+      <SignUpModal
+        show={showSignUp}
+        setShow={setShowSignUp}
+        setSearchResults={props.setSearchResults}
+        setUserName={props.setUserName}
+      />
+      <LoginModal
+        show={showLogin}
+        setShow={setShowLogin}
+        setSearchResults={props.setSearchResults}
+        setUserName={props.setUserName}
+      />
       {props.userName === 'guest'
-        && <button onClick={() => setShow(true)}>Login</button>
+        && <button onClick={() => setShowLogin(true)}>Login</button>
       }
       {props.userName !== 'guest'
         && <button
@@ -63,7 +79,11 @@ const Nav = (props) => {
             }
           }
         >Logout</button>
-      }</p>
+      }
+      {props.userName === 'guest'
+        && <>or <button onClick={() => setShowSignUp(true)}>Sign Up</button></>
+      }
+      </p>
       </div>
     </nav>
   );
