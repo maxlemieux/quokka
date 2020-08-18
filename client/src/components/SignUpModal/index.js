@@ -23,6 +23,7 @@ import {
 const SignUpForm = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [newsletter, setNewsletter] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -30,10 +31,12 @@ const SignUpForm = (props) => {
     const userData = {
       email,
       password,
+      newsletter,
     };
     axios
-      .post('/api/auth/register_login', userData)
+      .post('/api/auth/register', userData)
       .then((res) => {
+        console.log(res)
         props.setUserName(res.data.email);
         props.setSearchResults([]);
       })

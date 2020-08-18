@@ -32,7 +32,7 @@ const LoginForm = (props) => {
       password,
     };
     axios
-      .post('/api/auth/register_login', userData)
+      .post('/api/auth/login', userData)
       .then((res) => {
         props.setUserName(res.data.email);
         props.setSearchResults([]);
