@@ -34,10 +34,19 @@ const LoginForm = (props) => {
     axios
       .post('/api/auth/login', userData)
       .then((res) => {
+        if(res.status===200){
+          //props.setShow(false);
+        }
         props.setUserName(res.data.email);
+        //console.log(typeof res.status)
         props.setSearchResults([]);
+        
       })
-      .catch((err) => err);
+      .catch((err) =>{
+        console.log(err);
+        return err;
+        
+      });
   };
 
   return (
@@ -77,22 +86,9 @@ const LoginForm = (props) => {
                     </Col>
                 </Row>
             </Form.Group>
-            <Form.Group controlId="formBasicCheckbox">
-                <Row>
-                    <Col xs="2" sm="1">
-                        <Form.Check type="checkbox" />
-                    </Col>
-                    <Col xs="10" sm="11">
-                        <Form.Label>
-                            <MutedSpan>
-                                Yes, please send me occasional updates about the app
-                            </MutedSpan>
-                        </Form.Label>
-                    </Col>
-                </Row>
-            </Form.Group>
             <VerticalCenterWrapper>
-                <SubmitButton onClick={() => props.setShow(false)} type="submit">Submit</SubmitButton>
+              <SubmitButton onClick={() => props.setShow(false)} type="submit">Submit</SubmitButton>
+                {/* <SubmitButton type="submit">Submit</SubmitButton> */}
             </VerticalCenterWrapper>
         </Form>
   );
@@ -113,7 +109,7 @@ const LoginModal = (props) => {
         <PaddedContainer>
             <ResponsiveHeader4>With email:</ResponsiveHeader4>
             <br />
-            <LoginForm setUserName={props.setUserName} setShow={props.setShow} />
+            <LoginForm setUserName={props.setUserName}  setShow={props.setShow} />
             <Row style={{ borderBottom: '1px solid #dee2e6' }} />
         </PaddedContainer>
     </Modal>
@@ -123,6 +119,7 @@ LoginModal.propTypes = {
   show: PropTypes.bool,
   setShow: PropTypes.func,
   setUserName: PropTypes.func,
+  setSearchResult: PropTypes.func,
 };
 
 export default LoginModal;
