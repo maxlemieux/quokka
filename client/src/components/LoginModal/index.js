@@ -15,7 +15,6 @@ import {
   EmailSymbol,
   PasswordSymbol,
   ResponsiveHeader4,
-  MutedSpan,
   VerticalCenterWrapper,
   SubmitButton,
 } from './styles';
@@ -114,8 +113,9 @@ const LoginModal = (props) => {
         <PaddedContainer>
             <ResponsiveHeader4>With email:</ResponsiveHeader4>
             <br />
-            <LoginForm setUserName={props.setUserName}  setShow={props.setShow} />
+            <LoginForm setUserName={props.setUserName} setShow={props.setShow} />
             {/* Show errors on login here */}
+            <p id='loginErrors'></p>
         </PaddedContainer>
     </Modal>
   );

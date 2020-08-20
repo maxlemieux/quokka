@@ -121,6 +121,7 @@ const SignUpModal = (props) => {
             <ResponsiveHeader4>With email:</ResponsiveHeader4>
             <br />
             <SignUpForm setUserName={props.setUserName} setShow={props.setShow} />
+            <p id='signUpErrors'></p>
             {/* Sign Up errors go here */}
         </PaddedContainer>
     </Modal>
