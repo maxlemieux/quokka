@@ -34,11 +34,32 @@ router.get('/user_data', (req, res) => {
   }
 });
 
-router.post('/register_login', (req, res, next) => {
+router.post('/register', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) {
       return res.status(400).json({ errors: err });
     }
+    if (!user) {
+      return res.status(400).json({ errors: 'No user found' });
+    }
+    req.logIn(user, (logInErr) => {
+      if (logInErr) {
+        // this code runs if email is in database and password is wrong
+        return res.status(400).json({ errors: "Couldn't login with this email. Please try again." });
+      }
+      return res.status(200).json({ email: user.email });
+    });
+    
+  })(req, res, next);
+});
+
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    
+    if (err) {
+      return res.status(400).json({ errors: err });
+    }
+    
     if (!user) {
       return res.status(400).json({ errors: 'No user found' });
     }
