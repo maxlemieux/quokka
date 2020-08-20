@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import SignupLoginModal from '../SignupLoginModal';
+// import SignupLoginModal from '../SignupLoginModal';
 import LoginModal from '../LoginModal';
 import SignUpModal from '../SignUpModal';
 
 const Nav = (props) => {
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
 
