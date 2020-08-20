@@ -44,12 +44,12 @@ const Nav = (props) => {
 
       <div style={styleLogin}>
       <p>Welcome, <b>{props.userName}</b>&nbsp;
-      <SignupLoginModal
+      {/* <SignupLoginModal
         show={show}
         setShow={setShow}
         setSearchResults={props.setSearchResults}
         setUserName={props.setUserName}
-      />
+      /> */}
       <SignUpModal
         show={showSignUp}
         setShow={setShowSignUp}

@@ -22,6 +22,7 @@ import {
 const LoginForm = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -36,18 +37,15 @@ const LoginForm = (props) => {
         if (res.status === 200) {
           props.setShow(false);
         }
-
-        if (res.status === 400) {
-          console.log(res.status)
-        }
-
         props.setUserName(res.data.email);
-        //console.log(typeof res.status)
-        // props.setSearchResults([]);
+        props.setSearchResults([]);
         
       })
       .catch((err) =>{
-        console.log(err);
+        // console.log(err);
+        // Use state hook to set error message here
+        setLoginError('Oops, something was wrong with that password. Try again');
+
         return err;
         
       });
@@ -91,9 +89,10 @@ const LoginForm = (props) => {
                 </Row>
             </Form.Group>
             <VerticalCenterWrapper>
-              {/* <SubmitButton onClick={() => props.setShow(false)} type="submit">Submit</SubmitButton> */}
               <SubmitButton type="submit">Submit</SubmitButton>
+              {/* Show errors on login here */}
             </VerticalCenterWrapper>
+            <Form.Text id='loginErrors' className="text-muted">{loginError}</Form.Text>
         </Form>
   );
 };
@@ -114,8 +113,6 @@ const LoginModal = (props) => {
             <ResponsiveHeader4>With email:</ResponsiveHeader4>
             <br />
             <LoginForm setUserName={props.setUserName} setShow={props.setShow} />
-            {/* Show errors on login here */}
-            <p id='loginErrors'></p>
         </PaddedContainer>
     </Modal>
   );
