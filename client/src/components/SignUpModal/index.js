@@ -24,7 +24,7 @@ const SignUpForm = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newsletter, setNewsletter] = useState(false);
-
+  const [signUpError, setSignUpError] = useState('');
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -36,12 +36,18 @@ const SignUpForm = (props) => {
     axios
       .post('/api/auth/register', userData)
       .then((res) => {
-        console.log(res)
+        if (res.status === 200) {
+          props.setShow(false);
+        }
+      
         props.setUserName(res.data.email);
         props.setNewsletter(res.data.newsletter);
         props.setSearchResults([]);
       })
-      .catch((err) => err);
+      .catch((err,res) => {
+        //setSignUpError(err.response.data.errors);
+        return err;
+      })
   };
 
   return (
@@ -99,8 +105,10 @@ const SignUpForm = (props) => {
                 </Row>
             </Form.Group>
             <VerticalCenterWrapper>
-                <SubmitButton onClick={() => props.setShow(false)} type="submit">Submit</SubmitButton>
+                <SubmitButton type="submit">Submit</SubmitButton>
             </VerticalCenterWrapper>
+            {/* Sign Up errors go here */}
+            <Form.Text id='signUpErrors' className="text-muted">{signUpError}</Form.Text>
         </Form>
   );
 };
@@ -122,7 +130,7 @@ const SignUpModal = (props) => {
             <br />
             <SignUpForm setUserName={props.setUserName} setShow={props.setShow} />
             <p id='signUpErrors'></p>
-            {/* Sign Up errors go here */}
+            
         </PaddedContainer>
     </Modal>
   );

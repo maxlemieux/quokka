@@ -42,7 +42,7 @@ const LoginForm = (props) => {
         
       })
       .catch((err) =>{
-        // console.log(err);
+        console.log(err);
         // Use state hook to set error message here
         setLoginError('Oops, something was wrong with that password. Try again');
 
@@ -90,8 +90,9 @@ const LoginForm = (props) => {
             </Form.Group>
             <VerticalCenterWrapper>
               <SubmitButton type="submit">Submit</SubmitButton>
-              {/* Show errors on login here */}
+              
             </VerticalCenterWrapper>
+            {/* Show errors on login here */}
             <Form.Text id='loginErrors' className="text-muted">{loginError}</Form.Text>
         </Form>
   );
