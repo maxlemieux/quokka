@@ -34,12 +34,17 @@ const LoginForm = (props) => {
     axios
       .post('/api/auth/login', userData)
       .then((res) => {
-        if(res.status===200){
-          //props.setShow(false);
+        if (res.status === 200) {
+          props.setShow(false);
         }
+
+        if (res.status === 400) {
+          console.log(res.status)
+        }
+
         props.setUserName(res.data.email);
         //console.log(typeof res.status)
-        props.setSearchResults([]);
+        // props.setSearchResults([]);
         
       })
       .catch((err) =>{
@@ -87,8 +92,8 @@ const LoginForm = (props) => {
                 </Row>
             </Form.Group>
             <VerticalCenterWrapper>
-              <SubmitButton onClick={() => props.setShow(false)} type="submit">Submit</SubmitButton>
-                {/* <SubmitButton type="submit">Submit</SubmitButton> */}
+              {/* <SubmitButton onClick={() => props.setShow(false)} type="submit">Submit</SubmitButton> */}
+              <SubmitButton type="submit">Submit</SubmitButton>
             </VerticalCenterWrapper>
         </Form>
   );
@@ -110,7 +115,7 @@ const LoginModal = (props) => {
             <ResponsiveHeader4>With email:</ResponsiveHeader4>
             <br />
             <LoginForm setUserName={props.setUserName}  setShow={props.setShow} />
-            <Row style={{ borderBottom: '1px solid #dee2e6' }} />
+            {/* Show errors on login here */}
         </PaddedContainer>
     </Modal>
   );

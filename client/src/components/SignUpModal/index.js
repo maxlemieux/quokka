@@ -38,6 +38,7 @@ const SignUpForm = (props) => {
       .then((res) => {
         console.log(res)
         props.setUserName(res.data.email);
+        props.setNewsletter(res.data.newsletter);
         props.setSearchResults([]);
       })
       .catch((err) => err);
@@ -83,7 +84,10 @@ const SignUpForm = (props) => {
             <Form.Group controlId="formBasicCheckbox">
                 <Row>
                     <Col xs="2" sm="1">
-                        <Form.Check type="checkbox" />
+                        <Form.Check 
+                          type="checkbox"
+                          onChange={(e) => setNewsletter(e.target.value)}
+                          />
                     </Col>
                     <Col xs="10" sm="11">
                         <Form.Label>
@@ -117,7 +121,7 @@ const SignUpModal = (props) => {
             <ResponsiveHeader4>With email:</ResponsiveHeader4>
             <br />
             <SignUpForm setUserName={props.setUserName} setShow={props.setShow} />
-            <Row style={{ borderBottom: '1px solid #dee2e6' }} />
+            {/* Sign Up errors go here */}
         </PaddedContainer>
     </Modal>
   );
