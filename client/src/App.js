@@ -10,6 +10,9 @@ import API from './utils/API';
 
 import Plants from './pages/Plants';
 import NoMatch from './pages/NoMatch';
+import User from './pages/User';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 import Footer from './components/Footer';
 import Nav from './components/Nav';
 
@@ -55,7 +58,6 @@ function App() {
         searchResults={searchResults}
         setSearchResults={setSearchResults}
       />
-      <div>
         <Switch>
           <Route exact path="/">
             <Plants
@@ -69,14 +71,30 @@ function App() {
               setSearchResults={setSearchResults}
             />
           </Route>
+
+          <Route path="/signup">
+            <SignUp
+              setUserName={setUserName}
+            />
+          </Route>
+
+          <Route path="/login">
+            <Login
+              setUserName={setUserName}
+            />
+          </Route>
+
+          <Route exact path="/user">
+            <User />
+          </Route>
+
           <Route>
             <NoMatch />
           </Route>
         </Switch>
-      </div>
       <Footer />
     </BrowserRouter>
-  );
+);
 }
 
 export default App;

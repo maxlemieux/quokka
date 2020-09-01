@@ -159,7 +159,7 @@ function Plants(props) {
 
       <Col size="md-4 sm-12">
         <Jumbotron>
-          <h1>Plants On My List</h1>
+          <h1>My Garden</h1>
         </Jumbotron>
         <UserFavorites deleteFavorite={deletePlant} favorites={props.userFavorites} />
       </Col>

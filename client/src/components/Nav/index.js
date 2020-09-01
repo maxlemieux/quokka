@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-// import SignupLoginModal from '../SignupLoginModal';
-import LoginModal from '../LoginModal';
-import SignUpModal from '../SignUpModal';
-
+import { useHistory } from "react-router-dom";
 const Nav = (props) => {
-  // const [show, setShow] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
-  const [showSignUp, setShowSignUp] = useState(false);
-
+  const history = useHistory();
   const imgStyle = {
     width: '65px',
     height: '65px',
@@ -44,26 +38,8 @@ const Nav = (props) => {
 
       <div style={styleLogin}>
       <p>Welcome, <b>{props.userName}</b>&nbsp;
-      {/* <SignupLoginModal
-        show={show}
-        setShow={setShow}
-        setSearchResults={props.setSearchResults}
-        setUserName={props.setUserName}
-      /> */}
-      <SignUpModal
-        show={showSignUp}
-        setShow={setShowSignUp}
-        setSearchResults={props.setSearchResults}
-        setUserName={props.setUserName}
-      />
-      <LoginModal
-        show={showLogin}
-        setShow={setShowLogin}
-        setSearchResults={props.setSearchResults}
-        setUserName={props.setUserName}
-      />
       {props.userName === 'guest'
-        && <button onClick={() => setShowLogin(true)}>Login</button>
+        && <button onClick={() => history.push("/login")}>Login</button>
       }
       {props.userName !== 'guest'
         && <button
@@ -81,7 +57,7 @@ const Nav = (props) => {
         >Logout</button>
       }
       {props.userName === 'guest'
-        && <>or <button onClick={() => setShowSignUp(true)}>Sign Up</button></>
+        && <>or <button onClick={() => history.push("/signup")}>Sign Up</button></>
       }
       </p>
       </div>
