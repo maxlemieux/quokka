@@ -18,8 +18,6 @@ import {
   VerticalCenterWrapper,
   SubmitButton,
 } from '../components/SignUpModal/styles';
-import { Redirect } from 'react-router-dom';
-
 
 const SignUpForm = (props) => {
   const history = useHistory();
