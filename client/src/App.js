@@ -58,7 +58,6 @@ function App() {
         searchResults={searchResults}
         setSearchResults={setSearchResults}
       />
-      <div>
         <Switch>
           <Route exact path="/">
             <Plants
@@ -73,30 +72,29 @@ function App() {
             />
           </Route>
 
-          <Route>
-            <Login exact path="/login"
+          <Route path="/signup">
+            <SignUp
               setUserName={setUserName}
             />
           </Route>
 
-          <Route>
-            <SignUp exact path="/signup"
+          <Route path="/login">
+            <Login
               setUserName={setUserName}
             />
           </Route>
 
-          <Route>
-            <User exact path="/user"/>
+          <Route exact path="/user">
+            <User />
           </Route>
 
           <Route>
             <NoMatch />
           </Route>
         </Switch>
-      </div>
       <Footer />
     </BrowserRouter>
-  );
+);
 }
 
 export default App;
