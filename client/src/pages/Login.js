@@ -1,8 +1,7 @@
 /* eslint-disable arrow-body-style */
-import Jumbotron from '../components/Jumbotron';
 import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
 import {
-  Modal,
   Form,
   Col,
   Row,
@@ -20,6 +19,7 @@ import {
 } from '../components/LoginModal/styles';
 
 const LoginForm = (props) => {
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
@@ -36,7 +36,7 @@ const LoginForm = (props) => {
       .then((res) => {
 
         props.setUserName(res.data.email);
-        
+        history.push("/");
         
       })
       .catch((err) =>{

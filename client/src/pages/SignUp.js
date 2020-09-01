@@ -1,8 +1,7 @@
 /* eslint-disable arrow-body-style */
-
+import { useHistory } from "react-router-dom";
 import React, { useState } from 'react';
 import {
-  Modal,
   Form,
   Col,
   Row,
@@ -19,8 +18,11 @@ import {
   VerticalCenterWrapper,
   SubmitButton,
 } from '../components/SignUpModal/styles';
+import { Redirect } from 'react-router-dom';
+
 
 const SignUpForm = (props) => {
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newsletter, setNewsletter] = useState(false);
@@ -36,12 +38,9 @@ const SignUpForm = (props) => {
     axios
       .post('/api/auth/register', userData)
       .then((res) => {
-        if (res.status === 200) {
-          props.setShow(false);
-        }
-      
+        //console.log(res)
         props.setUserName(res.data.email);
-        props.setNewsletter(res.data.newsletter);
+        history.push("/");
       })
       .catch((err,res) => {
         //setSignUpError(err.response.data.errors);
@@ -119,9 +118,6 @@ SignUpForm.propTypes = {
 
 const SignUp = (props) => {
   return (
-    
-      
-        
         <PaddedContainer>
           <h1>Sign up</h1>
             <ResponsiveHeader4>With email:</ResponsiveHeader4>

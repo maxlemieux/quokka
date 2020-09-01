@@ -47,6 +47,7 @@ router.post('/register', (req, res, next) => {
         // this code runs if email is in database and password is wrong
         return res.status(400).json({ errors: "Couldn't login with this email. Please try again." });
       }
+    
       return res.status(200).json({ email: user.email });
     });
     
