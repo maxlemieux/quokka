@@ -80,7 +80,9 @@ function App() {
           </Route>
 
           <Route>
-            <SignUp exact path="/signup"/>
+            <SignUp exact path="/signup"
+              setUserName={setUserName}
+            />
           </Route>
 
           <Route>
