@@ -7,7 +7,7 @@ import { AiOutlineMail } from 'react-icons/ai';
 import { FiKey } from 'react-icons/fi';
 
 export const PaddedContainer = styled(Container)`
-    padding: 0 25px 25px 25px;
+    padding: 25px 25px 25px 25px;
 `;
 
 export const EmailSymbol = styled(AiOutlineMail)`
