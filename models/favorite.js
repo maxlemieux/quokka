@@ -1,0 +1,18 @@
+const mongoose = require('mongoose');
+const { string } = require('prop-types');
+
+const { Schema } = mongoose;
+
+const favoriteSchema = new Schema({
+  trefle_id: String,
+  user_name: {
+    type: String,
+  },
+  ip: String,
+  user_zip: String,
+  date: { type: Date, default: Date.now },
+});
+
+const Favorite = mongoose.model('Favorites', favoriteSchema);
+
+module.exports = Favorite;

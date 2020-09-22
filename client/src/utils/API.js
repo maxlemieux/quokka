@@ -5,6 +5,10 @@ export default {
   getPlants() {
     return axios.get('/api/plants');
   },
+  // Gets all favorites
+  getFavorites() {
+    return axios.get('/api/favorites');
+  },
   // Gets the plant with the given id
   getPlant(id) {
     return axios.get(`/api/plants/${id}`);

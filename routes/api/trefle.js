@@ -14,6 +14,19 @@ router.route('/species/:plantId')
       });
   });
 
+  // router.route('/plants/:plantId')
+  // .get((req, res) => {
+  //   // axios.get(`https://v0.trefle.io/api/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
+  //   axios.get(`https://trefle.io/api/v1/plants/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
+  //     .then((response) => {
+  //       res.json(response.data.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log('backend axios error getting trefle data');
+  //       res.status(err.response.status).send(err.response.statusText);
+  //     });
+  // });
+
 router.route('/temperature_minimum_deg_f/:minTemp')
   .get((req, res) => {
     // axios.get(`https://v0.trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&temperature_minimum_deg_f>${req.params.minTemp}`)
