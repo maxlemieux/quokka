@@ -24,7 +24,7 @@ const SignUpForm = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newsletter, setNewsletter] = useState(false);
-  const [signUpError, setSignUpError] = useState('');
+  //const [signUpError, setSignUpError] = useState('');
   const onSubmit = (e) => {
     e.preventDefault();
 
