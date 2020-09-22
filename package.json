@@ -27,6 +27,7 @@
     "@maxmind/geoip2-node": "^1.4.0",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
+    "bl": ">=2.2.1",
     "connect-mongo": "^3.2.0",
     "dot-prop": "^5.2.0",
     "dotenv": "^8.2.0",
