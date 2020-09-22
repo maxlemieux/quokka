@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useHistory } from "react-router-dom";
-import { AiFillExclamationCircle } from 'react-icons/ai';
+
 const Nav = (props) => {
   const history = useHistory();
   const imgStyle = {
