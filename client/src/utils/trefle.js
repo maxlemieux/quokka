@@ -7,4 +7,7 @@ export default {
   getPlantsByName(name) {
     return axios.get(`/api/trefle/name/${name}`);
   },
+  getPlantsByDistribution(zoneId) {
+    return axios.get(`/api/trefle/distributions/${zoneId}`);
+  },
 };

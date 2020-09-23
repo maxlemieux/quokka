@@ -41,6 +41,19 @@ router.route('/temperature_minimum_deg_f/:minTemp')
       });
   });
 
+router.route('/distributions/:zoneId')
+  .get((req, res) => {
+    axios.get(`https://trefle.io/api/v1/distributions/${req.params.zoneId}/plants?token=${process.env.REACT_APP_TREFLE}`)
+    .then((response) => {
+      res.json(response.data);
+    })
+    .catch((err) => {
+      console.log('backend axios error getting trefle data on tdwg zone ID');
+      console.log(err.response)
+      res.status(err.response.status).send(err.response.statusText);
+    });
+});
+
 router.route('/name/:name')
   .get((req, res) => {
     // axios.get(`https://v0.trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&q=${req.params.name}`)

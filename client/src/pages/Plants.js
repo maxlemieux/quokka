@@ -15,6 +15,7 @@ import API from '../utils/API';
 import Trefle from '../utils/trefle';
 import phzmapi from '../utils/phzmapi';
 import geoip from '../utils/geoip';
+import tdwg from '../utils/tdwg';
 
 function Plants(props) {
   const [activityData, setActivityData] = useState([]);
@@ -53,11 +54,21 @@ function Plants(props) {
 
     geoip.getZipCodeByIp(props.userIp).then((geoipRes) => {
       let zip = '97201';
-      let stateName = null;
+      let stateName = 'Oregon';
       if (geoipRes.data) {
         zip = geoipRes.data.postal.code;
         stateName = geoipRes.data.subdivisions.names.en;
       }
+      console.log(tdwg.tdwgCodes)
+      console.log(stateName)
+
+      let tdwgCode = tdwg.tdwgCodes[stateName];
+      console.log(tdwgCode);
+      Trefle.getPlantsByDistribution(tdwgCode)
+        .then((res) => {
+          console.log(res)
+        });
+        
       phzmapi.getTemperatureByZipcode(zip)
         .then((res) => {
           const minTemp = res.data.temperature_range.split(' ')[0];
