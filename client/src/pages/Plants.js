@@ -53,8 +53,10 @@ function Plants(props) {
 
     geoip.getZipCodeByIp(props.userIp).then((geoipRes) => {
       let zip = '97201';
+      let stateName = null;
       if (geoipRes.data) {
         zip = geoipRes.data.postal.code;
+        stateName = geoipRes.data.subdivisions.names.en;
       }
       phzmapi.getTemperatureByZipcode(zip)
         .then((res) => {
