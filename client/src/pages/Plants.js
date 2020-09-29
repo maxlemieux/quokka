@@ -59,14 +59,13 @@ function Plants(props) {
         zip = geoipRes.data.postal.code;
         stateName = geoipRes.data.subdivisions.names.en;
       }
-      console.log(tdwg.tdwgCodes)
-      console.log(stateName)
+      // console.log(tdwg.tdwgCodes)
+      // console.log(stateName)
 
       let tdwgCode = tdwg.tdwgCodes[stateName];
-      console.log(tdwgCode);
       Trefle.getPlantsByDistribution(tdwgCode)
         .then((res) => {
-          console.log(res)
+          // console.log(res)
         });
         
       phzmapi.getTemperatureByZipcode(zip)

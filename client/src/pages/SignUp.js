@@ -41,7 +41,7 @@ const SignUpForm = (props) => {
         history.push("/");
       })
       .catch((err,res) => {
-        //setSignUpError(err.response.data.errors);
+        setSignUpError(err.response.data.errors);
         return err;
       })
   };
