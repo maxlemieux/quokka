@@ -8,7 +8,6 @@ import { List, ListItem } from '../List';
 
 export default function ActivityFeed(props) {
   const image = { url: 'https://via.placeholder.com/300/d3d3d3/000000?text=No%20image%20available' };
-  console.log(props.activityData);
   // if the data is not in the database
   if (props.activityData === {exists: false}) {    
     return (
