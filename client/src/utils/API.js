@@ -25,10 +25,18 @@ export default {
   searchPlantName(searchName) {
     return axios.get(`/api/plants/species/${searchName}`);
   },
+  // Gets the favorite with the given plantId
+  getFavorite(plantId) {
+    return axios.get(`/api/favorites/${plantId}`);
+  },
   // Find recent favorites saved to the db
   findRecentFavorites() {
     // return axios.get('/api/plants/recent');
     return axios.get('/api/favorites/recent');
+  },
+  // Saves a plant to the database
+  saveFavorite(favoriteData) {
+    return axios.post('/api/favorites', favoriteData);
   },
   // Get details on a specific plant
   plantDetails(plantId) {

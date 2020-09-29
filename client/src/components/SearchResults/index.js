@@ -69,9 +69,23 @@ export function Result(props) {
           });
       })
       .catch((err) => err);
+  }  
+  
+  function saveFavorite(plantId) {
+    let newFavorite = {};
+    newFavorite.user_name = props.userName;
+    newFavorite.ip = props.userIp;
+    newFavorite.user_zip = props.userZip;
+    newFavorite.trefle_id = plantId;
+    // newFavorite.images=[res.data.image_url]
+    API.saveFavorite(newFavorite)
+      .then(() => {
+        props.loadFavorites();
+        props.loadActivityFeed();
+      });
   }
 
-  API.getPlant(props.result.id)
+  API.getFavorite(props.result.id)
     .then((res) => {
       if (res.data.exists) {
         setIsFavorite(true);
@@ -90,7 +104,7 @@ export function Result(props) {
         </ListItem>
         <div style={{ margin: 'auto', paddingTop: '20px' }}>
         {!isFavorite
-        && <button onClick={() => savePlant(props.result.id)}>
+        && <button onClick={() => savePlant(props.result.id) && saveFavorite(props.result.id, props.userName)}>
           <i
             className="fa fa-leaf"
             style={{ color: 'green', padding: '5px' }}
