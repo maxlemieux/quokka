@@ -25,9 +25,10 @@ export default {
   searchPlantName(searchName) {
     return axios.get(`/api/plants/species/${searchName}`);
   },
-  // Find recent plants saved to the db
-  findRecent() {
-    return axios.get('/api/plants/recent');
+  // Find recent favorites saved to the db
+  findRecentFavorites() {
+    // return axios.get('/api/plants/recent');
+    return axios.get('/api/favorites/recent');
   },
   // Get details on a specific plant
   plantDetails(plantId) {

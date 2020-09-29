@@ -24,7 +24,7 @@ function Plants(props) {
   const [userTemp, setUserTemp] = useState('');
 
   function loadActivityFeed() {
-    API.findRecent()
+    API.findRecentFavorites()
       .then((res) => setActivityData(res.data))
       .catch((err) => err);
   }
@@ -182,7 +182,7 @@ function Plants(props) {
           <h1>Live Feed</h1>
         </Jumbotron>
 
-        <ActivityFeed data={activityData}/>
+        <ActivityFeed activityData={activityData} />
       </Col>
 
       </Row>

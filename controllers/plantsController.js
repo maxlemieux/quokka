@@ -24,6 +24,7 @@ module.exports = {
         .catch((err) => res.status(422).json(err));
     }
   },
+  /* Not used anywhere but might be in future...ML */
   findRecent(req, res) {
     db.Plant
       .find(req.query)
