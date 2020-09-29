@@ -104,7 +104,10 @@ export function Result(props) {
         </ListItem>
         <div style={{ margin: 'auto', paddingTop: '20px' }}>
         {!isFavorite
-        && <button onClick={() => savePlant(props.result.id) && saveFavorite(props.result.id, props.userName)}>
+        && <button onClick={() => {
+          // savePlant(props.result.id)
+          saveFavorite(props.result.id, props.userName);
+        }}>
           <i
             className="fa fa-leaf"
             style={{ color: 'green', padding: '5px' }}

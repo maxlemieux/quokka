@@ -9,23 +9,17 @@ import DeleteBtn from '../DeleteBtn';
 
 export default function UserFavorites({ deleteFavorite, favorites }) {
   const image = { url: 'https://via.placeholder.com/300/d3d3d3/000000?text=No%20image%20available' };
+  console.log(favorites);
   if (favorites.length) {
     return (
       <List>
         {favorites.map((favorite) => (
           <ListItem key={favorite.trefle_id}>
           <DeleteBtn onClick={() => deleteFavorite(favorite._id)} />
-              <p>Common Name: {favorite.common_name}</p>
-              <p>Scientific Name: {favorite.scientific_name}</p>
-              <p>Author: {favorite.author}</p>
+            <p>Plant Id: {favorite.trefle_id}</p>
+            <p>Scientific Name: {favorite.scientific_name}</p>
+            <p>Author: {favorite.author}</p>
             <br />
-            {favorite.images[0]
-              && <img width='50%' src={ favorite.images[0] } alt={favorite.scientific_name} />
-              ? favorite.images[0]
-                && <img width='50%' src={ favorite.images[0]} alt={favorite.scientific_name} />
-              : image
-                && <img width='50%' src ={image.url} alt={favorite.scientific_name} />
-            }
           </ListItem>
         ))}
       </List>

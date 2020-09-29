@@ -71,6 +71,7 @@ module.exports = {
     }
   },
   create(req, res) {
+    console.log('create called with request body' + req.body)
     db.Favorite
       .create(req.body)
       .then((dbModel) => res.json(dbModel))
