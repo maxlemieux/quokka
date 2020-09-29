@@ -1,6 +1,6 @@
-const plant = require('./plant');
-const favorite = require('./favorite')
+const Plant = require('./plant');
+const Favorite = require('./favorite')
 module.exports = {
-  Plant: plant,
-  Favorite: favorite,
+  Plant,
+  Favorite,
 };
