@@ -56,9 +56,6 @@ export function Result(props) {
   function savePlant(plantId) {
     API.plantDetails(plantId)
       .then((res) => {
-        res.data.user_name = props.userName;
-        res.data.ip = props.userIp;
-        res.data.user_zip = props.userZip;
         res.data.trefle_id = res.data.id;
         res.data.images=[res.data.image_url]
         //console.log(res.data.images)
@@ -77,7 +74,6 @@ export function Result(props) {
     newFavorite.ip = props.userIp;
     newFavorite.user_zip = props.userZip;
     newFavorite.trefle_id = plantId;
-    // newFavorite.images=[res.data.image_url]
     API.saveFavorite(newFavorite)
       .then(() => {
         props.loadFavorites();

@@ -1,13 +1,26 @@
 const db = require('../models');
 
-// Defining methods for the plantsController
+// Defining methods for the pfavoritesController
 module.exports = {
   findAll(req, res) {
     if (req.user) {
       db.Favorite
         .find({ user_name: req.user.email })
         .sort({ date: 1 })
-        .then((dbModel) => res.json(dbModel))
+        .then((dbModel) => {
+          let favoritesList= dbModel
+          for(var i=0; i<favoritesList.length; i++ ){
+            db.Plant
+              .find({trefle_id : favoritesList[i].trefle_id})
+              .then((plantModel) => {
+                //console.log(plantModel)
+                favoritesList[i].plant_data=plantModel  
+              })
+          }
+          console.log("------------------------------------------------------")
+          res.json(favoritesList)
+          console.log(favoritesList)
+        })
         .catch((err) => res.status(422).json(err));
     } else {
       let ip = '';
@@ -71,7 +84,7 @@ module.exports = {
     }
   },
   create(req, res) {
-    console.log('create called with request body' + req.body)
+    //console.log('create called with request body' + req.body)
     db.Favorite
       .create(req.body)
       .then((dbModel) => res.json(dbModel))
