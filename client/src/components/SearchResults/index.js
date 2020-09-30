@@ -105,7 +105,7 @@ export function Result(props) {
         <div style={{ margin: 'auto', paddingTop: '20px' }}>
         {!isFavorite
         && <button onClick={() => {
-          // savePlant(props.result.id)
+          savePlant(props.result.id)
           saveFavorite(props.result.id, props.userName);
         }}>
           <i

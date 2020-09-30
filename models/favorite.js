@@ -9,7 +9,10 @@ const favoriteSchema = new Schema({
   },
   ip: String,
   user_zip: String,
-  date: { type: Date, default: Date.now },
+  date: { 
+    type: Date, 
+    default: Date.now 
+  },
 });
 
 const Favorite = mongoose.model('Favorite', favoriteSchema);

@@ -3,10 +3,16 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const plantSchema = new Schema({
-  trefle_id: String,
+  trefle_id: {
+    type: String,
+    unique: true,
+  },
   common_name: String,
   slug : String,
-  scientific_name: { type: String, required: true },
+  scientific_name: { 
+    type: String, 
+    required: true 
+  },
   main_species_id: String,
   image_url: String,
   year: String,
@@ -30,7 +36,10 @@ const plantSchema = new Schema({
   // soils_adaptation: Object,
   images: Array,
   // growth: Object,
-  date: { type: Date, default: Date.now },
+  date: { 
+    type: Date, 
+    default: Date.now 
+  },
 });
 
 const Plant = mongoose.model('Plant', plantSchema);
