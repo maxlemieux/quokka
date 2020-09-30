@@ -30,11 +30,6 @@ const plantSchema = new Schema({
   // soils_adaptation: Object,
   images: Array,
   // growth: Object,
-  user_name: {
-    type: String,
-  },
-  ip: String,
-  user_zip: String,
   date: { type: Date, default: Date.now },
 });
 
