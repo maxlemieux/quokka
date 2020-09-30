@@ -1,7 +1,6 @@
 const db = require('../models');
 
-
-// Defining methods for the pfavoritesController
+// Defining methods for the favoritesController
 module.exports = {
   findAll(req, res) {
     if (req.user) {
