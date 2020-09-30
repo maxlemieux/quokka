@@ -7,20 +7,10 @@ module.exports = {
     if (req.user) {
       db.Favorite
         .find({ user_name: req.user.email })
+        .populate('plantInfo')
         .sort({ date: 1 })
         .then((dbModel) => {
-          let favoritesList= dbModel
-          for(var i=0; i<favoritesList.length; i++ ){
-            db.Plant
-              .find({trefle_id : favoritesList[i].trefle_id})
-              .then((plantModel) => {
-                //console.log(plantModel)
-                favoritesList[i].plant_data=plantModel  
-              })
-          }
-          console.log("------------------------------------------------------")
-          res.json(favoritesList)
-          console.log(favoritesList)
+          res.json(dbModel);
         })
         .catch((err) => res.status(422).json(err));
     } else {

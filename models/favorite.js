@@ -21,13 +21,13 @@ const favoriteSchema = new Schema({
     type: Date, 
     default: Date.now 
   },
-},schemaOptions);
+}, schemaOptions);
 
 favoriteSchema.virtual('plantInfo', {
   ref: 'Plant',
   localField: 'trefle_id',
   foreignField: 'trefle_id',
-  justOne: true,
+  // justOne: true,
 });
 
 const Favorite = mongoose.model('Favorite', favoriteSchema);

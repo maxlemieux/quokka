@@ -16,8 +16,12 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
         {favorites.map((favorite) => (
           <ListItem key={favorite.trefle_id}>
           <DeleteBtn onClick={() => deleteFavorite(favorite._id)} />
+            {/* <p>Image: {favorite.plantInfo.image}</p> */}
             <p>Plant Id: {favorite.trefle_id}</p>
-            <p>Scientific Name: {favorite.scientific_name}</p>
+            
+            {/* This doesn't work - need populated virtual reference */}
+            <p>Scientific Name: {favorite.plantInfo.scientific_name}</p>
+            
             <p>Author: {favorite.author}</p>
             <br />
           </ListItem>
