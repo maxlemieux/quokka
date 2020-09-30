@@ -23,10 +23,12 @@ const favoriteSchema = new Schema({
   },
 },schemaOptions);
 
-favoriteSchema.virtual('plantInfo').get(function () {
-  
-})
-
+favoriteSchema.virtual('plantInfo', {
+  ref: 'Plant',
+  localField: 'trefle_id',
+  foreignField: 'trefle_id',
+  justOne: true,
+});
 
 const Favorite = mongoose.model('Favorite', favoriteSchema);
 
