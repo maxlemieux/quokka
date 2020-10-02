@@ -42,8 +42,8 @@ function Plants(props) {
   //     .catch((err) => err);
   // }
 
-  function deleteFavorite(plantId) {
-    API.deleteFavorite(plantId)
+  function deleteFavorite(id) {
+    API.deleteFavorite(id)
       .then(() => props.loadFavorites())
       .catch((err) => err);
   }

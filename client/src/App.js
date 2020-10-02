@@ -43,11 +43,8 @@ function App() {
     API.getFavorites()
       .then((res) => {
         // Let's add a predictable array of plantInfo data to each Favorite record that comes back from the collection
-        // console.log(res.data)
         for (let i=0; i<res.data.length; i++) {
-          res.data[i].plantData = res.data[i].plantInfo;
           if (res.data[i].plantInfo.length !== 0) {
-            console.log('foo')
             console.log(res.data[i].plantInfo[0].scientific_name)
           }
         }
