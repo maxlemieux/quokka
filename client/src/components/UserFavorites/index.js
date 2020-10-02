@@ -9,13 +9,13 @@ import DeleteBtn from '../DeleteBtn';
 
 export default function UserFavorites({ deleteFavorite, favorites }) {
   const image = { url: 'https://via.placeholder.com/300/d3d3d3/000000?text=No%20image%20available' };
-  console.log(favorites);
+  // console.log(favorites);
   if (favorites.length) {
     return (
       <List>
         {favorites.map((favorite) => (
           <ListItem key={favorite.trefle_id}>
-          <DeleteBtn onClick={() => deleteFavorite(favorite._id)} />
+          <DeleteBtn onClick={() => deleteFavorite(favorite.trefle_id)} />
             {/* <p>Image: {favorite.plantInfo.image}</p> */}
             <p>Plant Id: {favorite.trefle_id}</p>
             
