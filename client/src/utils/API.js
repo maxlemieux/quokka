@@ -38,6 +38,10 @@ export default {
   saveFavorite(favoriteData) {
     return axios.post('/api/favorites', favoriteData);
   },
+  // Deletes the plant with the given id
+  deleteFavorite(plantId) {
+    return axios.delete(`/api/favorites/${plantId}`);
+  },  
   // Get details on a specific plant
   plantDetails(plantId) {
     return axios.get(`/api/trefle/species/${plantId}`);

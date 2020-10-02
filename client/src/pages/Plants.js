@@ -36,8 +36,14 @@ function Plants(props) {
     return () => clearTimeout(timer);
   });  
 
-  function deletePlant(id) {
-    API.deletePlant(id)
+  // function deletePlant(id) {
+  //   API.deletePlant(id)
+  //     .then(() => props.loadFavorites())
+  //     .catch((err) => err);
+  // }
+
+  function deleteFavorite(plantId) {
+    API.deleteFavorite(plantId)
       .then(() => props.loadFavorites())
       .catch((err) => err);
   }
@@ -173,7 +179,7 @@ function Plants(props) {
         <Jumbotron>
           <h1>My Garden</h1>
         </Jumbotron>
-        <UserFavorites deleteFavorite={deletePlant} favorites={props.userFavorites} />
+        <UserFavorites deleteFavorite={deleteFavorite} favorites={props.userFavorites} />
       </Col>
 
       <Col size="md-3">
