@@ -17,14 +17,12 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
         {favorites.map((favorite) => (
           <ListItem key={favorite.trefle_id}>
           <DeleteBtn onClick={() => deleteFavorite(favorite._id)} />
-            {/* <p>Image: {favorite.plantInfo[0].image}</p> */}
-            <p>Plant Id: {favorite.trefle_id}</p>
-            
-            <p>Type of plantInfo: {typeof favorite.plantInfo}</p>
-            {/* This breaks when adding a favorite because the plant record doesn't exist quite yet - need a callback from adding the plant */}
-            <p>A value from plantInfo: {favorite.plantInfo[0].common_name}</p>
-            
-            <p>Author: {favorite.author}</p>
+            <h3>{favorite.plantInfo[0].common_name}</h3>
+            <p>({favorite.plantInfo[0].scientific_name})</p>
+            <p>{favorite.plantInfo[0].common_name} is in the {favorite.plantInfo[0].family_common_name}</p>
+            <p><small>Trefle plant ID: {favorite.trefle_id}</small></p>            
+            <p><img width="150" height="150" src={favorite.plantInfo[0].images} /></p>
+            <p>Author: {favorite.plantInfo[0].author}</p>
             <br />
           </ListItem>
         ))}

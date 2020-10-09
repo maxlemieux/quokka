@@ -6,6 +6,8 @@ const plantSchema = new Schema({
   trefle_id: {
     type: String,
     unique: true,
+    required: true,
+    // dropDups: true,
   },
   common_name: String,
   slug : String,
