@@ -23,6 +23,7 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
             {/* This doesn't work - need populated virtual reference */}
             {/* <p>Scientific Name: {favorite.plantInfo[0].scientific_name}</p> */}
             <p>Type of plantInfo: {typeof favorite.plantInfo}</p>
+            <p>A value from plantInfo: {favorite.plantInfo[0].common_name}</p>
             
             <p>Author: {favorite.author}</p>
             <br />

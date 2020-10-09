@@ -30,6 +30,9 @@ favoriteSchema.virtual('plantInfo', {
   // justOne: true,
 });
 
+
+
+
 const Favorite = mongoose.model('Favorite', favoriteSchema);
 
 module.exports = Favorite;
