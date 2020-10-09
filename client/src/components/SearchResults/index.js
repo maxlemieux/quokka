@@ -53,7 +53,35 @@ SearchResults.propTypes = {
 export function Result(props) {
   const [isFavorite, setIsFavorite] = useState(false);
 
-  function savePlant(plantId) {
+  // function savePlant(plantId) {
+  //   API.plantDetails(plantId)
+  //     .then((res) => {
+  //       res.data.trefle_id = res.data.id;
+  //       res.data.images=[res.data.image_url]
+  //       //console.log(res.data.images)
+  //       API.savePlant(res.data)
+  //         .then(() => {
+  //           props.loadFavorites();
+  //           props.loadActivityFeed();
+  //         });
+  //     })
+  //     .catch((err) => err);
+  // }  
+  
+  // function saveFavorite(plantId) {
+  //   let newFavorite = {};
+  //   newFavorite.user_name = props.userName;
+  //   newFavorite.ip = props.userIp;
+  //   newFavorite.user_zip = props.userZip;
+  //   newFavorite.trefle_id = plantId;
+  //   API.saveFavorite(newFavorite)
+  //     .then(() => {
+  //       props.loadFavorites();
+  //       props.loadActivityFeed();
+  //     });
+  // }
+
+  function saveFavorite(plantId) {
     API.plantDetails(plantId)
       .then((res) => {
         res.data.trefle_id = res.data.id;
@@ -61,26 +89,21 @@ export function Result(props) {
         //console.log(res.data.images)
         API.savePlant(res.data)
           .then(() => {
-            props.loadFavorites();
-            props.loadActivityFeed();
+            let newFavorite = {};
+            newFavorite.user_name = props.userName;
+            newFavorite.ip = props.userIp;
+            newFavorite.user_zip = props.userZip;
+            newFavorite.trefle_id = plantId;
+            API.saveFavorite(newFavorite)
+              .then(() => {
+                props.loadFavorites();
+                props.loadActivityFeed();
+              });        
           });
       })
       .catch((err) => err);
   }  
   
-  function saveFavorite(plantId) {
-    let newFavorite = {};
-    newFavorite.user_name = props.userName;
-    newFavorite.ip = props.userIp;
-    newFavorite.user_zip = props.userZip;
-    newFavorite.trefle_id = plantId;
-    API.saveFavorite(newFavorite)
-      .then(() => {
-        props.loadFavorites();
-        props.loadActivityFeed();
-      });
-  }
-
   API.getFavorite(props.result.id)
     .then((res) => {
       if (res.data.exists) {
@@ -101,8 +124,7 @@ export function Result(props) {
         <div style={{ margin: 'auto', paddingTop: '20px' }}>
         {!isFavorite
         && <button onClick={() => {
-          savePlant(props.result.id)
-          saveFavorite(props.result.id, props.userName);
+          saveFavorite(props.result.id);
         }}>
           <i
             className="fa fa-leaf"
