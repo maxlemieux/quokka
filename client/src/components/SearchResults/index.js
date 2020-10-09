@@ -53,6 +53,20 @@ SearchResults.propTypes = {
 export function Result(props) {
   const [isFavorite, setIsFavorite] = useState(false);
 
+  function createFavorite(plantId) {
+    let newFavorite = {};
+    newFavorite.user_name = props.userName;
+    newFavorite.ip = props.userIp;
+    newFavorite.user_zip = props.userZip;
+    newFavorite.trefle_id = plantId;
+    API.saveFavorite(newFavorite)
+      .then(() => {
+        props.loadFavorites();
+        props.loadActivityFeed();
+      });        
+  }
+
+  // First create a plant then a favorite, if the plant already exists we create a favorite anyway
   function saveFavorite(plantId) {
     API.plantDetails(plantId)
       .then((res) => {
@@ -61,16 +75,15 @@ export function Result(props) {
         //console.log(res.data.images)
         API.savePlant(res.data)
           .then(() => {
-            let newFavorite = {};
-            newFavorite.user_name = props.userName;
-            newFavorite.ip = props.userIp;
-            newFavorite.user_zip = props.userZip;
-            newFavorite.trefle_id = plantId;
-            API.saveFavorite(newFavorite)
-              .then(() => {
-                props.loadFavorites();
-                props.loadActivityFeed();
-              });        
+            createFavorite(plantId)
+          })
+          .catch((err) => {
+            // If there is an error saving plant on unique Trefle ID, log the error
+            // return console.log(Object.keys(err))
+            if (err.response.data.keyPattern.trefle_id === 1) {
+              console.log("Error adding a new plant because it already exists, adding favorite anyway");
+              createFavorite(plantId);
+            }
           });
       })
       .catch((err) => err);
