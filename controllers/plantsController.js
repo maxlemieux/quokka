@@ -25,7 +25,8 @@ module.exports = {
       })
       .then((dbModel) => {
         if (dbModel[0]) {
-          res.json({ exists: true });
+          // res.json({ exists: true });
+          res.json(dbModel[0]);
         } else {
           res.json({ exists: false });
         }

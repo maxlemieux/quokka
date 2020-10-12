@@ -5,19 +5,24 @@ router.route('/species/:plantId')
   .get((req, res) => {
     axios.get(`http://localhost:3001/api/plants/${req.params.plantId}`)
       .then((response) => {
-        console.log(`OK, we got a response on local lookup for this plant`)
-        console.log(response)
+        if (response.data.exists === false ) {
+          console.log(`Plant with id ${req.params.plantId} not found in local database - getting it from Trefle API`)
+          axios.get(`https://trefle.io/api/v1/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
+            .then((response) => {
+              res.json(response.data.data);
+            })
+            .catch((err) => {
+              console.log('backend axios error getting trefle data');
+            });
+        } else {
+          // it exists in our Plants collection, send the response back
+          console.log('Already found in Plants collection, sending the data back without a new Trefle API call')
+          // console.log(response.data);
+          res.json(response);
+        }
       })
       .catch((err) => {
         console.log('backend axios error getting local plant data')
-        console.log(err)
-      });
-    axios.get(`https://trefle.io/api/v1/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
-      .then((response) => {
-        res.json(response.data.data);
-      })
-      .catch((err) => {
-        console.log('backend axios error getting trefle data');
         res.status(err.response.status).send(err.response.statusText);
       });
   });
