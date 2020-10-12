@@ -42,12 +42,6 @@ function App() {
   function loadFavorites() {
     API.getFavorites()
       .then((res) => {
-        // Let's add a predictable array of plantInfo data to each Favorite record that comes back from the collection
-        for (let i=0; i<res.data.length; i++) {
-          if (res.data[i].plantInfo.length !== 0) {
-            console.log(res.data[i].plantInfo[0].scientific_name)
-          }
-        }
         setUserFavorites(res.data);
       })
       .catch((err) => err);
