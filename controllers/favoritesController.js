@@ -30,10 +30,11 @@ module.exports = {
   findRecent(req, res) {
     db.Favorite
       .find(req.query)
+      .populate('plantInfo')
       .sort({ date: -1 })
       .limit(10)
       .then((dbModel) => {
-        console.log(dbModel)
+        // console.log(dbModel)
         res.json(dbModel)
       })
       .catch((err) => res.status(422).json(err));
