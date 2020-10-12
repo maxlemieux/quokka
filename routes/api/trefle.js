@@ -5,10 +5,12 @@ router.route('/species/:plantId')
   .get((req, res) => {
     axios.get(`http://localhost:3001/api/plants/${req.params.plantId}`)
       .then((response) => {
+        console.log(response.data)
         if (response.data.exists === false ) {
           console.log(`Plant with id ${req.params.plantId} not found in local database - getting it from Trefle API`)
           axios.get(`https://trefle.io/api/v1/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
             .then((response) => {
+              console.log(response.data);
               res.json(response.data.data);
             })
             .catch((err) => {
@@ -17,8 +19,8 @@ router.route('/species/:plantId')
         } else {
           // it exists in our Plants collection, send the response back
           console.log('Already found in Plants collection, sending the data back without a new Trefle API call')
-          // console.log(response.data);
-          res.json(response);
+          //console.log(response.data);
+          res.json(response.data);
         }
       })
       .catch((err) => {

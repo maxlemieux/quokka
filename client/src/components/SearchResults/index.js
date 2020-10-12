@@ -78,13 +78,15 @@ export function Result(props) {
         res.data.images=[res.data.image_url]
         //console.log(res.data.images)
         API.savePlant(res.data)
-          .then(() => {
+          .then((res) => {
+            console.log(res.data)
             createFavorite(plantId)
           })
           .catch((err) => {
             // If there is an error saving plant on unique Trefle ID, log the error
             // return console.log(Object.keys(err))
-            if (err.response.data.keyPattern.trefle_id === 1) {
+            console.log(err)
+            if (err.response.data.keyPattern.trefle_id === 1) {  
               console.log("Error adding a new plant because it already exists, adding favorite anyway");
               createFavorite(plantId);
             }
