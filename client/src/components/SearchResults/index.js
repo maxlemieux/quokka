@@ -120,7 +120,6 @@ export function Result(props) {
             // user is not logged in, go to signup page
             history.push("/signup");
           }
-          
         }}>
           <i
             className="fa fa-leaf"
