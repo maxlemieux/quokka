@@ -6,6 +6,8 @@ import { List, ListItem } from '../List';
 import Spinner from '../Spinner';
 import API from '../../utils/API';
 
+import { useHistory } from "react-router-dom";
+
 export function SearchResults(props) {
   return (
     <>
@@ -51,6 +53,8 @@ SearchResults.propTypes = {
 };
 
 export function Result(props) {
+  const history = useHistory();
+
   const [isFavorite, setIsFavorite] = useState(false);
 
   function createFavorite(plantId) {
@@ -109,7 +113,14 @@ export function Result(props) {
         <div style={{ margin: 'auto', paddingTop: '20px' }}>
         {!isFavorite
         && <button onClick={() => {
-          saveFavorite(props.result.id);
+          if (props.userName !== 'guest') {
+            // user is logged in
+            saveFavorite(props.result.id);
+          } else {
+            // user is not logged in, go to signup page
+            history.push("/signup");
+          }
+          
         }}>
           <i
             className="fa fa-leaf"
