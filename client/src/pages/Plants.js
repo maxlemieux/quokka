@@ -15,6 +15,7 @@ import API from '../utils/API';
 import Trefle from '../utils/trefle';
 import phzmapi from '../utils/phzmapi';
 import geoip from '../utils/geoip';
+import tdwg from '../utils/tdwg';
 
 function Plants(props) {
   const [activityData, setActivityData] = useState([]);
@@ -23,7 +24,7 @@ function Plants(props) {
   const [userTemp, setUserTemp] = useState('');
 
   function loadActivityFeed() {
-    API.findRecent()
+    API.findRecentFavorites()
       .then((res) => setActivityData(res.data))
       .catch((err) => err);
   }
@@ -35,8 +36,14 @@ function Plants(props) {
     return () => clearTimeout(timer);
   });  
 
-  function deletePlant(id) {
-    API.deletePlant(id)
+  // function deletePlant(id) {
+  //   API.deletePlant(id)
+  //     .then(() => props.loadFavorites())
+  //     .catch((err) => err);
+  // }
+
+  function deleteFavorite(id) {
+    API.deleteFavorite(id)
       .then(() => props.loadFavorites())
       .catch((err) => err);
   }
@@ -53,9 +60,20 @@ function Plants(props) {
 
     geoip.getZipCodeByIp(props.userIp).then((geoipRes) => {
       let zip = '97201';
+      let stateName = 'Oregon';
       if (geoipRes.data) {
         zip = geoipRes.data.postal.code;
+        stateName = geoipRes.data.subdivisions.names.en;
       }
+      // console.log(tdwg.tdwgCodes)
+      // console.log(stateName)
+
+      let tdwgCode = tdwg.tdwgCodes[stateName];
+      Trefle.getPlantsByDistribution(tdwgCode)
+        .then((res) => {
+          // console.log(res)
+        });
+        
       phzmapi.getTemperatureByZipcode(zip)
         .then((res) => {
           const minTemp = res.data.temperature_range.split(' ')[0];
@@ -161,7 +179,7 @@ function Plants(props) {
         <Jumbotron>
           <h1>My Garden</h1>
         </Jumbotron>
-        <UserFavorites deleteFavorite={deletePlant} favorites={props.userFavorites} />
+        <UserFavorites deleteFavorite={deleteFavorite} favorites={props.userFavorites} />
       </Col>
 
       <Col size="md-3">
@@ -169,7 +187,7 @@ function Plants(props) {
           <h1>Live Feed</h1>
         </Jumbotron>
 
-        <ActivityFeed data={activityData}/>
+        <ActivityFeed activityData={activityData} />
       </Col>
 
       </Row>

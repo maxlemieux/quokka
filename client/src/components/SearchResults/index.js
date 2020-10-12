@@ -6,6 +6,8 @@ import { List, ListItem } from '../List';
 import Spinner from '../Spinner';
 import API from '../../utils/API';
 
+import { useHistory } from "react-router-dom";
+
 export function SearchResults(props) {
   return (
     <>
@@ -51,27 +53,47 @@ SearchResults.propTypes = {
 };
 
 export function Result(props) {
+  const history = useHistory();
+
   const [isFavorite, setIsFavorite] = useState(false);
 
-  function savePlant(plantId) {
+  function createFavorite(plantId) {
+    let newFavorite = {};
+    newFavorite.user_name = props.userName;
+    newFavorite.ip = props.userIp;
+    newFavorite.user_zip = props.userZip;
+    newFavorite.trefle_id = plantId;
+    API.saveFavorite(newFavorite)
+      .then(() => {
+        props.loadFavorites();
+        props.loadActivityFeed();
+      });        
+  }
+
+  // First create a plant then a favorite, if the plant already exists we create a favorite anyway
+  function saveFavorite(plantId) {
     API.plantDetails(plantId)
       .then((res) => {
-        res.data.user_name = props.userName;
-        res.data.ip = props.userIp;
-        res.data.user_zip = props.userZip;
         res.data.trefle_id = res.data.id;
         res.data.images=[res.data.image_url]
         //console.log(res.data.images)
         API.savePlant(res.data)
           .then(() => {
-            props.loadFavorites();
-            props.loadActivityFeed();
+            createFavorite(plantId)
+          })
+          .catch((err) => {
+            // If there is an error saving plant on unique Trefle ID, log the error
+            // return console.log(Object.keys(err))
+            if (err.response.data.keyPattern.trefle_id === 1) {
+              console.log("Error adding a new plant because it already exists, adding favorite anyway");
+              createFavorite(plantId);
+            }
           });
       })
       .catch((err) => err);
-  }
-
-  API.getPlant(props.result.id)
+  }  
+  
+  API.getFavorite(props.result.id)
     .then((res) => {
       if (res.data.exists) {
         setIsFavorite(true);
@@ -90,7 +112,15 @@ export function Result(props) {
         </ListItem>
         <div style={{ margin: 'auto', paddingTop: '20px' }}>
         {!isFavorite
-        && <button onClick={() => savePlant(props.result.id)}>
+        && <button onClick={() => {
+          if (props.userName !== 'guest') {
+            // user is logged in
+            saveFavorite(props.result.id);
+          } else {
+            // user is not logged in, go to signup page
+            history.push("/signup");
+          }
+        }}>
           <i
             className="fa fa-leaf"
             style={{ color: 'green', padding: '5px' }}

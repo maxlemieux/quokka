@@ -40,7 +40,7 @@ function App() {
   }, []);
 
   function loadFavorites() {
-    API.getPlants()
+    API.getFavorites()
       .then((res) => {
         setUserFavorites(res.data);
       })

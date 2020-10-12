@@ -5,6 +5,10 @@ export default {
   getPlants() {
     return axios.get('/api/plants');
   },
+  // Gets all favorites
+  getFavorites() {
+    return axios.get('/api/favorites');
+  },
   // Gets the plant with the given id
   getPlant(id) {
     return axios.get(`/api/plants/${id}`);
@@ -21,10 +25,23 @@ export default {
   searchPlantName(searchName) {
     return axios.get(`/api/plants/species/${searchName}`);
   },
-  // Find recent plants saved to the db
-  findRecent() {
-    return axios.get('/api/plants/recent');
+  // Gets the favorite with the given plantId
+  getFavorite(plantId) {
+    return axios.get(`/api/favorites/${plantId}`);
   },
+  // Find recent favorites saved to the db
+  findRecentFavorites() {
+    // return axios.get('/api/plants/recent');
+    return axios.get('/api/favorites/recent');
+  },
+  // Saves a plant to the database
+  saveFavorite(favoriteData) {
+    return axios.post('/api/favorites', favoriteData);
+  },
+  // Deletes the plant with the given id
+  deleteFavorite(plantId) {
+    return axios.delete(`/api/favorites/${plantId}`);
+  },  
   // Get details on a specific plant
   plantDetails(plantId) {
     return axios.get(`/api/trefle/species/${plantId}`);

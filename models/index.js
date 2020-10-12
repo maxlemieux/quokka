@@ -1,5 +1,6 @@
-const plant = require('./plant');
-
+const Plant = require('./plant');
+const Favorite = require('./favorite')
 module.exports = {
-  Plant: plant,
+  Plant,
+  Favorite,
 };

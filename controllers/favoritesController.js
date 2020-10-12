@@ -1,13 +1,16 @@
 const db = require('../models');
 
-// Defining methods for the plantsController
+// Defining methods for the favoritesController
 module.exports = {
   findAll(req, res) {
     if (req.user) {
-      db.Plant
+      db.Favorite
         .find({ user_name: req.user.email })
+        .populate('plantInfo')
         .sort({ date: 1 })
-        .then((dbModel) => res.json(dbModel))
+        .then((dbModel) => {
+          res.json(dbModel);
+        })
         .catch((err) => res.status(422).json(err));
     } else {
       let ip = '';
@@ -17,25 +20,28 @@ module.exports = {
         ip = addrList[addrList.length - 1];
       }
       // It's a guest, filter by IP instead of user
-      db.Plant
+      db.Favorite
         .find({ ip, user_name: 'guest' })
         .sort({ date: 1 })
         .then((dbModel) => res.json(dbModel))
         .catch((err) => res.status(422).json(err));
     }
   },
-  /* Not used anywhere but might be in future...ML */
   findRecent(req, res) {
-    db.Plant
+    db.Favorite
       .find(req.query)
+      .populate('plantInfo')
       .sort({ date: -1 })
       .limit(10)
-      .then((dbModel) => res.json(dbModel))
+      .then((dbModel) => {
+        // console.log(dbModel)
+        res.json(dbModel)
+      })
       .catch((err) => res.status(422).json(err));
   },
   findById(req, res) {
     if (req.user) {
-      db.Plant
+      db.Favorite
         .find({
           user_name: req.user.email,
           trefle_id: req.params.id,
@@ -55,7 +61,7 @@ module.exports = {
         const addrList = ipAddr.split(',');
         ip = addrList[addrList.length - 1];
       }
-      db.Plant
+      db.Favorite
         .find({
           ip,
           user_name: 'guest',
@@ -72,19 +78,20 @@ module.exports = {
     }
   },
   create(req, res) {
-    db.Plant
+    //console.log('create called with request body' + req.body)
+    db.Favorite
       .create(req.body)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   update(req, res) {
-    db.Plant
+    db.Favorite
       .findOneAndUpdate({ _id: req.params.id }, req.body)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   remove(req, res) {
-    db.Plant
+    db.Favorite
       .findById({ _id: req.params.id })
       .then((dbModel) => dbModel.remove())
       .then((dbModel) => res.json(dbModel))

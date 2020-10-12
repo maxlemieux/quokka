@@ -6,6 +6,7 @@ router.route('/species/:plantId')
     // axios.get(`https://v0.trefle.io/api/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
     axios.get(`https://trefle.io/api/v1/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
       .then((response) => {
+        // console.log(response)
         res.json(response.data.data);
       })
       .catch((err) => {
@@ -13,6 +14,19 @@ router.route('/species/:plantId')
         res.status(err.response.status).send(err.response.statusText);
       });
   });
+
+  // router.route('/plants/:plantId')
+  // .get((req, res) => {
+  //   // axios.get(`https://v0.trefle.io/api/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
+  //   axios.get(`https://trefle.io/api/v1/plants/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
+  //     .then((response) => {
+  //       res.json(response.data.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log('backend axios error getting trefle data');
+  //       res.status(err.response.status).send(err.response.statusText);
+  //     });
+  // });
 
 router.route('/temperature_minimum_deg_f/:minTemp')
   .get((req, res) => {
@@ -27,6 +41,19 @@ router.route('/temperature_minimum_deg_f/:minTemp')
         res.status(err.response.status).send(err.response.statusText);
       });
   });
+
+router.route('/distributions/:zoneId')
+  .get((req, res) => {
+    axios.get(`https://trefle.io/api/v1/distributions/${req.params.zoneId}/plants?token=${process.env.REACT_APP_TREFLE}`)
+    .then((response) => {
+      res.json(response.data);
+    })
+    .catch((err) => {
+      console.log('backend axios error getting trefle data on tdwg zone ID');
+      console.log(err.response)
+      res.status(err.response.status).send(err.response.statusText);
+    });
+});
 
 router.route('/name/:name')
   .get((req, res) => {
