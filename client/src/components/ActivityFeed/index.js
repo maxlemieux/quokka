@@ -9,7 +9,7 @@ import { List, ListItem } from '../List';
 export default function ActivityFeed({ activityData }) {
   // const image = { url: 'https://via.placeholder.com/300/d3d3d3/000000?text=No%20image%20available' };
   // if the data is not in the database
-  console.log(activityData)
+  // console.log(activityData)
   if (activityData.length) {    
     return (
       <List>
@@ -32,7 +32,7 @@ export default function ActivityFeed({ activityData }) {
       </List>
     )
   } else {
-    console.log("no activity data to show")
+    // console.log("no activity data to show")
     return (
       <List>
       </List>

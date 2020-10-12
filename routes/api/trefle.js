@@ -3,10 +3,17 @@ const router = require('express').Router();
 
 router.route('/species/:plantId')
   .get((req, res) => {
-    // axios.get(`https://v0.trefle.io/api/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
+    axios.get(`http://localhost:3001/api/plants/${req.params.plantId}`)
+      .then((response) => {
+        console.log(`OK, we got a response on local lookup for this plant`)
+        console.log(response)
+      })
+      .catch((err) => {
+        console.log('backend axios error getting local plant data')
+        console.log(err)
+      });
     axios.get(`https://trefle.io/api/v1/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
       .then((response) => {
-        // console.log(response)
         res.json(response.data.data);
       })
       .catch((err) => {
@@ -15,23 +22,8 @@ router.route('/species/:plantId')
       });
   });
 
-  // router.route('/plants/:plantId')
-  // .get((req, res) => {
-  //   // axios.get(`https://v0.trefle.io/api/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
-  //   axios.get(`https://trefle.io/api/v1/plants/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
-  //     .then((response) => {
-  //       res.json(response.data.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log('backend axios error getting trefle data');
-  //       res.status(err.response.status).send(err.response.statusText);
-  //     });
-  // });
-
 router.route('/temperature_minimum_deg_f/:minTemp')
   .get((req, res) => {
-    // axios.get(`https://v0.trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&temperature_minimum_deg_f>${req.params.minTemp}`)
-    // https://trefle.io/api/v1/species?token=cHhTeGd4R21rUFc3b2tMK0x4bDNqQT09&range[minimum_temperature_deg_f]=,60
     axios.get(`https://trefle.io/api/v1/species?token=${process.env.REACT_APP_TREFLE}&range[minimum_temperature_deg_f]=,${req.params.minTemp}`)
       .then((response) => {
         res.json(response.data.data);
@@ -57,7 +49,6 @@ router.route('/distributions/:zoneId')
 
 router.route('/name/:name')
   .get((req, res) => {
-    // axios.get(`https://v0.trefle.io/api/species?token=${process.env.REACT_APP_TREFLE}&q=${req.params.name}`)
     axios.get(`https://trefle.io/api/v1/plants/search?q=${req.params.name}&token=${process.env.REACT_APP_TREFLE}`)
       .then((response) => {
         res.json(response.data.data);
