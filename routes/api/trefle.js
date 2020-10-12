@@ -6,6 +6,7 @@ router.route('/species/:plantId')
     // axios.get(`https://v0.trefle.io/api/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
     axios.get(`https://trefle.io/api/v1/species/${req.params.plantId}?token=${process.env.REACT_APP_TREFLE}`)
       .then((response) => {
+        // console.log(response)
         res.json(response.data.data);
       })
       .catch((err) => {
