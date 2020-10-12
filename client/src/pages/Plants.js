@@ -63,9 +63,9 @@ function Plants(props) {
       let stateName = 'Oregon';
       console.log(geoipRes)
 
-      if (geoipRes.data && geoipRes.data.postal.code && geoipRes.data.subdivisions.names.en) {
+      if (geoipRes.data && geoipRes.data.postal.code && geoipRes.data.subdivisions[0].names.en) {
         zip = geoipRes.data.postal.code;
-        stateName = geoipRes.data.subdivisions.names.en;
+        stateName = geoipRes.data.subdivisions[0].names.en;
       } else {
         console.log('no state name, using default')
       }
