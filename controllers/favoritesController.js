@@ -32,7 +32,10 @@ module.exports = {
       .find(req.query)
       .sort({ date: -1 })
       .limit(10)
-      .then((dbModel) => res.json(dbModel))
+      .then((dbModel) => {
+        console.log(dbModel)
+        res.json(dbModel)
+      })
       .catch((err) => res.status(422).json(err));
   },
   findById(req, res) {
