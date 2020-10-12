@@ -13,8 +13,8 @@ export default function ActivityFeed({ activityData }) {
   if (activityData.length) {    
     return (
       <List>
-          {activityData.map((favorite) => (
-            <ListItem className='list-overflow-container' key={favorite._id}>
+          {activityData.map((favorite, index) => (
+            <ListItem className='list-overflow-container' key={index}>
               <Container fluid>
                 <Row>
                   <Col size="md-6" >
