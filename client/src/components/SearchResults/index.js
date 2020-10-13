@@ -20,7 +20,10 @@ export function SearchResults(props) {
         && <div className='list-overflow-container' style={{ paddingTop: '20px', marginTop: '30px' }}>
       <h5>Search Results</h5>
       <p>Minimum temperature {props.userTemp} degrees(F)</p>
+
+      {/* This needs to change if we move to a menu of states/provinces */}
       <p>Zip code {props.userZip} (autodetected from public IP address {props.userIp})</p>
+      
       <ul className="list-group">
         {props.searchResults
           && props.searchResults.map((result) => (
@@ -56,6 +59,36 @@ export function Result(props) {
   const history = useHistory();
 
   const [isFavorite, setIsFavorite] = useState(false);
+
+  function checkPlantExists(plantId) {
+    API.getPlant(plantId)
+      .then((response) => {
+        console.log(response.data)
+        if (response.data.exists === false) {
+          // response.data === {exists: false}
+          console.log('Plant does not exist, saving new record to collection')
+          savePlant(plantId);
+        } else {
+          // response.data == 'big plantInfo object'
+          console.log('Plant exists, nothing to do')
+          createFavorite(plantId);
+        }
+      });
+  }
+
+  function savePlant(plantId) {
+    API.plantDetails(plantId)
+    .then((res) => {
+      res.data.trefle_id = res.data.id;
+      res.data.images=[res.data.image_url]
+      API.savePlant(res.data)
+        .then((res) => {
+          console.log(res.data)
+        });
+
+      createFavorite(plantId);
+    });
+  }
 
   function createFavorite(plantId) {
     let newFavorite = {};
@@ -117,7 +150,9 @@ export function Result(props) {
         && <button onClick={() => {
           if (props.userName !== 'guest') {
             // user is logged in
-            saveFavorite(props.result.id);
+            // print results of API.getPlant in front end console
+            checkPlantExists(props.result.id);
+            // saveFavorite(props.result.id);
           } else {
             // user is not logged in, go to signup page
             history.push("/signup");

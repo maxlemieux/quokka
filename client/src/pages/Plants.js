@@ -61,14 +61,15 @@ function Plants(props) {
     geoip.getZipCodeByIp(props.userIp).then((geoipRes) => {
       let zip = '97201';
       let stateName = 'Oregon';
-      console.log(geoipRes)
+      // console.log(geoipRes)
 
       if (geoipRes.data && geoipRes.data.postal.code && geoipRes.data.subdivisions[0].names.en) {
         zip = geoipRes.data.postal.code;
         stateName = geoipRes.data.subdivisions[0].names.en;
-      } else {
-        console.log('no state name, using default')
       }
+      // } else {
+      //   console.log('no state name, using default')
+      // }
       // console.log(tdwg.tdwgCodes)
       // console.log(stateName)
 
