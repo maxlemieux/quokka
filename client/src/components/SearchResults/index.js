@@ -81,13 +81,13 @@ export function Result(props) {
     .then((res) => {
       res.data.trefle_id = res.data.id;
       res.data.images=[res.data.image_url]
-      console.log(`Got response from Trefle for plant with ID ${plantId}:`)
-      console.log(res.data)
-      console.log('Length of this data:')
-      console.log(res.data.length)
+      // console.log(`Got response from Trefle for plant with ID ${plantId}:`)
+      // console.log(res.data)
+      // console.log('Length of this data:')
+      // console.log(res.data.length)
       API.savePlant(res.data)
         .then((res) => {
-          console.log(res.data)
+          // console.log(res.data)
           createFavorite(plantId);
         })
         .catch((err) => {
@@ -118,15 +118,14 @@ export function Result(props) {
         //console.log(res.data.images)
         API.savePlant(res.data)
           .then((res) => {
-            console.log(res.data)
+            // console.log(res.data)
             createFavorite(plantId)
           })
           .catch((err) => {
             // If there is an error saving plant on unique Trefle ID, log the error
-            // return console.log(Object.keys(err))
-            console.log(err)
+            // console.log(err)
             if (err.response.data.keyPattern.trefle_id === 1) {  
-              console.log("Error adding a new plant because it already exists, adding favorite anyway");
+              // console.log("Error adding a new plant because it already exists, adding favorite anyway");
               createFavorite(plantId);
             }
           });
