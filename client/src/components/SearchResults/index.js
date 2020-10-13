@@ -84,9 +84,11 @@ export function Result(props) {
       API.savePlant(res.data)
         .then((res) => {
           console.log(res.data)
-        });
-
-      createFavorite(plantId);
+          createFavorite(plantId);
+        })
+        .catch((err) => {
+          console.log(`Error adding a new plant to our database on id ${plantId}`)
+        })
     });
   }
 
