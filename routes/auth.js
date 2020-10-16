@@ -5,7 +5,8 @@ const express = require('express');
 
 const router = express.Router();
 const passport = require('passport');
-const { listIndexes } = require('../models/Users');
+const User = require('../models/Users');
+
 
 // Route for logging user out
 router.get('/logout', (req, res) => {
@@ -34,43 +35,21 @@ router.get('/user_data', (req, res) => {
   }
 });
 
-router.post('/register', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    if (err) {
-      return res.status(400).json({ errors: err });
-    }
-    if (!user) {
-      return res.status(400).json({ errors: 'No user found' });
-    }
-    req.logIn(user, (logInErr) => {
-      if (logInErr) {
-        // this code runs if email is in database and password is wrong
-        return res.status(400).json({ errors: "Couldn't login with this email. Please try again." });
+router.post('/register', function(req, res){
+  console.log('registering user');
+  Users=new User({email: req.body.email, username : req.body.username}); 
+    User.register(Users, req.body.password, function(err, user) { 
+      if (err) {
+        console.log('error while user register!', err);
+        return next(err);
       }
-    
-      return res.status(200).json({ email: user.email });
+  
+      console.log('user registered!');
+  
+      res.redirect('/');
     });
-    
-  })(req, res, next);
 });
 
-router.post('/login', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    
-    if (err) {
-      return res.status(400).json({ errors: err });
-    }
-    
-    if (!user) {
-      return res.status(400).json({ errors: 'No user found' });
-    }
-    req.logIn(user, (logInErr) => {
-      if (logInErr) {
-        return res.status(400).json({ errors: logInErr });
-      }
-      return res.status(200).json({ email: user.email });
-    });
-  })(req, res, next);
-});
+  
 
 module.exports = router;

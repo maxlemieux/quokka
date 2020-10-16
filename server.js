@@ -13,7 +13,14 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 
-// const passport = require('./passport/setup');
+const passport = require('./passport/setup');
+const User = require('./models/Users'); 
+
+const LocalStrategy = require('passport-local').Strategy; 
+passport.use(new LocalStrategy(User.authenticate())); 
+
+
+
 
 const routes = require('./routes');
 
@@ -49,8 +56,10 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
 
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
+passport.serializeUser(User.serializeUser()); 
+passport.deserializeUser(User.deserializeUser()); 
 
 // Add routes, both API and view
 app.use(routes);

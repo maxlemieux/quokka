@@ -22,6 +22,7 @@ import {
 const SignUpForm = (props) => {
   const history = useHistory();
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [newsletter, setNewsletter] = useState(false);
   const [signUpError, setSignUpError] = useState('');
@@ -31,6 +32,7 @@ const SignUpForm = (props) => {
     const userData = {
       email,
       password,
+      username:name,
       newsletter,
     };
     axios
@@ -64,6 +66,27 @@ const SignUpForm = (props) => {
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         <Form.Text className="text-muted">We&apos;ll never share your email with anyone else.</Form.Text>
+                    </Col>
+                </Row>
+            </Form.Group>
+
+
+            <Form.Group controlId="formBasicUserName">
+                <Row>
+                    <Form.Label column xs="2" sm="1">
+                        
+                    </Form.Label>
+                    <Col xs="10" sm="11">
+                        <Form.Control
+                            type="user"
+                            placeholder="Enter username"
+                            onChange={(e) => {
+                              setName(e.target.value);
+                            }}
+                            required
+                        />
+                        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        
                     </Col>
                 </Row>
             </Form.Group>
