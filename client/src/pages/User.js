@@ -7,11 +7,11 @@ import {
 } from 'react-bootstrap';
 
 import {
-  PaddedContainer,
+//   PaddedContainer,
   EmailSymbol,
   PasswordSymbol,
-  ResponsiveHeader4,
-  MutedSpan,
+//   ResponsiveHeader4,
+//   MutedSpan,
   VerticalCenterWrapper,
   SubmitButton,
 } from '../components/SignUpModal/styles';
@@ -19,7 +19,7 @@ import {
 
 
 function User(props) {
-  const [displayName, setDisplayName] = useState('');
+//   const [displayName, setDisplayName] = useState('');
   const [newPassword1, setNewPassword1] = useState('');
   const [newPassword2, setNewPassword2] = useState('');
   const [updateError, setUpdateError] = useState('');
@@ -27,15 +27,15 @@ function User(props) {
   function checkPassword( password1, password2) { 
 
     // If password not entered 
-    if (password1 == '') 
+    if (password1 === '') 
         setUpdateError("Please enter Password"); 
           
     // If confirm password not entered 
-    else if (password2 == '') 
+    else if (password2 === '') 
         setUpdateError("Please enter confirm password"); 
           
     // If Not same return False.     
-    else if (password1 != password2) { 
+    else if (password1 !== password2) { 
         setUpdateError("\nPassword did not match: Please try again...") 
         return false; 
     } 

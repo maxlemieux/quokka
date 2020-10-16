@@ -108,31 +108,6 @@ export function Result(props) {
         props.loadActivityFeed();
       });        
   }
-
-  // First create a plant then a favorite, if the plant already exists we create a favorite anyway
-  function saveFavorite(plantId) {
-    API.plantDetails(plantId)
-      .then((res) => {
-        res.data.trefle_id = res.data.id;
-        res.data.images=[res.data.image_url]
-        //console.log(res.data.images)
-        API.savePlant(res.data)
-          .then((res) => {
-            console.log(res.data)
-            createFavorite(plantId)
-          })
-          .catch((err) => {
-            // If there is an error saving plant on unique Trefle ID, log the error
-            // return console.log(Object.keys(err))
-            console.log(err)
-            if (err.response.data.keyPattern.trefle_id === 1) {  
-              console.log("Error adding a new plant because it already exists, adding favorite anyway");
-              createFavorite(plantId);
-            }
-          });
-      })
-      .catch((err) => err);
-  }  
   
   API.getFavorite(props.result.id)
     .then((res) => {
