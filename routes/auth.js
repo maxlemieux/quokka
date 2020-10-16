@@ -5,7 +5,7 @@ const express = require('express');
 
 const router = express.Router();
 const passport = require('passport');
-// const { listIndexes } = require('../models/Users');
+const { listIndexes } = require('../models/Users');
 
 // Route for logging user out
 router.get('/logout', (req, res) => {
@@ -35,7 +35,7 @@ router.get('/user_data', (req, res) => {
 });
 
 router.post('/register', (req, res, next) => {
-  passport.authenticate('passport-local', (err, user, info) => {
+  passport.authenticate('local', (err, user, info) => {
     if (err) {
       return res.status(400).json({ errors: err });
     }
@@ -55,7 +55,7 @@ router.post('/register', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-  passport.authenticate('passport-local', (err, user, info) => {
+  passport.authenticate('local', (err, user, info) => {
     
     if (err) {
       return res.status(400).json({ errors: err });
