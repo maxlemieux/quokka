@@ -26,8 +26,8 @@ function App() {
   function getUserName() {
     axios.get('/api/auth/user_data')
       .then((res) => {
-        if (res.data.email) {
-          setUserName(res.data.email);
+        if (res.data.username) {
+          setUserName(res.data.username);
           setUserIp(res.data.ip);
         } else {
           setUserName('guest');

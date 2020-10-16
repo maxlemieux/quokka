@@ -38,8 +38,8 @@ const SignUpForm = (props) => {
     axios
       .post('/api/auth/register', userData)
       .then((res) => {
-        //console.log(res)
-        props.setUserName(res.data.email);
+        console.log(res.config.data)
+        props.setUserName(res.config.data.username);
         history.push("/");
       })
       .catch((err,res) => {

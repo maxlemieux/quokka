@@ -28,7 +28,9 @@ router.get('/user_data', (req, res) => {
   } else {
     // Otherwise send back the user's email and id
     // Sending back a password, even a hashed password, isn't a good idea
+    console.log(req)
     res.json({
+      username: req.user.username,
       email: req.user.email,
       ip,
     });
@@ -50,6 +52,12 @@ router.post('/register', function(req, res){
     });
 });
 
-  
+router.get('/login', function(req, res) {
+  res.render('login', {user: req.user, message: 'error'});
+});
+
+router.post('/login', passport.authenticate('local', { failureRedirect: '/login'}), function(req, res) {
+    res.redirect('/');
+});
 
 module.exports = router;
