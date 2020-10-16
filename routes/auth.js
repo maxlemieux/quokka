@@ -5,45 +5,26 @@ const express = require('express');
 
 const router = express.Router();
 const passport = require('passport');
-const User = require('../models/Users');
+const Account = require('../models/account');
 
-// Route for getting some data about our user to be used client side
-router.get('/user_data', (req, res) => {
-  let ip = '';
-  const ipAddr = req.headers['x-forwarded-for'];
-  if (ipAddr) {
-    const addrList = ipAddr.split(',');
-    ip = addrList[addrList.length - 1];
-  }
-  if (!req.user) {
-    // The user is not logged in, send back the ip address
-    res.json({ ip });
-  } else {
-    // Otherwise send back the user's email and id
-    // Sending back a password, even a hashed password, isn't a good idea
-    console.log(req)
-    res.json({
-      username: req.user.username,
-      email: req.user.email,
-      ip,
-    });
-  }
+router.get('/register', function(req, res) {
+  res.render('register', {});
 });
 
 router.post('/register', function(req, res, next) {
   console.log('registering user');
-  Users=new User({email: req.body.email, username : req.body.username}); 
-    User.register(Users, req.body.password, function(err, user) { 
-      if (err) {
-        console.log('error while user register!', err);
-        return next(err);
-      }
-  
-      console.log('user registered!');
-  
-      res.redirect('/');
-    });
+  Account.register(new Account({username: req.body.username}), req.body.password, function(err) {
+    if (err) {
+      console.log('error while user register!', err);
+      return next(err);
+    }
+
+    console.log('user registered!');
+
+    res.redirect('/');
+  });
 });
+
 
 router.get('/login', function(req, res) {
   res.render('login', {user: req.user, message: 'error'});

@@ -7,9 +7,10 @@ import './style.css';
 import { List, ListItem } from '../List';
 import DeleteBtn from '../DeleteBtn';
 
-export default function UserFavorites({ deleteFavorite, favorites }) {
+export default function UserFavorites({ deleteFavorite }) {
   // const image = { url: 'https://via.placeholder.com/300/d3d3d3/000000?text=No%20image%20available' };
 
+  const favorites = [];
   if (favorites.length) {
     return (
       <List>
@@ -32,6 +33,5 @@ export default function UserFavorites({ deleteFavorite, favorites }) {
 }
 
 UserFavorites.propTypes = {
-  favorites: PropTypes.array,
   deleteFavorite: PropTypes.func,
 };

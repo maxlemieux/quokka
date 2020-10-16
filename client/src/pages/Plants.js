@@ -167,12 +167,10 @@ function Plants(props) {
         </div>
         <div style={styleLi}>
           <SearchResults
-            userName={props.userName}
             userIp={props.userIp}
             userZip={props.userZip}
             searchResults={props.searchResults}
             loadActivityFeed={loadActivityFeed}
-            loadFavorites={props.loadFavorites}
             setShowSpinner={setShowSpinner}
             showSpinner={showSpinner}
             userTemp={userTemp}
@@ -184,7 +182,7 @@ function Plants(props) {
         <Jumbotron>
           <h1>My Garden</h1>
         </Jumbotron>
-        <UserFavorites deleteFavorite={deleteFavorite} favorites={props.userFavorites} />
+        <UserFavorites deleteFavorite={deleteFavorite} />
       </Col>
 
       <Col size="md-3">
@@ -201,12 +199,8 @@ function Plants(props) {
 }
 
 Plants.propTypes = {
-  loadFavorites: PropTypes.func,
   searchResults: PropTypes.array,
   setSearchResults: PropTypes.func,
-  userFavorites: PropTypes.array,
-  setUserFavorites: PropTypes.func,
-  userName: PropTypes.string,
   userIp: PropTypes.string,
   userZip: PropTypes.string,
   setUserZip: PropTypes.func,
