@@ -45,22 +45,21 @@ const Nav = (props) => {
       </a>
 
       <div> 
-        <p style={userStyle}>Welcome, <b>{props.userName}</b>&nbsp;</p>
+        <p style={userStyle}>Welcome, <b>{props.loggedInUsername}</b>&nbsp;</p>
       </div>
 
       <div style={styleLogin}>
         {/* <p>Welcome, <b>{props.userName}</b>&nbsp; */}
-          {props.userName === 'guest'
+          {props.loggedInUsername === 'guest'
             && <button onClick={() => history.push("/login")}>Login</button>
           }
-          {props.userName !== 'guest'
+          {props.loggedInUsername !== 'guest'
             && <button
               onClick={
                 () => {
                   axios.get('/api/auth/logout')
                     .then(
                       () => {
-                        props.setUserName('guest');
                         props.setSearchResults([]);
                       },
                     );
@@ -68,7 +67,7 @@ const Nav = (props) => {
               }
             >Logout</button>
           }
-          {props.userName === 'guest'
+          {props.loggedInUsername === 'guest'
             && <> | <button onClick={() => history.push("/signup")}>Sign Up</button></>
           }
         {/* </p> */}
@@ -78,8 +77,7 @@ const Nav = (props) => {
 };
 
 Nav.propTypes = {
-  userName: PropTypes.string,
-  setUserName: PropTypes.func,
+  loggedInUsername: PropTypes.string,
   setSearchResults: PropTypes.func,
 };
 

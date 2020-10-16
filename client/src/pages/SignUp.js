@@ -22,7 +22,7 @@ import {
 const SignUpForm = (props) => {
   const history = useHistory();
   const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [newsletter, setNewsletter] = useState(false);
   const [signUpError, setSignUpError] = useState('');
@@ -32,14 +32,13 @@ const SignUpForm = (props) => {
     const userData = {
       email,
       password,
-      username:name,
+      username,
       newsletter,
     };
     axios
       .post('/api/auth/register', userData)
       .then((res) => {
-        console.log(res.config.data)
-        props.setUserName(res.config.data.username);
+        // console.log(res.config.data)
         history.push("/");
       })
       .catch((err,res) => {
@@ -74,14 +73,14 @@ const SignUpForm = (props) => {
             <Form.Group controlId="formBasicUserName">
                 <Row>
                     <Form.Label column xs="2" sm="1">
-                        
+                        Username
                     </Form.Label>
                     <Col xs="10" sm="11">
                         <Form.Control
                             type="user"
                             placeholder="Enter username"
                             onChange={(e) => {
-                              setName(e.target.value);
+                              setUsername(e.target.value);
                             }}
                             required
                         />
@@ -150,7 +149,7 @@ const SignUp = (props) => {
   );
 };
 SignUp.propTypes = {
-  setUserName: PropTypes.func,
+  loggedInUsername: PropTypes.string,
 };
 
 export default SignUp;

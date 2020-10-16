@@ -7,13 +7,6 @@ const router = express.Router();
 const passport = require('passport');
 const User = require('../models/Users');
 
-
-// Route for logging user out
-router.get('/logout', (req, res) => {
-  req.logOut();
-  res.redirect('/');
-});
-
 // Route for getting some data about our user to be used client side
 router.get('/user_data', (req, res) => {
   let ip = '';
@@ -37,7 +30,7 @@ router.get('/user_data', (req, res) => {
   }
 });
 
-router.post('/register', function(req, res){
+router.post('/register', function(req, res, next) {
   console.log('registering user');
   Users=new User({email: req.body.email, username : req.body.username}); 
     User.register(Users, req.body.password, function(err, user) { 
@@ -58,6 +51,12 @@ router.get('/login', function(req, res) {
 
 router.post('/login', passport.authenticate('local', { failureRedirect: '/login'}), function(req, res) {
     res.redirect('/');
+});
+
+// Route for logging user out
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
 });
 
 module.exports = router;

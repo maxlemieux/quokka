@@ -17,7 +17,7 @@ import Footer from './components/Footer';
 import Nav from './components/Nav';
 
 function App() {
-  const [userName, setUserName] = useState('');
+  const [loggedInUsername, setLoggedInUsername] = useState('');
   const [userIp, setUserIp] = useState('');
   const [userZip, setUserZip] = useState('');
   const [userFavorites, setUserFavorites] = useState([]);
@@ -26,13 +26,13 @@ function App() {
   function getUserName() {
     axios.get('/api/auth/user_data')
       .then((res) => {
+        console.log(res.data)
         if (res.data.username) {
-          setUserName(res.data.username);
-          setUserIp(res.data.ip);
+          setLoggedInUsername(res.data.username);
         } else {
-          setUserName('guest');
-          setUserIp(res.data.ip);
+          setLoggedInUsername('guest');
         }
+        setUserIp(res.data.ip);
       });
   }
   useEffect(() => {
@@ -48,13 +48,12 @@ function App() {
   }
   useEffect(() => {
     loadFavorites();
-  }, [userName]);
+  }, [loggedInUsername]);
 
   return (
     <BrowserRouter>
       <Nav
-        userName={userName}
-        setUserName={setUserName}
+        loggedInUsername={loggedInUsername}
         searchResults={searchResults}
         setSearchResults={setSearchResults}
       />
@@ -63,7 +62,7 @@ function App() {
             <Plants
               userFavorites={userFavorites}
               loadFavorites={loadFavorites}
-              userName={userName}
+              loggedInUsername={loggedInUsername}
               userIp={userIp}
               userZip={userZip}
               setUserZip={setUserZip}
@@ -73,21 +72,16 @@ function App() {
           </Route>
 
           <Route path="/signup">
-            <SignUp
-              setUserName={setUserName}
-            />
+            <SignUp />
           </Route>
 
           <Route path="/login">
-            <Login
-              setUserName={setUserName}
-            />
+            <Login />
           </Route>
 
           <Route exact path="/user">
             <User 
-              setUserName={setUserName}
-              userName={userName}
+              loggedInUsername={loggedInUsername}
             />
           </Route>
 

@@ -7,11 +7,9 @@ import {
   Row,
 } from 'react-bootstrap';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 
 import {
   PaddedContainer,
-  EmailSymbol,
   PasswordSymbol,
   ResponsiveHeader4,
   VerticalCenterWrapper,
@@ -20,7 +18,7 @@ import {
 
 const LoginForm = (props) => {
   const history = useHistory();
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
 
@@ -28,14 +26,12 @@ const LoginForm = (props) => {
     e.preventDefault();
 
     const userData = {
-      email,
+      username,
       password,
     };
     axios
       .post('/api/auth/login', userData)
       .then((res) => {
-
-        props.setUserName(res.data.email);
         history.push("/");
         
       })
@@ -51,22 +47,21 @@ const LoginForm = (props) => {
 
   return (
         <Form onSubmit={onSubmit}>
-            <Form.Group controlId="formBasicEmail">
+            <Form.Group controlId="formBasicUsername">
                 <Row>
                     <Form.Label column xs="2" sm="1">
-                        <EmailSymbol />
+                        Username
                     </Form.Label>
                     <Col xs="10" sm="11">
                         <Form.Control
-                            type="email"
-                            placeholder="Enter email"
+                            type="username"
+                            placeholder="Enter username"
                             onChange={(e) => {
-                              setEmail(e.target.value);
+                              setUsername(e.target.value);
                             }}
                             required
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                        <Form.Text className="text-muted">We&apos;ll never share your email with anyone else.</Form.Text>
                     </Col>
                 </Row>
             </Form.Group>
@@ -96,23 +91,15 @@ const LoginForm = (props) => {
   );
 };
 
-LoginForm.propTypes = {
-  setUserName: PropTypes.func,
-};
-
 const Login = (props) => {
   return (
-    
     <PaddedContainer>
         <h1>Login</h1>
-        <ResponsiveHeader4>With email:</ResponsiveHeader4>
+        <ResponsiveHeader4>With username:</ResponsiveHeader4>
         <br />
-        <LoginForm setUserName={props.setUserName} />
+        <LoginForm />
     </PaddedContainer>
   );
-};
-Login.propTypes = {
-  setUserName: PropTypes.func,
 };
 
 export default Login;
