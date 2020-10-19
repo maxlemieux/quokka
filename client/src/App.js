@@ -15,12 +15,24 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Footer from './components/Footer';
 import Nav from './components/Nav';
+import API from './utils/API';
 
 function App() {
   const [userIp, setUserIp] = useState('');
   const [userZip, setUserZip] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [userInfo, setUserInfo] = useState([]);
 
+  function loadUserInfo() {
+    API.getUserInfo()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => err)
+  };
+  useEffect(() => {
+    loadUserInfo();
+  }, []);
   // Move this down to UserFavorites component
   // function loadFavorites() {
   //   API.getFavorites()

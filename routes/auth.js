@@ -7,6 +7,10 @@ const router = express.Router();
 const passport = require('passport');
 const Account = require('../models/account');
 
+router.get('/', function(req, res) {
+  res.send({user: req.user});
+});
+
 router.get('/register', function(req, res) {
   res.render('register', {});
 });

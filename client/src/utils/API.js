@@ -46,4 +46,8 @@ export default {
   plantDetails(plantId) {
     return axios.get(`/api/trefle/species/${plantId}`);
   },
+  // Get user info
+  getUserInfo() {
+    return axios.get(`/api/auth/`);
+  }
 };

@@ -32,8 +32,9 @@ const LoginForm = (props) => {
     axios
       .post('/api/auth/login', userData)
       .then((res) => {
-        history.push("/");
-        
+        // history.push("/");
+        console.log('got a response back from /api/auth/login')
+        console.log(res)
       })
       .catch((err) =>{
         console.log(err);

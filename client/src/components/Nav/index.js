@@ -34,7 +34,7 @@ const Nav = (props) => {
     fontSize: '20px',
     
   };
-
+  // console.log(req)
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between sticky-top"
@@ -45,7 +45,7 @@ const Nav = (props) => {
       </a>
 
       <div> 
-        <p style={userStyle}>Welcome, <b>{props.loggedInUsername}</b>&nbsp;</p>
+        <p style={userStyle}>Welcome, <b>{}</b>&nbsp;</p>
       </div>
 
       <div style={styleLogin}>
