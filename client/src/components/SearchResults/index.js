@@ -56,6 +56,11 @@ export function Result(props) {
   function savePlant(plantId) {
     API.plantDetails(plantId)
       .then((res) => {
+        console.log(res.data)
+        // Checking to see if this fixes the 413 "payload too large" bug
+        // this was triggered from Bermudagrass with 64 entries in synonyms
+        delete res.data.synonyms;
+
         res.data.user_name = props.userName;
         res.data.ip = props.userIp;
         res.data.user_zip = props.userZip;

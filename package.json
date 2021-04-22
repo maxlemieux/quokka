@@ -41,7 +41,7 @@
     "passport-local": "^1.0.0",
     "prop-types": "^15.7.2"
   },
-  "repository":{
+  "repository": {
     "type": "git",
     "url": "https://github.com/maxlemieux/quokka.git"
   }
