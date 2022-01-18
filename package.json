@@ -17,11 +17,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^5.2.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-react": "^7.20.0",
-    "nodemon": "^2.0.4"
+    "concurrently": ">=5.2.0",
+    "eslint-config-airbnb-base": ">=14.2.0",
+    "eslint-plugin-import": ">=2.22.0",
+    "eslint-plugin-react": ">=7.20.0",
+    "nodemon": ">=2.0.4"
   },
   "dependencies": {
     "@maxmind/geoip2-node": ">=1.4.0",
